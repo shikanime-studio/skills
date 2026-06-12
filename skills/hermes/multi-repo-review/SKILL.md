@@ -2,7 +2,7 @@
 name: multi-repo-review
 description: "Review multiple repositories in parallel for code quality, security, configuration issues, and improvements. Use when the user asks to review 2+ repos, audit a set of projects, or compare patterns across repositories."
 version: 1.0.0
-author: Hermes Agent
+author: Operator 21O
 license: MIT
 platforms: [linux, macos, windows]
 metadata:

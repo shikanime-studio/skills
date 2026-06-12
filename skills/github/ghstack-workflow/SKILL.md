@@ -2,7 +2,7 @@
 name: ghstack-workflow
 description: "Stacked PRs with ghstack + Jujutsu (jj). Create, update, land, and manage stacked pull requests where 1 commit == 1 PR. Use when user mentions stack, stacked PR, ghstack, or jj squash for PR updates."
 version: 1.0.0
-author: Hermes Agent
+author: Operator 21O
 license: Apache-2.0
 platforms: [linux, macos]
 metadata:

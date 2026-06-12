@@ -2,7 +2,7 @@
 name: jj-workflow
 description: "Jujutsu (jj) daily workflow — init, commit, push, rebase, resolve conflicts, and interop with git hosting (GitHub/GitLab). Use when the user asks about jj operations, or when any repo workflow is needed (jj is the preferred VCS)."
 version: 1.0.0
-author: Hermes Agent
+author: Operator 21O
 license: Apache-2.0
 platforms: [linux, macos]
 metadata:
