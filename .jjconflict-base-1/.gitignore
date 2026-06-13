@@ -1,0 +1,17 @@
+# Nix
+result
+flake.lock
+
+# macOS
+.DS_Store
+
+# Node / npm
+node_modules
+package-lock.json
+skills-lock.json
+
+# Editor
+*.swp
+*~
+.idea
+.vscode
