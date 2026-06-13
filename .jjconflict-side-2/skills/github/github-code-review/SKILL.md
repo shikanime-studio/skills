@@ -2,7 +2,7 @@
 name: github-code-review
 description: "Review PRs: diffs, inline comments via gh or REST."
 version: 1.1.0
-author: Hermes Agent
+author: Operator 21O
 license: MIT
 platforms: [linux, macos, windows]
 metadata:

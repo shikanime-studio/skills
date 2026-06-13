@@ -2,7 +2,7 @@
 name: nix-module-bulk-edit
 description: "Bulk-edit Nix module files (e.g. adding integrations to language modules) using reliable patterns. Use when modifying many .nix files in a Nix project."
 version: 1.0.0
-author: Hermes Agent
+author: Operator 21O
 license: MIT
 ---
 

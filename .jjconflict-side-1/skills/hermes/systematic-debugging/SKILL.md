@@ -2,7 +2,7 @@
 name: systematic-debugging
 description: "4-phase root cause debugging: understand bugs before fixing."
 version: 1.2.0
-author: Hermes Agent (adapted from obra/superpowers)
+author: Operator 21O (adapted from obra/superpowers)
 license: MIT
 platforms: [linux, macos, windows]
 metadata:

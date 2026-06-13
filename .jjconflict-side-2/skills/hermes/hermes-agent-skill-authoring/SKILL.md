@@ -2,7 +2,7 @@
 name: hermes-agent-skill-authoring
 description: "Author in-repo SKILL.md: frontmatter, validator, structure."
 version: 1.0.0
-author: Hermes Agent
+author: Operator 21O
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
@@ -44,7 +44,7 @@ Peer-matched shape used by every skill under `skills/software-development/`:
 name: my-skill-name               # lowercase, hyphens, ≤64 chars (MAX_NAME_LENGTH)
 description: Use when <trigger>. <one-line behavior>.
 version: 1.0.0
-author: Hermes Agent
+author: Operator 21O
 license: MIT
 metadata:
   hermes:

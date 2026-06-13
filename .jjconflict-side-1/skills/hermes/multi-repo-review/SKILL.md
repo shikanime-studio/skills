@@ -2,7 +2,7 @@
 name: multi-repo-review
 description: "Review multiple repositories in parallel for code quality, security, configuration issues, and improvements. Use when the user asks to review 2+ repos, audit a set of projects, or compare patterns across repositories."
 version: 1.0.0
-author: Hermes Agent
+author: Operator 21O
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
@@ -28,7 +28,7 @@ Review multiple repositories in parallel using subagents, then synthesize findin
 
 ### Phase 1: Plan
 
-1. Identify the repos to review. If the user gives names like "shikanime/manifests", use `gh repo clone <org>/<name> /tmp/review-<name>`.
+1. Identify the repos to review. If the user gives names like "shikanime/manifests", use `gh repo clone <org>/<name>`. Clone to the user's preferred source directory (XDG layout, e.g. `~/Source/Repos/github.com/<org>/<repo>`). Do not clone to `/tmp/` for repos the user may want to keep working on.
 2. Determine the review scope from user input. Default: code quality, security, configuration, duplication, outdated patterns, missing error handling.
 3. Check if repos are already cloned (e.g., from a previous subagent run) before re-cloning.
 
@@ -64,8 +64,23 @@ Match the repo's convention exactly. Common patterns in shikanime repos:
 - **No sign-off trailers** unless the repo has a commit-msg hook
 - **No `Co-Authored-By`** trailers unless explicitly used by the repo
 - **One commit per logical fix** — don't bundle unrelated changes
+- **Use `ghstack submit`** for PR creation when the repo supports it (the user prefers ghstack over `gh pr create`)
 
 If you already created PRs with the wrong style, close them and redo. The user will notice and ask you to fix it.
+
+### Phase 2.6: Create PRs with ghstack
+
+For each fix, create a separate branch and use ghstack:
+
+```bash
+git checkout -b fix/specific-fix
+# ... apply changes ...
+git commit -m "Short imperative message matching repo style"
+git push origin fix/specific-fix
+ghstack submit --stack
+```
+
+This creates one PR per commit, linked in a stack. Edit PR descriptions afterward with `gh pr edit` to add context about what was fixed and why.
 
 ### Phase 3: Verify Subagent Results
 
