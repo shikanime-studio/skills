@@ -1,7 +1,5 @@
 # jQuery Frontend Security Spec (jQuery 4.0.x, modern browsers)
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new jQuery-based frontend code.
@@ -830,85 +828,85 @@ schemes):
   ([GitHub][17])
 
 [1]:
-  https://nvd.nist.gov/vuln/detail/cve-2020-11022?utm_source=chatgpt.com
+  <https://nvd.nist.gov/vuln/detail/cve-2020-11022?utm_source=chatgpt.com>
   "CVE-2020-11022 Detail - NVD"
 [2]:
-  https://api.jquery.com/jQuery.parseHTML/?utm_source=chatgpt.com
+  <https://api.jquery.com/jQuery.parseHTML/?utm_source=chatgpt.com>
   "jQuery.parseHTML()"
 [3]:
-  https://api.jquery.com/load/?utm_source=chatgpt.com
+  <https://api.jquery.com/load/?utm_source=chatgpt.com>
   ".load() | jQuery API Documentation"
 [4]:
-  https://api.jquery.com/jQuery.getScript/?utm_source=chatgpt.com
+  <https://api.jquery.com/jQuery.getScript/?utm_source=chatgpt.com>
   "jQuery.getScript()"
 [5]: https://api.jquery.com/jQuery.ajax/?utm_source=chatgpt.com "jQuery.ajax()"
 [6]:
-  https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/javascript?utm_source=chatgpt.com
+  <https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/javascript?utm_source=chatgpt.com>
   "javascript: URLs - URIs - MDN Web Docs"
 [7]:
-  https://blog.jquery.com/2026/01/17/jquery-4-0-0/
+  <https://blog.jquery.com/2026/01/17/jquery-4-0-0/>
   "jQuery 4.0.0 | Official jQuery Blog"
 [8]: https://jquery.com/download/ "Download jQuery | jQuery"
 [9]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html?utm_source=chatgpt.com
+  <https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html?utm_source=chatgpt.com>
   "Content Security Policy - OWASP Cheat Sheet Series"
 [10]:
-  https://www.w3.org/TR/trusted-types/?utm_source=chatgpt.com
+  <https://www.w3.org/TR/trusted-types/?utm_source=chatgpt.com>
   "Trusted Types"
 [11]:
-  https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for?utm_source=chatgpt.com
+  <https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for?utm_source=chatgpt.com>
   "Content-Security-Policy: require-trusted-types-for directive"
 [12]:
-  https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html?utm_source=chatgpt.com
+  <https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html?utm_source=chatgpt.com>
   "HTTP Security Response Headers Cheat Sheet"
 [13]:
-  https://nvd.nist.gov/vuln/detail/cve-2019-11358?utm_source=chatgpt.com
+  <https://nvd.nist.gov/vuln/detail/cve-2019-11358?utm_source=chatgpt.com>
   "CVE-2019-11358 Detail - NVD"
 [14]:
-  https://api.jquery.com/text/?utm_source=chatgpt.com
+  <https://api.jquery.com/text/?utm_source=chatgpt.com>
   ".text() | jQuery API Documentation"
 [15]:
-  https://api.jquery.com/val/?utm_source=chatgpt.com
+  <https://api.jquery.com/val/?utm_source=chatgpt.com>
   ".val() | jQuery API Documentation"
 [16]:
-  https://github.com/jquery/jquery/security/advisories/GHSA-gxr4-xjj5-5px2
+  <https://github.com/jquery/jquery/security/advisories/GHSA-gxr4-xjj5-5px2>
   "jQuery.htmlPrefilter XSS advisory"
 [17]:
-  https://github.com/cure53/DOMPurify?utm_source=chatgpt.com
+  <https://github.com/cure53/DOMPurify?utm_source=chatgpt.com>
   "DOMPurify - a DOM-only, super-fast, uber-tolerant XSS ..."
 [18]:
-  https://developer.mozilla.org/en-US/docs/Web/API/HTML_Sanitizer_API?utm_source=chatgpt.com
+  <https://developer.mozilla.org/en-US/docs/Web/API/HTML_Sanitizer_API?utm_source=chatgpt.com>
   "HTML Sanitizer API - MDN Web Docs"
 [19]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html?utm_source=chatgpt.com
+  <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html?utm_source=chatgpt.com>
   "Cross-Site Request Forgery Prevention Cheat Sheet"
 [20]:
-  https://api.jquery.com/jQuery.escapeSelector/?utm_source=chatgpt.com
+  <https://api.jquery.com/jQuery.escapeSelector/?utm_source=chatgpt.com>
   "jQuery.escapeSelector()"
 [21]:
-  https://api.jquery.com/html/?utm_source=chatgpt.com
+  <https://api.jquery.com/html/?utm_source=chatgpt.com>
   ".html() | jQuery API Documentation"
 [22]:
-  https://api.jquery.com/append/?utm_source=chatgpt.com
+  <https://api.jquery.com/append/?utm_source=chatgpt.com>
   ".append() | jQuery API Documentation"
 [23]:
-  https://nvd.nist.gov/vuln/detail/cve-2020-11023?utm_source=chatgpt.com
+  <https://nvd.nist.gov/vuln/detail/cve-2020-11023?utm_source=chatgpt.com>
   "CVE-2020-11023 Detail - NVD"
 [24]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html?utm_source=chatgpt.com
+  <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html?utm_source=chatgpt.com>
   "Cross Site Scripting Prevention - OWASP Cheat Sheet Series"
 [25]:
-  https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html?utm_source=chatgpt.com
+  <https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html?utm_source=chatgpt.com>
   "DOM based XSS Prevention Cheat Sheet"
 [26]:
-  https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity?utm_source=chatgpt.com
+  <https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity?utm_source=chatgpt.com>
   "Subresource Integrity - Security - MDN Web Docs"
 [27]:
-  https://www.w3.org/TR/sri-2/?utm_source=chatgpt.com
+  <https://www.w3.org/TR/sri-2/?utm_source=chatgpt.com>
   "Subresource Integrity"
 [28]:
-  https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP?utm_source=chatgpt.com
+  <https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP?utm_source=chatgpt.com>
   "Content Security Policy (CSP) - HTTP - MDN Web Docs"
 [29]:
-  https://developer.mozilla.org/docs/Web/API/Trusted_Types_API?utm_source=chatgpt.com
+  <https://developer.mozilla.org/docs/Web/API/Trusted_Types_API?utm_source=chatgpt.com>
   "Trusted Types API - MDN Web Docs"

@@ -10,8 +10,6 @@ license: MIT
 
 # Nix Module Bulk Edit
 
-<!-- markdownlint-disable MD013 MD034 MD075 -->
-
 Reliable patterns for bulk-editing Nix module files in a project like devenv.
 
 ## When to use

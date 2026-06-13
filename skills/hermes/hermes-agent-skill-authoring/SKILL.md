@@ -13,8 +13,6 @@ metadata:
 
 # Authoring Hermes-Agent Skills (in-repo)
 
-<!-- markdownlint-disable MD076 -->
-
 ## Overview
 
 There are two places a SKILL.md can live:
@@ -130,7 +128,6 @@ casually.
    ```
 
    Read 2-3 peer SKILL.md files to match tone and structure.
-
 2. **Check validator constraints** in `tools/skill_manager_tool.py` if unsure.
 3. **Draft** with `write_file` to `skills/<category>/<name>/SKILL.md`.
 4. **Validate locally**:

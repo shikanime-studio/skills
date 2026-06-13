@@ -46,8 +46,8 @@
     },
     {
       "name": "darwin-host-provisioning",
-      "path": "skills/devops/darwin-host-provisioning",
-      "description": "Provision and restore macOS Nix-Darwin hosts, including host configuration, home-manager, SOPS secrets, and flake registration."
+      "description": "Provision and restore macOS Nix-Darwin hosts, including host configuration, home-manager, SOPS secrets, and flake registration.",
+      "path": "skills/devops/darwin-host-provisioning"
     },
     {
       "name": "nix-module-bulk-edit",
@@ -56,8 +56,8 @@
     },
     {
       "name": "system-migration-audit",
-      "path": "skills/devops/system-migration-audit",
-      "description": "Audit and plan system package manager migrations (e.g. Homebrew to MacPorts), including inventory, categorization, migration planning, and cleanup."
+      "description": "Audit and plan system package manager migrations (e.g. Homebrew to MacPorts), including inventory, categorization, migration planning, and cleanup.",
+      "path": "skills/devops/system-migration-audit"
     },
     {
       "name": "dogfood",

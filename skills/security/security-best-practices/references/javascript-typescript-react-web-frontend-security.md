@@ -1,7 +1,5 @@
 # React (JavaScript/TypeScript) Web Security Spec (React 19.x, TypeScript 5.x)
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new React code.
@@ -1083,8 +1081,10 @@ Primary React documentation:
 - React 19 stable announcement — `https://react.dev/blog/2024/12/05/react-19`
   ([React][23])
 - React DOM docs: `dangerouslySetInnerHTML` warning —
-  `https://react.dev/reference/react-dom/components/common#dangerouslysetting-the-inner-html`
-  ([React][12])
+
+`https://react.dev/reference/react-dom/components/common#dangerouslysetting-the-inner-html`
+([React][12])
+
 - React (legacy) JSX escaping statement —
   `https://legacy.reactjs.org/docs/introducing-jsx.html` ([React][14])
 
@@ -1092,20 +1092,30 @@ OWASP Cheat Sheet Series:
 
 - Cross Site Scripting Prevention (framework escape hatches; React
   `dangerouslySetInnerHTML`; URL validation notes) —
-  `https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][9])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][9])
+
 - Content Security Policy —
-  `https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][2])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][2])
+
 - Cross-Site Request Forgery Prevention —
-  `https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][6])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][6])
+
 - HTML5 Security (Web Storage, postMessage, tabnabbing, sandboxed frames) —
-  `https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][4])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][4])
+
 - Third Party JavaScript Management —
-  `https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][5])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][5])
+
 - File Upload —
   `https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html`
   ([OWASP Cheat Sheet Series][19])
@@ -1126,11 +1136,15 @@ Browser / platform references (MDN, W3C):
   `https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/Clickjacking`
   ([MDN Web Docs][8])
 - Using Service Workers (HTTPS requirement; proxy-like behavior) —
-  `https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers`
-  ([MDN Web Docs][10])
+
+`https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers`
+([MDN Web Docs][10])
+
 - Secure contexts (powerful APIs restricted to HTTPS) —
-  `https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Secure_Contexts`
-  ([MDN Web Docs][18])
+
+`https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Secure_Contexts`
+([MDN Web Docs][18])
+
 - Link `rel` values (noopener/noreferrer) —
   `https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel` ([MDN Web
   Docs][17])
@@ -1161,59 +1175,59 @@ Sanitizer reference:
 - DOMPurify — `https://github.com/cure53/DOMPurify` ([GitHub][13])
 
 [1]:
-  https://create-react-app.dev/docs/adding-custom-environment-variables/
+  <https://create-react-app.dev/docs/adding-custom-environment-variables/>
   "Adding Custom Environment Variables | Create React App"
 [2]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html>
   "Content Security Policy - OWASP Cheat Sheet Series"
 [3]:
-  https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API
+  <https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API>
   "Trusted Types API - Web APIs | MDN"
 [4]:
-  https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html>
   "HTML5 Security - OWASP Cheat Sheet Series"
 [5]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html>
   "Third Party Javascript Management - OWASP Cheat Sheet Series"
 [6]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
   "Cross-Site Request Forgery Prevention - OWASP Cheat Sheet Series"
 [7]:
-  https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity
+  <https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity>
   "Subresource Integrity - Security | MDN"
 [8]:
-  https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/Clickjacking
+  <https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/Clickjacking>
   "Clickjacking - Security | MDN"
 [9]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
   "Cross Site Scripting Prevention - OWASP Cheat Sheet Series"
 [10]:
-  https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
+  <https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers>
   "Using Service Workers - MDN"
 [11]: https://vite.dev/guide/env-and-mode "Env Variables and Modes | Vite"
 [12]:
-  https://react.dev/reference/react-dom/components/common
+  <https://react.dev/reference/react-dom/components/common>
   "Common components - React"
 [13]: https://github.com/cure53/DOMPurify "DOMPurify - GitHub"
 [14]:
-  https://legacy.reactjs.org/docs/introducing-jsx.html
+  <https://legacy.reactjs.org/docs/introducing-jsx.html>
   "Introducing JSX - React"
 [15]: https://www.w3.org/TR/trusted-types/ "Trusted Types"
 [16]:
-  https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps
+  <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps>
   "draft-ietf-oauth-browser-based-apps-26"
 [17]:
-  https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel
+  <https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel>
   "HTML attribute: rel - HTML | MDN"
 [18]:
-  https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Secure_Contexts
+  <https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Secure_Contexts>
   "Secure contexts - Security | MDN"
 [19]:
-  https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html>
   "File Upload - OWASP Cheat Sheet Series"
 [20]: https://docs.npmjs.com/cli/v10/commands/npm-audit "npm audit docs"
 [21]: https://docs.npmjs.com/cli/v10/commands/npm-ci "npm ci docs"
 [22]:
-  https://cheatsheetseries.owasp.org/cheatsheets/NPM_Security_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/NPM_Security_Cheat_Sheet.html>
   "NPM Security - OWASP Cheat Sheet Series"
 [23]: https://react.dev/blog/2024/12/05/react-19 "React v19 – React"

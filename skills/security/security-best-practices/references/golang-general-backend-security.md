@@ -1,7 +1,5 @@
 # Go (Golang) Security Spec (Go 1.25.x, Standard Library, net/http)
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new Go code.
@@ -1163,12 +1161,20 @@ Primary Go documentation:
 OWASP Cheat Sheet Series (general web security):
 
 - Session Management —
-  <https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>
+
+<https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>
+
 - CSRF Prevention —
-  <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
+
+<https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
+
 - SSRF Prevention —
-  <https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html>
+
+<https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html>
+
 - XSS Prevention —
-  <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
+
+<https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
+
 - HTTP Security Response Headers —
   <https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html>

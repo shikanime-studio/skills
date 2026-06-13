@@ -1,7 +1,5 @@
 # Express (Node.js) Web Security Spec (Express 5.x / 4.19.2+, Node.js LTS)
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new Express apps and routes.
@@ -1383,32 +1381,48 @@ Node.js and npm official references:
 OWASP Cheat Sheet Series:
 
 - Session Management:
-  `https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][12])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][12])
+
 - CSRF Prevention:
-  `https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][3])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][3])
+
 - XSS Prevention:
-  `https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][4])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][4])
+
 - Input Validation:
-  `https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][17])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][17])
+
 - SQL Injection Prevention:
-  `https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][6])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][6])
+
 - OS Command Injection Defense:
-  `https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][14])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][14])
+
 - SSRF Prevention:
-  `https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][7])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][7])
+
 - File Upload:
   `https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html`
   ([OWASP Cheat Sheet Series][13])
 - Unvalidated Redirects:
-  `https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][18])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][18])
+
 - HTTP Headers:
   `https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html`
   ([OWASP Cheat Sheet Series][10])
@@ -1420,50 +1434,50 @@ Versioning / advisories:
   `https://nvd.nist.gov/vuln/detail/CVE-2024-29041` ([NVD][9])
 
 [1]:
-  https://expressjs.com/en/advanced/best-practice-security.html
+  <https://expressjs.com/en/advanced/best-practice-security.html>
   "Security Best Practices for Express in Production"
 [2]: https://expressjs.com/en/guide/behind-proxies.html "Express behind proxies"
 [3]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
   "Cross-Site Request Forgery Prevention - OWASP Cheat Sheet Series"
 [4]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
   "Cross Site Scripting Prevention - OWASP Cheat Sheet Series"
 [5]: https://expressjs.com/en/5x/api.html "Express 5.x - API Reference"
 [6]:
-  https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html>
   "SQL Injection Prevention - OWASP Cheat Sheet Series"
 [7]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html>
   "Server Side Request Forgery Prevention - OWASP Cheat Sheet Series"
 [8]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html>
   "Nodejs Security - OWASP Cheat Sheet Series"
 [9]:
-  https://nvd.nist.gov/vuln/detail/cve-2024-29041?utm_source=chatgpt.com
+  <https://nvd.nist.gov/vuln/detail/cve-2024-29041?utm_source=chatgpt.com>
   "CVE-2024-29041 Detail - NVD"
 [10]:
-  https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html>
   "HTTP Headers - OWASP Cheat Sheet Series"
 [11]:
-  https://expressjs.com/en/guide/error-handling.html
+  <https://expressjs.com/en/guide/error-handling.html>
   "Express error handling"
 [12]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>
   "Session Management - OWASP Cheat Sheet Series"
 [13]:
-  https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html>
   "File Upload - OWASP Cheat Sheet Series"
 [14]:
-  https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html>
   "OS Command Injection Defense - OWASP Cheat Sheet Series"
 [15]:
-  https://nodejs.org/en/learn/getting-started/security-best-practices
+  <https://nodejs.org/en/learn/getting-started/security-best-practices>
   "Node.js — Security Best Practices"
 [16]: https://docs.npmjs.com/cli/v9/commands/npm-audit/ "npm-audit | npm Docs"
 [17]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html>
   "Input Validation - OWASP Cheat Sheet Series"
 [18]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html>
   "Unvalidated Redirects and Forwards - OWASP Cheat Sheet Series"

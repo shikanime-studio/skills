@@ -1,7 +1,5 @@
 # JS/TS Web Security Spec (Browser JS/TS, Modern Browsers)
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new frontend JavaScript/TypeScript
@@ -946,58 +944,58 @@ DOM clobbering:
   ([OWASP Cheat Sheet Series][8])
 
 [1]:
-  https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/http-equiv
+  <https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/http-equiv>
   "<https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/http-equiv>"
 [2]:
-  https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html>"
 [3]: https://www.w3.org/TR/CSP2/ "Content Security Policy Level 2"
 [4]:
-  https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/javascript
+  <https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/javascript>
   "javascript: URLs - URIs | MDN"
 [5]:
-  https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+  <https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage>
   "<https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage>"
 [6]:
-  https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html>"
 [7]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html>"
 [8]:
-  https://cheatsheetseries.owasp.org/cheatsheets/DOM_Clobbering_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/DOM_Clobbering_Prevention_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/DOM_Clobbering_Prevention_Cheat_Sheet.html>"
 [9]:
-  https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener
+  <https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener>
   "<https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener>"
 [10]:
-  https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP
+  <https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP>
   "<https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP>"
 [11]:
-  https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for
+  <https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for>
   "<https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for>"
 [12]:
-  https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity
+  <https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity>
   "<https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity>"
 [13]:
-  https://developer.mozilla.org/en-US/docs/Web/API/Document/write
+  <https://developer.mozilla.org/en-US/docs/Web/API/Document/write>
   "<https://developer.mozilla.org/en-US/docs/Web/API/Document/write>"
 [14]:
-  https://developer.mozilla.org/en-US/docs/Web/API/Document/writeln
+  <https://developer.mozilla.org/en-US/docs/Web/API/Document/writeln>
   "<https://developer.mozilla.org/en-US/docs/Web/API/Document/writeln>"
 [15]:
-  https://www.w3.org/TR/trusted-types/
+  <https://www.w3.org/TR/trusted-types/>
   "<https://www.w3.org/TR/trusted-types/>"
 [16]:
-  https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/trusted-types
+  <https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/trusted-types>
   "<https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/trusted-types>"
 [18]:
-  https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors
+  <https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors>
   "<https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors>"
 [19]:
-  https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+  <https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML>
   "<https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML>"
 [20]:
-  https://developer.mozilla.org/docs/Web/API/Element/insertAdjacentHTML
+  <https://developer.mozilla.org/docs/Web/API/Element/insertAdjacentHTML>
   "<https://developer.mozilla.org/docs/Web/API/Element/insertAdjacentHTML>"
 [21]: https://www.w3.org/TR/sri-2/ "https://www.w3.org/TR/sri-2/"

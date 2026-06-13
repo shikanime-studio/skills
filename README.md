@@ -30,15 +30,11 @@ npx skills add shikanime-studio/skills -g -a claude-code -a cursor -y
 
 ### Install as a Hermes skill source
 
-Add the repo as a tap and configure the external directory:
+Add the repo as a tap:
 
 ```bash
 # Add as a tap
 hermes skills tap add shikanime-studio/skills
-
-# Configure external directory for auto-loading
-hermes config set skills.externalDirs \
-  '["~/Source/Repos/github.com/shikanime-studio/skills/skills"]'
 
 # Verify loaded skills
 hermes skills list
@@ -78,22 +74,49 @@ compatible with the [Hermes format](https://hermes-agent.nousresearch.com/docs).
 
 These skills were created from scratch and are not part of any upstream hub:
 
-| Skill                    | Category      | Description                                                 |
-| ------------------------ | ------------- | ----------------------------------------------------------- |
-| `apple-notes`            | apple         | Manage Apple Notes via memo CLI                             |
-| `apple-reminders`        | apple         | Apple Reminders via remindctl                               |
-| `claude-code`            | autonomous-ai | Delegate coding to Claude Code CLI                          |
-| `codex`                  | autonomous-ai | Delegate coding to OpenAI Codex CLI                         |
-| `kanban-worker`          | autonomous-ai | Pitfalls and examples for Hermes Kanban workers             |
-| `github-auth`            | github        | GitHub auth setup: HTTPS tokens, SSH keys, gh CLI           |
-| `github-code-review`     | github        | Review PRs: diffs, inline comments via gh or REST           |
-| `github-issues`          | github        | Create, triage, label, assign GitHub issues                 |
-| `github-repo-management` | github        | Clone/create/fork repos; manage remotes, releases           |
-| `ghstack-workflow`       | github        | Stacked PRs with ghstack + jj: create, update, land stacks  |
-| `darwin-host-provisioning` | devops      | Provision and restore macOS Nix-Darwin hosts                |
-| `home-manager-pitfalls`  | devops        | Home Manager module gotchas and silent failures             |
-| `nix-module-bulk-edit`   | devops        | Bulk-edit Nix module files using reliable patterns          |
-| `system-migration-audit` | devops        | Audit and plan system package manager migrations            |
+<<<<<<< conflict 1 of 1 %%%%%%% diff from: urrpkqsl e287241b "Update catalog
+with darwin-host-provisioning and system-migration-audit" (parents of rebased
+revision) \\\\\\\ to: ookzmxzk 1ebb1286 "Add gpg-key-rotation skill and update
+README" (rebase destination) | Skill | Category | Description |
+|-------|----------|-------------| | `apple-notes` | apple | Manage Apple Notes
+via memo CLI | | `apple-reminders` | apple | Apple Reminders via remindctl | |
+`claude-code` | autonomous-ai | Delegate coding to Claude Code CLI | | `codex` |
+autonomous-ai | Delegate coding to OpenAI Codex CLI | | `kanban-worker` |
+autonomous-ai | Pitfalls and examples for Hermes Kanban workers | |
+`github-auth` | github | GitHub auth setup: HTTPS tokens, SSH keys, gh CLI | |
+`github-code-review` | github | Review PRs: diffs, inline comments via gh or
+REST | | `github-issues` | github | Create, triage, label, assign GitHub issues
+| | `github-repo-management` | github | Clone/create/fork repos; manage remotes,
+releases | | `ghstack-workflow` | github | Stacked PRs with ghstack + jj:
+create, update, land stacks | | `darwin-host-provisioning` | devops | Provision
+and restore macOS Nix-Darwin hosts | | `home-manager-pitfalls` | devops | Home
+Manager module gotchas and silent failures | | `nix-module-bulk-edit` | devops |
+Bulk-edit Nix module files using reliable patterns | | `system-migration-audit`
+| devops | Audit and plan system package manager migrations | +|
+`gpg-key-rotation` | devops | Annual GPG signing key rotation: generate,
+configure git/jj/sl, upload to GitHub | | `jj-workflow` | vcs | Jujutsu daily
+workflow: commit, push, rebase, conflicts | | `windows-hermes-setup` | hermes |
+Windows-specific Hermes setup, pitfalls, and workarounds | +++++++ tnwpmpzz
+19d6e087 (rebased revision) | Skill | Category | Description
+ -------------------------- | ------------- |  |  
+ ---------------------------------------------------------- |  | `apple-notes` |  
+ apple | Manage Apple Notes via memo CLI |  | `apple-reminders`
+ Reminders via remindctl |  | `claude-code` | autonomous-ai
+ Claude Code CLI |  | `codex` | autonomous-ai
+ CLI |  | `kanban-worker` | autonomous-ai
+ Kanban workers |  | `github-auth` | github
+ keys, gh CLI |  | `github-code-review` | github
+ comments via gh or REST |  | `github-issues` | github
+ assign GitHub issues |  | `github-repo-management` | github
+ repos; manage remotes, releases |  | `ghstack-workflow` | github
+ with ghstack + jj: create, update, land stacks |  | `darwin-host-provisioning` |  
+ devops | Provision and restore macOS Nix-Darwin hosts |  |  
+ `home-manager-pitfalls` | devops | Home Manager module gotchas and silent |  
+ failures |  | `nix-module-bulk-edit` | devops
+ reliable patterns |  | `system-migration-audit` | devops
+package manager migrations |
+
+> > > > > > > conflict 1 of 1 ends
 
 ### Improved Skills (Substantially Modified)
 

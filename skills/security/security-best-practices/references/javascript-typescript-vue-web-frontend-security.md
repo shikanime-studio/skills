@@ -1,7 +1,5 @@
 # Vue.js Web Security Spec (Vue 3.x, TypeScript/JavaScript, common tooling: Vite)
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new Vue code.
@@ -923,14 +921,20 @@ Vite documentation (common Vue tooling):
 OWASP and web platform hardening references:
 
 - OWASP Cheat Sheet Series: XSS Prevention —
-  `https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html`
-  ([Vue.js][1])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html`
+([Vue.js][1])
+
 - OWASP Cheat Sheet Series: CSRF Prevention —
-  `https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][9])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][9])
+
 - OWASP Cheat Sheet Series: Authorization —
-  `https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html`
-  ([OWASP Cheat Sheet Series][8])
+
+`https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html`
+([OWASP Cheat Sheet Series][8])
+
 - OWASP Cheat Sheet Series: HTTP Headers —
   `https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html`
   ([OWASP Cheat Sheet Series][4])
@@ -940,46 +944,48 @@ OWASP and web platform hardening references:
 Browser/platform references:
 
 - MDN: `rel="noopener"` —
-  `https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener`
-  ([MDN Web Docs][12])
+
+`https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener`
+([MDN Web Docs][12])
+
 - MDN: Subresource Integrity —
   `https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity`
   ([MDN Web Docs][11])
 - web.dev: Trusted Types — `https://web.dev/trusted-types/` ([web.dev][10])
 
 [1]:
-  https://vuejs.org/guide/best-practices/security
+  <https://vuejs.org/guide/best-practices/security>
   "<https://vuejs.org/guide/best-practices/security>"
 [2]: https://vite.dev/guide/env-and-mode "https://vite.dev/guide/env-and-mode"
 [3]:
-  https://vuejs.org/guide/best-practices/production-deployment
+  <https://vuejs.org/guide/best-practices/production-deployment>
   "<https://vuejs.org/guide/best-practices/production-deployment>"
 [4]:
-  https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html>"
 [5]: https://vite.dev/guide/cli "https://vite.dev/guide/cli"
 [6]: https://vite.dev/guide/build "https://vite.dev/guide/build"
 [7]:
-  https://vuejs.org/guide/best-practices/production-deployment?utm_source=chatgpt.com
+  <https://vuejs.org/guide/best-practices/production-deployment?utm_source=chatgpt.com>
   "Production Deployment"
 [8]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html>"
 [9]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>"
 [10]:
-  https://web.dev/articles/trusted-types
+  <https://web.dev/articles/trusted-types>
   "<https://web.dev/articles/trusted-types>"
 [11]:
-  https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity?utm_source=chatgpt.com
+  <https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity?utm_source=chatgpt.com>
   "Subresource Integrity - Security - MDN Web Docs"
 [12]:
-  https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener
+  <https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener>
   "<https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener>"
 [13]:
-  https://vuejs.org/guide/essentials/template-syntax
+  <https://vuejs.org/guide/essentials/template-syntax>
   "Template Syntax | Vue.js"
 [14]:
-  https://vite.dev/config/server-options
+  <https://vite.dev/config/server-options>
   "<https://vite.dev/config/server-options>"

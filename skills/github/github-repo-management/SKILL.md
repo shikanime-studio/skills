@@ -13,8 +13,6 @@ metadata:
 
 # GitHub Repository Management
 
-<!-- markdownlint-disable MD013 MD034 MD075 -->
-
 Create, clone, fork, configure, and manage GitHub repositories. Each section
 shows `gh` first, then the `git` + `curl` fallback.
 

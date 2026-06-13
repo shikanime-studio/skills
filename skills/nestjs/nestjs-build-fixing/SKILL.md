@@ -307,7 +307,6 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
   function. Use the plain-object pattern instead. This reliably preserves all
   properties on the request object including BigInt values, nested objects, and
   arrays.
-
 - **`mockDeep` proxies break the `in` operator**: vitest-mock-extended creates
   ES Proxies for all nested properties. The `in` operator (e.g.
   `'adminRoleIds' in pat.owner`) returns `false` for properties that exist on
@@ -324,7 +323,6 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
   `mockResolvedValue`. The same mock value works fine for direct property access
   (`pat.owner.adminRoleIds` reads the correct value) — only the `in` operator is
   broken.
-
 - **`resolveProjectPermissions` lives with the loader, not the validation
   service**: When `ProjectLoaderService` builds `ProjectConfig` from DB, it also
   owns `resolveProjectPermissions()`.
@@ -356,19 +354,29 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
   const requirements = makeProjectRequirements(policy)
   request.project = await this.loader.load(request, requirements)
   ```\n
-  Follow same pattern as `makeUserSelect`/`makeAdminTokenSelect` in `AuthService`.
+  Follow same pattern as `makeUserSelect`/`makeAdminTokenSelect` in
+  `AuthService`.
 
   **Key consequences of the view-model pattern**:
-  - `ProjectService` validates against `project.projectPermissions` directly — no longer injects `ProjectLoaderService`
-  - `resolveProjectPermissions` is private on the loader; the validation service never calls it
-  - Use `satisfies Prisma.ProjectSelect` on the return value (not `: Prisma.ProjectSelect` annotation) to catch typos while preserving the literal type for Prisma's `GetPayload` inference
+  - `ProjectService` validates against `project.projectPermissions` directly —
+    no longer injects `ProjectLoaderService`
+  - `resolveProjectPermissions` is private on the loader; the validation service
+    never calls it
+  - Use `satisfies Prisma.ProjectSelect` on the return value (not `:
+    Prisma.ProjectSelect` annotation) to catch typos while preserving the
+    literal type for Prisma's `GetPayload` inference
 
-  Follow same pattern as `makeUserSelect`/`makeAdminTokenSelect` in `AuthService`.
+  Follow same pattern as `makeUserSelect`/`makeAdminTokenSelect` in
+  `AuthService`.
 
   **Key consequences of the view-model pattern**:
-  - `ProjectService` validates against `project.projectPermissions` directly — no longer injects `ProjectLoaderService`
-  - `resolveProjectPermissions` is private on the loader; the validation service never calls it
-  - Use `satisfies Prisma.ProjectSelect` on the return value (not `: Prisma.ProjectSelect` annotation) to catch typos while preserving the literal type for Prisma's `GetPayload` inference
+  - `ProjectService` validates against `project.projectPermissions` directly —
+    no longer injects `ProjectLoaderService`
+  - `resolveProjectPermissions` is private on the loader; the validation service
+    never calls it
+  - Use `satisfies Prisma.ProjectSelect` on the return value (not `:
+    Prisma.ProjectSelect` annotation) to catch typos while preserving the
+    literal type for Prisma's `GetPayload` inference
 
   ````
 

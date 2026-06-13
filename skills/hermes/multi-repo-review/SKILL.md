@@ -16,8 +16,6 @@ metadata:
 
 # Multi-Repository Code Review
 
-<!-- markdownlint-disable MD013 MD034 MD075 -->
-
 Review multiple repositories in parallel using subagents, then synthesize
 findings into a prioritized report.
 
@@ -155,7 +153,8 @@ For each repo, check:
 - [ ] **Composite actions** (GitHub Actions repos): step output reference
       mismatches, undefined shell arrays, unsupported inputs, env var naming
       consistency. See
-      [references/composite-action-bug-patterns.md](references/composite-action-bug-patterns.md).
+
+[references/composite-action-bug-patterns.md](references/composite-action-bug-patterns.md).
 
 ## Pitfalls
 

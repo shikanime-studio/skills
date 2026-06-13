@@ -1,7 +1,5 @@
 # Next.js (TypeScript/JavaScript) Web Security Spec (Next.js 16.1.x, Node.js 20.9+)
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new Next.js backend code (Route
@@ -1319,36 +1317,36 @@ General web security references (recommended baseline):
   Prevention, File Upload, HTTP Headers) — `https://cheatsheetseries.owasp.org/`
 
 [1]:
-  https://nextjs.org/docs/app/getting-started/route-handlers
+  <https://nextjs.org/docs/app/getting-started/route-handlers>
   "Getting Started: Route Handlers | Next.js"
 [2]:
-  https://nextjs.org/docs/app/getting-started/deploying?utm_source=chatgpt.com
+  <https://nextjs.org/docs/app/getting-started/deploying?utm_source=chatgpt.com>
   "Getting Started: Deploying"
 [3]:
-  https://nextjs.org/docs/pages/building-your-application/routing/api-routes
+  <https://nextjs.org/docs/pages/building-your-application/routing/api-routes>
   "Routing: API Routes | Next.js"
 [4]:
-  https://nextjs.org/docs/app/api-reference/functions/headers
+  <https://nextjs.org/docs/app/api-reference/functions/headers>
   "Functions: headers | Next.js"
 [5]:
-  https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions
+  <https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions>
   "next.config.js: serverActions | Next.js"
 [6]:
-  https://nextjs.org/blog/security-nextjs-server-components-actions
+  <https://nextjs.org/blog/security-nextjs-server-components-actions>
   "How to Think About Security in Next.js | Next.js"
 [7]:
-  https://nextjs.org/docs/pages/guides/environment-variables
+  <https://nextjs.org/docs/pages/guides/environment-variables>
   "Guides: Environment Variables | Next.js"
 [8]:
-  https://nextjs.org/docs/pages/guides/self-hosting?utm_source=chatgpt.com
+  <https://nextjs.org/docs/pages/guides/self-hosting?utm_source=chatgpt.com>
   "Guides: Self-Hosting"
 [9]:
-  https://nextjs.org/docs/app/api-reference/functions/cookies
+  <https://nextjs.org/docs/app/api-reference/functions/cookies>
   "Functions: cookies | Next.js"
 [10]: https://nextjs.org/blog/next-16?utm_source=chatgpt.com "Next.js 16"
 [11]:
-  https://github.com/vercel/next.js/security/advisories/GHSA-9g9p-9gw9-jx7f?utm_source=chatgpt.com
+  <https://github.com/vercel/next.js/security/advisories/GHSA-9g9p-9gw9-jx7f?utm_source=chatgpt.com>
   "Denial of Service in Image Optimizer · Advisory"
 [12]:
-  https://nextjs.org/docs/pages/guides/authentication
+  <https://nextjs.org/docs/pages/guides/authentication>
   "Guides: Authentication | Next.js"

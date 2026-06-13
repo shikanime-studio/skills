@@ -1,7 +1,5 @@
 # FastAPI (Python) Web Security Spec (FastAPI 0.128.x, Python 3.x) ([PyPI][1])
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new FastAPI code.
@@ -1241,79 +1239,79 @@ Selected supply-chain/advisory references (Starlette examples):
 
 [1]: https://pypi.org/project/fastapi/ "https://pypi.org/project/fastapi/"
 [2]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>"
 [3]: https://starlette.dev/websockets/?utm_source=chatgpt.com "Websockets"
 [4]: https://pypi.org/project/uvicorn/ "https://pypi.org/project/uvicorn/"
 [5]: https://pypi.org/project/starlette/ "https://pypi.org/project/starlette/"
 [6]:
-  https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html?utm_source=chatgpt.com
+  <https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html?utm_source=chatgpt.com>
   "HTTP Security Response Headers Cheat Sheet"
 [7]:
-  https://fastapi.tiangolo.com/reference/dependencies/?utm_source=chatgpt.com
+  <https://fastapi.tiangolo.com/reference/dependencies/?utm_source=chatgpt.com>
   "Dependencies - Depends() and Security() - FastAPI"
 [8]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>"
 [9]:
-  https://advisories.gitlab.com/pkg/pypi/starlette/CVE-2024-47874/
+  <https://advisories.gitlab.com/pkg/pypi/starlette/CVE-2024-47874/>
   "Starlette Denial of service (DoS) via multipart/form-data | GitLab Advisory Database"
 [10]:
-  https://advisories.gitlab.com/pkg/pypi/starlette/CVE-2023-29159/
+  <https://advisories.gitlab.com/pkg/pypi/starlette/CVE-2023-29159/>
   "Starlette has Path Traversal vulnerability in StaticFiles | GitLab Advisory Database"
 [11]:
-  https://fastapi.tiangolo.com/tutorial/security/first-steps/?utm_source=chatgpt.com
+  <https://fastapi.tiangolo.com/tutorial/security/first-steps/?utm_source=chatgpt.com>
   "Security - First Steps - FastAPI"
 [12]:
-  https://fastapi.tiangolo.com/tutorial/response-model/
+  <https://fastapi.tiangolo.com/tutorial/response-model/>
   "<https://fastapi.tiangolo.com/tutorial/response-model/>"
 [13]:
-  https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+  <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
   "<https://owasp.org/API-Security/editions/2023/en/0x11-t10/>"
 [14]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html>"
 [15]:
-  https://fastapi.tiangolo.com/tutorial/extra-models/
+  <https://fastapi.tiangolo.com/tutorial/extra-models/>
   "<https://fastapi.tiangolo.com/tutorial/extra-models/>"
 [16]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>"
 [17]:
-  https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/07-Input_Validation_Testing/18-Testing_for_Server_Side_Template_Injection?utm_source=chatgpt.com
+  <https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/07-Input_Validation_Testing/18-Testing_for_Server_Side_Template_Injection?utm_source=chatgpt.com>
   "Testing for Server Side Template Injection"
 [18]:
-  https://jinja.palletsprojects.com/en/stable/sandbox/?utm_source=chatgpt.com
+  <https://jinja.palletsprojects.com/en/stable/sandbox/?utm_source=chatgpt.com>
   "Sandbox — Jinja Documentation (3.1.x)"
 [19]:
-  https://advisories.gitlab.com/pkg/pypi/starlette/CVE-2025-62727/
+  <https://advisories.gitlab.com/pkg/pypi/starlette/CVE-2025-62727/>
   "Starlette vulnerable to O(n^2) DoS via Range header merging in
   ``starlette.responses.FileResponse`` | GitLab Advisory Database"
 [20]:
-  https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html>"
 [21]:
-  https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html>"
 [22]:
-  https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html>"
 [23]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html
+  <https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html>
   "<https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html>"
 [24]:
-  https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html?utm_source=chatgpt.com
+  <https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html?utm_source=chatgpt.com>
   "Unvalidated Redirects and Forwards Cheat Sheet"
 [25]:
-  https://cheatsheetseries.owasp.org/cheatsheets/WebSocket_Security_Cheat_Sheet.html?utm_source=chatgpt.com
+  <https://cheatsheetseries.owasp.org/cheatsheets/WebSocket_Security_Cheat_Sheet.html?utm_source=chatgpt.com>
   "WebSocket Security - OWASP Cheat Sheet Series"
 [26]:
-  https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/11-Client-side_Testing/10-Testing_WebSockets?utm_source=chatgpt.com
+  <https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/11-Client-side_Testing/10-Testing_WebSockets?utm_source=chatgpt.com>
   "WSTG - Latest | OWASP Foundation"
 [27]:
-  https://fastapi.tiangolo.com/advanced/websockets/?utm_source=chatgpt.com
+  <https://fastapi.tiangolo.com/advanced/websockets/?utm_source=chatgpt.com>
   "WebSockets - FastAPI"
 [28]:
-  https://fastapi.tiangolo.com/reference/apirouter/?utm_source=chatgpt.com
+  <https://fastapi.tiangolo.com/reference/apirouter/?utm_source=chatgpt.com>
   "APIRouter class - FastAPI"
 [29]: https://docs.pydantic.dev/latest/ "https://docs.pydantic.dev/latest/"

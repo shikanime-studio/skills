@@ -1,7 +1,5 @@
 # Flask (Python) Web Security Spec (Flask 3.1.x, Python 3.x)
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new Flask code.

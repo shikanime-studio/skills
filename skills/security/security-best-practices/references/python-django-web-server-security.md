@@ -1,7 +1,5 @@
 # Django (Python) Web Security Spec (Django 6.0.x, Python 3.x)
 
-<!-- markdownlint-disable MD013 MD033 MD034 MD075 -->
-
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new Django code.
@@ -1095,27 +1093,27 @@ OWASP:
 ```
 
 [1]:
-  https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+  <https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/>
   "<https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/>"
 [2]:
-  https://docs.djangoproject.com/en/6.0/topics/security/
+  <https://docs.djangoproject.com/en/6.0/topics/security/>
   "Security in Django | Django documentation | Django"
 [3]:
-  https://docs.djangoproject.com/en/6.0/ref/settings/
+  <https://docs.djangoproject.com/en/6.0/ref/settings/>
   "Settings | Django documentation | Django"
 [4]:
-  https://docs.djangoproject.com/en/6.0/howto/csrf/
+  <https://docs.djangoproject.com/en/6.0/howto/csrf/>
   "How to use Django’s CSRF protection | Django documentation | Django"
 [5]:
-  https://docs.djangoproject.com/en/6.0/ref/templates/builtins/
+  <https://docs.djangoproject.com/en/6.0/ref/templates/builtins/>
   "<https://docs.djangoproject.com/en/6.0/ref/templates/builtins/>"
 [6]:
-  https://docs.djangoproject.com/en/6.0/ref/utils/
+  <https://docs.djangoproject.com/en/6.0/ref/utils/>
   "<https://docs.djangoproject.com/en/6.0/ref/utils/>"
 [7]:
-  https://docs.djangoproject.com/en/6.0/topics/db/sql/
+  <https://docs.djangoproject.com/en/6.0/topics/db/sql/>
   "<https://docs.djangoproject.com/en/6.0/topics/db/sql/>"
 [8]:
-  https://docs.djangoproject.com/en/6.0/ref/models/querysets/
+  <https://docs.djangoproject.com/en/6.0/ref/models/querysets/>
   "<https://docs.djangoproject.com/en/6.0/ref/models/querysets/>"
 [9]: https://www.djangoproject.com/download/ "Download Django | Django"
