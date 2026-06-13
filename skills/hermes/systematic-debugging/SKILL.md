@@ -7,23 +7,27 @@ license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:
-    tags: [debugging, troubleshooting, problem-solving, root-cause, investigation]
-    related_skills: [test-driven-development, writing-plans, subagent-driven-development]
+    tags:
+      [debugging, troubleshooting, problem-solving, root-cause, investigation]
+    related_skills:
+      [test-driven-development, writing-plans, subagent-driven-development]
 ---
 
 # Systematic Debugging
 
 ## Overview
 
-Random fixes waste time and create new bugs. Quick patches mask underlying issues.
+Random fixes waste time and create new bugs. Quick patches mask underlying
+issues.
 
-**Core principle:** ALWAYS find root cause before attempting fixes. Symptom fixes are failure.
+**Core principle:** ALWAYS find root cause before attempting fixes. Symptom
+fixes are failure.
 
 **Violating the letter of this process is violating the spirit of debugging.**
 
 ## The Iron Law
 
-```
+```text
 NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
 ```
 
@@ -32,15 +36,18 @@ If you haven't completed Phase 1, you cannot propose fixes.
 ## When to Use
 
 Use for ANY technical issue:
+
 - Test failures
 - Bugs in production
 - Unexpected behavior
 - Performance problems
 - Build failures
 - Integration issues
-- Local reverse-proxy / strangler routing problems (client → nginx-strangler → multiple backends)
+- Local reverse-proxy / strangler routing problems (client → nginx-strangler →
+  multiple backends)
 
 **Use this ESPECIALLY when:**
+
 - Under time pressure (emergencies make guessing tempting)
 - "Just one quick fix" seems obvious
 - You've already tried multiple fixes
@@ -48,6 +55,7 @@ Use for ANY technical issue:
 - You don't fully understand the issue
 
 **Don't skip when:**
+
 - Issue seems simple (simple bugs have root causes too)
 - You're in a hurry (rushing guarantees rework)
 - Someone wants it fixed NOW (systematic is faster than thrashing)
@@ -69,17 +77,22 @@ You MUST complete each phase before proceeding to the next.
 - Read stack traces completely
 - Note line numbers, file paths, error codes
 
-**Action:** Use `read_file` on the relevant source files. Use `search_files` to find the error string in the codebase.
+**Action:** Use `read_file` on the relevant source files. Use `search_files` to
+find the error string in the codebase.
 
 ### 1b. Plan before changing anything
 
-For live infrastructure failures, write a short diagnostic plan before making changes.
+For live infrastructure failures, write a short diagnostic plan before making
+changes.
+
 - Name the exact failing component.
-- Identify the minimum comparison set (usually one healthy node or one working workload).
+- Identify the minimum comparison set (usually one healthy node or one working
+  workload).
 - Decide what evidence will confirm or reject the hypothesis.
 - Only then proceed to a fix.
 
 This prevents cluster debugging from turning into broad manifest thrashing.
+
 ### 2. Reproduce Consistently
 
 - Can you trigger it reliably?
@@ -118,19 +131,20 @@ git log -p --follow src/problematic_file.py | head -100
 
 ### 4. Gather Evidence in Multi-Component Systems
 
-**WHEN system has multiple components (API → service → database, CI → build → deploy):**
+**WHEN system has multiple components (API → service → database, CI → build →
+deploy):**
 
 **BEFORE proposing fixes, add diagnostic instrumentation:**
 
 For EACH component boundary:
+
 - Log what data enters the component
 - Log what data exits the component
 - Verify environment/config propagation
 - Check state at each layer
 
-Run once to gather evidence showing WHERE it breaks.
-THEN analyze evidence to identify the failing component.
-THEN investigate that specific component.
+Run once to gather evidence showing WHERE it breaks. THEN analyze evidence to
+identify the failing component. THEN investigate that specific component.
 
 ### 5. Trace Data Flow
 
@@ -269,11 +283,13 @@ pytest tests/ -q
 ### 5. If 3+ Fixes Failed: Question Architecture
 
 **Pattern indicating an architectural problem:**
+
 - Each fix reveals new shared state/coupling in a different place
 - Fixes require "massive refactoring" to implement
 - Each fix creates new symptoms elsewhere
 
 **STOP and question fundamentals:**
+
 - Is this pattern fundamentally sound?
 - Are we "sticking with it through sheer inertia"?
 - Should we refactor the architecture vs. continue fixing symptoms?
@@ -287,6 +303,7 @@ This is NOT a failed hypothesis — this is a wrong architecture.
 ## Red Flags — STOP and Follow Process
 
 If you catch yourself thinking:
+
 - "Quick fix for now, investigate later"
 - "Just try changing X and see if it works"
 - "Add multiple changes, run tests"
@@ -305,25 +322,25 @@ If you catch yourself thinking:
 
 ## Common Rationalizations
 
-| Excuse | Reality |
-|--------|---------|
-| "Issue is simple, don't need process" | Simple issues have root causes too. Process is fast for simple bugs. |
-| "Emergency, no time for process" | Systematic debugging is FASTER than guess-and-check thrashing. |
-| "Just try this first, then investigate" | First fix sets the pattern. Do it right from the start. |
-| "I'll write test after confirming fix works" | Untested fixes don't stick. Test first proves it. |
-| "Multiple fixes at once saves time" | Can't isolate what worked. Causes new bugs. |
-| "Reference too long, I'll adapt the pattern" | Partial understanding guarantees bugs. Read it completely. |
-| "I see the problem, let me fix it" | Seeing symptoms ≠ understanding root cause. |
-| "One more fix attempt" (after 2+ failures) | 3+ failures = architectural problem. Question the pattern, don't fix again. |
+| Excuse                                       | Reality                                                                     |
+| -------------------------------------------- | --------------------------------------------------------------------------- |
+| "Issue is simple, don't need process"        | Simple issues have root causes too. Process is fast for simple bugs.        |
+| "Emergency, no time for process"             | Systematic debugging is FASTER than guess-and-check thrashing.              |
+| "Just try this first, then investigate"      | First fix sets the pattern. Do it right from the start.                     |
+| "I'll write test after confirming fix works" | Untested fixes don't stick. Test first proves it.                           |
+| "Multiple fixes at once saves time"          | Can't isolate what worked. Causes new bugs.                                 |
+| "Reference too long, I'll adapt the pattern" | Partial understanding guarantees bugs. Read it completely.                  |
+| "I see the problem, let me fix it"           | Seeing symptoms ≠ understanding root cause.                                 |
+| "One more fix attempt" (after 2+ failures)   | 3+ failures = architectural problem. Question the pattern, don't fix again. |
 
 ## Quick Reference
 
-| Phase | Key Activities | Success Criteria |
-|-------|---------------|------------------|
-| **1. Root Cause** | Read errors, reproduce, check changes, gather evidence, trace data flow | Understand WHAT and WHY |
-| **2. Pattern** | Find working examples, compare, identify differences | Know what's different |
-| **3. Hypothesis** | Form theory, test minimally, one variable at a time | Confirmed or new hypothesis |
-| **4. Implementation** | Create regression test, fix root cause, verify | Bug resolved, all tests pass |
+| Phase                 | Key Activities                                                          | Success Criteria             |
+| --------------------- | ----------------------------------------------------------------------- | ---------------------------- |
+| **1. Root Cause**     | Read errors, reproduce, check changes, gather evidence, trace data flow | Understand WHAT and WHY      |
+| **2. Pattern**        | Find working examples, compare, identify differences                    | Know what's different        |
+| **3. Hypothesis**     | Form theory, test minimally, one variable at a time                     | Confirmed or new hypothesis  |
+| **4. Implementation** | Create regression test, fix root cause, verify                          | Bug resolved, all tests pass |
 
 ## Hermes Agent Integration
 
@@ -340,7 +357,9 @@ Use these Hermes tools during Phase 1:
 
 For complex multi-component debugging, dispatch investigation subagents:
 
-For local routing problems, prefer a quick live-state triage before changing code:
+For local routing problems, prefer a quick live-state triage before changing
+code:
+
 - verify current listeners with `lsof`
 - check container logs for upstream variables
 - compare compose ports against `.env` examples and docs
@@ -367,6 +386,7 @@ delegate_task(
 ### With test-driven-development
 
 When fixing bugs:
+
 1. Write a test that reproduces the bug (RED)
 2. Debug systematically to find root cause
 3. Fix the root cause (GREEN)
@@ -374,85 +394,140 @@ When fixing bugs:
 
 ## Playwright E2E Race Selectors
 
-When a Playwright test clicks a table/list row and then fails on a missing detail-page heading, inspect the selector contract before changing app code.
+When a Playwright test clicks a table/list row and then fails on a missing
+detail-page heading, inspect the selector contract before changing app code.
 
 Rules of thumb:
-- Avoid generic row selectors like `locator('tr').nth(1)` when the table can render loading, empty, or placeholder rows.
-- Prefer stable data-row selectors such as `locator('[data-testid^="serviceChainTr-"]').first()` and wait with `await expect(row).toBeVisible()` before clicking.
-- If the heading includes dynamic data, use a regex for the stable part instead of exact text.
-- Keep the fix scoped to the failing race; do not bundle unrelated flaky tests unless they share the same root cause.
 
-See `references/playwright-e2e-race-selectors.md` for the concrete pattern and snippet.
+- Avoid generic row selectors like `locator('tr').nth(1)` when the table can
+  render loading, empty, or placeholder rows.
+- Prefer stable data-row selectors such as
+  `locator('[data-testid^="serviceChainTr-"]').first()` and wait with
+  `await expect(row).toBeVisible()` before clicking.
+- If the heading includes dynamic data, use a regex for the stable part instead
+  of exact text.
+- Keep the fix scoped to the failing race; do not bundle unrelated flaky tests
+  unless they share the same root cause.
+
+See `references/playwright-e2e-race-selectors.md` for the concrete pattern and
+snippet.
 
 ## Local Reverse Proxy / Strangler Routing
 
 When a client appears to hit the wrong backend in a mixed legacy + NestJS setup:
 
-**First: verify the nginx-strangler container is running.** If it's down, *all* proxied requests fail with 502 — this looks like a routing problem but is an availability problem. Check with `docker ps --filter name=nginx-strangler` and start it if needed.
+**First: verify the nginx-strangler container is running.** If it's down, _all_
+proxied requests fail with 502 — this looks like a routing problem but is an
+availability problem. Check with `docker ps --filter name=nginx-strangler` and
+start it if needed.
 
 Then:
+
 1. Verify the client proxy target matches the strangler's host port.
 2. Verify the strangler container is publishing the expected host port.
-3. Verify the upstream ports in `docker/docker-compose.local.yml` match the live listeners.
+3. Verify the upstream ports in `docker/docker-compose.local.yml` match the live
+   listeners.
 4. Read the strangler logs before assuming a route is missing.
-5. Only then decide whether the issue is a routing rule, a bad upstream, or a backend 404.
+5. Only then decide whether the issue is a routing rule, a bad upstream, or a
+   backend 404.
 
 The durable reference for this repo is `references/nginx-strangler-routing.md`.
 
 ## NestJS / TypeScript Build Errors
 
-For TS2304, TS1361, and TS2345 errors specific to NestJS controller compilation — missing decorators, `import type` vs value imports, schema misalignment, dead parameters — see `references/nestjs-build-errors.md`. Contains a diagnostic workflow and a case study from this repo.
+For TS2304, TS1361, and TS2345 errors specific to NestJS controller compilation
+— missing decorators, `import type` vs value imports, schema misalignment, dead
+parameters — see `references/nestjs-build-errors.md`. Contains a diagnostic
+workflow and a case study from this repo.
 
 ## Playwright E2E Flaky Table Rows
 
-When a Playwright test clicks a generic table row such as `locator('tr').nth(1)`, verify whether the component renders placeholder rows (`Chargement...`, empty-state rows, skeleton rows) before data arrives. Prefer waiting for a durable data-row selector (`[data-testid^="resourceTr-"]`) and click that locator after `toBeVisible()`. Avoid `toHaveCount(0)` on loaders when the loader may not have mounted yet; wait for the data contract instead.
+When a Playwright test clicks a generic table row such as
+`locator('tr').nth(1)`, verify whether the component renders placeholder rows
+(`Chargement...`, empty-state rows, skeleton rows) before data arrives. Prefer
+waiting for a durable data-row selector (`[data-testid^="resourceTr-"]`) and
+click that locator after `toBeVisible()`. Avoid `toHaveCount(0)` on loaders when
+the loader may not have mounted yet; wait for the data contract instead.
 
-See `references/playwright-e2e-flaky-table-rows.md` for the condensed debugging pattern.
+See `references/playwright-e2e-flaky-table-rows.md` for the condensed debugging
+pattern.
 
 ## NestJS Auth Request-Context Regressions
 
-When auth middleware or guards change how request state is attached, verify every consumer of that state before assuming the new shape is safe.
+When auth middleware or guards change how request state is attached, verify
+every consumer of that state before assuming the new shape is safe.
 
 Rules of thumb:
-- If `UserGuard` stores `request.userId` and `request.adminPermissions`, every downstream permission guard/spec should read those flat fields directly and treat missing permissions as `0n`.
-- If a shared test helper only constructs headers, seed the request object in the test body; do not pass unsupported properties into the helper.
-- If downstream code imports `UserContext`, keep the type source stable during refactors to avoid TS2459/TS2305 import errors.
-- Search for all references to the old request contract before patching only one file.
 
-See `references/nestjs-auth-request-context-regression.md` for the concrete reproduction and fix pattern.
+- If `UserGuard` stores `request.userId` and `request.adminPermissions`, every
+  downstream permission guard/spec should read those flat fields directly and
+  treat missing permissions as `0n`.
+- If a shared test helper only constructs headers, seed the request object in
+  the test body; do not pass unsupported properties into the helper.
+- If downstream code imports `UserContext`, keep the type source stable during
+  refactors to avoid TS2459/TS2305 import errors.
+- Search for all references to the old request contract before patching only one
+  file.
+
+See `references/nestjs-auth-request-context-regression.md` for the concrete
+reproduction and fix pattern.
 
 ## Nixpkgs / Cargo Build Failures
 
-For Cargo `[patch.crates-io]` causing git fetch failures in the Nix sandbox, read-only `Cargo.lock` from the Nix store, and `openssl-src` needing `perl` — see `references/nix-cargo-patch-crates-io.md`.
+For Cargo `[patch.crates-io]` causing git fetch failures in the Nix sandbox,
+read-only `Cargo.lock` from the Nix store, and `openssl-src` needing `perl` —
+see `references/nix-cargo-patch-crates-io.md`.
 
 ## Workspace / Package Resolution Failures
 
-When a build or test fails because a workspace package cannot be resolved at import time, suspect eager runtime imports or missing explicit workspace dependencies.
-Use `references/workspace-plugin-resolution.md` for the console-repo pattern:
+When a build or test fails because a workspace package cannot be resolved at
+import time, suspect eager runtime imports or missing explicit workspace
+dependencies. Use `references/workspace-plugin-resolution.md` for the
+console-repo pattern:
+
 - explicit `workspace:^` deps in the consuming app
 - lazy `await import(packageName)` from a fixed allowlist
 - await plugin-manager initialization before app setup continues
 
 ## Prisma Workspace Generation Races
 
-If parallel workspace tests intermittently fail during `pretest -> prisma generate`, suspect a shared Prisma client output path rather than a code regression. See `references/prisma-workspace-race.md` for the reproduction and the root cause pattern.
+If parallel workspace tests intermittently fail during
+`pretest -> prisma generate`, suspect a shared Prisma client output path rather
+than a code regression. See `references/prisma-workspace-race.md` for the
+reproduction and the root cause pattern.
 
 ## Kubernetes / RKE2 Node Debugging
 
-When a cluster add-on fails with artifact pulls, registry timeouts, DNS errors, or pod startup loops on an RKE2 node, do not jump straight to CNI blame. First separate host reachability from pod reachability, then read the RKE2 journal for the earliest fatal error, then inspect node networking state and kubelet/containerd logs.
+When a cluster add-on fails with artifact pulls, registry timeouts, DNS errors,
+or pod startup loops on an RKE2 node, do not jump straight to CNI blame. First
+separate host reachability from pod reachability, then read the RKE2 journal for
+the earliest fatal error, then inspect node networking state and
+kubelet/containerd logs.
 
 Useful split:
-- host DNS / egress works, but pod DNS fails: inspect CNI, CoreDNS, NetworkPolicy, and pod-level DNS routing
-- add-on pull timeouts plus `lookup github.com on [<cluster-dns-ip>]:53: server misbehaving`: suspect pod DNS or CNI, not the registry itself
-- `rke2-canal`/flannel crashes on one IP family while the node is otherwise Ready: verify dual-stack CIDRs, node IPs, and CNI backend compatibility before resetting
 
-Key pitfall: a visible Flux or Helm artifact timeout can be downstream of a node bootstrap error such as an IP-family mismatch (`cluster-cidr` vs `node-ip`) or a partially reconciled CNI setup. If the host can reach the registry but workloads cannot, investigate NetworkPolicy / pod egress / in-pod DNS before planning a cluster reset.
+- host DNS / egress works, but pod DNS fails: inspect CNI, CoreDNS,
+  NetworkPolicy, and pod-level DNS routing
+- add-on pull timeouts plus
+  `lookup github.com on [<cluster-dns-ip>]:53: server misbehaving`: suspect pod
+  DNS or CNI, not the registry itself
+- `rke2-canal`/flannel crashes on one IP family while the node is otherwise
+  Ready: verify dual-stack CIDRs, node IPs, and CNI backend compatibility before
+  resetting
 
-See `references/rke2-flux-node-debugging.md` for the command sequence and heuristics.
+Key pitfall: a visible Flux or Helm artifact timeout can be downstream of a node
+bootstrap error such as an IP-family mismatch (`cluster-cidr` vs `node-ip`) or a
+partially reconciled CNI setup. If the host can reach the registry but workloads
+cannot, investigate NetworkPolicy / pod egress / in-pod DNS before planning a
+cluster reset.
+
+See `references/rke2-flux-node-debugging.md` for the command sequence and
+heuristics.
 
 ## Real-World Impact
 
 From debugging sessions:
+
 - Systematic approach: 15-30 minutes to fix
 - Random fixes approach: 2-3 hours of thrashing
 - First-time fix rate: 95% vs 40%

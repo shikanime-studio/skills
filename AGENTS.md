@@ -1,6 +1,7 @@
 # Skills
 
-A curated catalog of self-improved agent skills for Hermes and compatible agents. Each skill lives in its own directory with a `SKILL.md`.
+A curated catalog of self-improved agent skills for Hermes and compatible
+agents. Each skill lives in its own directory with a `SKILL.md`.
 
 **Language:** Markdown (SKILL.md)
 
@@ -34,7 +35,8 @@ A curated catalog of self-improved agent skills for Hermes and compatible agents
 ## Adding a New Skill
 
 1. Create a directory under the appropriate category
-2. Write a `SKILL.md` following the [skill authoring](https://hermes-agent.nousresearch.com/docs) format
+2. Write a `SKILL.md` following the
+   [skill authoring](https://hermes-agent.nousresearch.com/docs) format
 3. Add the skill to the catalog table in `README.md`
 4. Commit with a descriptive message
 
@@ -48,4 +50,5 @@ A curated catalog of self-improved agent skills for Hermes and compatible agents
 - `software-dev` — Development workflows, debugging, testing
 - `vcs` — Version control systems
 
-*Each skill must include a valid `SKILL.md` with YAML frontmatter. Test against the target agent before submitting*
+_Each skill must include a valid `SKILL.md` with YAML frontmatter. Test against
+the target agent before submitting_
