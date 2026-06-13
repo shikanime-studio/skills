@@ -48,9 +48,9 @@ main (trunk)
 jj bookmark set main -r @-   # ensure main is at desired base
 
 # 2. Make changes and commit each logical unit separately
-jj commit -m "feat: add auth middleware"
-jj commit -m "feat: add rate limiter"
-jj commit -m "feat: add session store"
+jj commit -m "Add auth middleware"
+jj commit -m "Add rate limiter"
+jj commit -m "Add session store"
 
 # 3. Submit the entire stack as PRs
 ghstack
@@ -68,7 +68,6 @@ ghstack
 jj squash -r <revision>
 # 3. Resubmit the entire stack
 ghstack
-# OR (if ghstack supports it): ghstack resubmit
 ```
 
 **Critical:** Use `jj squash` (not `jj commit`) to amend an existing
