@@ -86,13 +86,15 @@ These skills were created from scratch and are not part of any upstream hub:
 | `claude-code` | autonomous-ai | Delegate coding to Claude Code CLI |
 | `codex` | autonomous-ai | Delegate coding to OpenAI Codex CLI |
 | `kanban-worker` | autonomous-ai | Pitfalls and examples for Hermes Kanban workers |
-|| `github-auth` | github | GitHub auth setup: HTTPS tokens, SSH keys, gh CLI |
-|| `github-code-review` | github | Review PRs: diffs, inline comments via gh or REST |
-|| `github-issues` | github | Create, triage, label, assign GitHub issues |
-|| `github-repo-management` | github | Clone/create/fork repos; manage remotes, releases |
+| `github-auth` | github | GitHub auth setup: HTTPS tokens, SSH keys, gh CLI |
+| `github-code-review` | github | Review PRs: diffs, inline comments via gh or REST |
+| `github-issues` | github | Create, triage, label, assign GitHub issues |
+| `github-repo-management` | github | Clone/create/fork repos; manage remotes, releases |
 | `ghstack-workflow` | github | Stacked PRs with ghstack + jj: create, update, land stacks |
+| `darwin-host-provisioning` | devops | Provision and restore macOS Nix-Darwin hosts |
 | `home-manager-pitfalls` | devops | Home Manager module gotchas and silent failures |
 | `nix-module-bulk-edit` | devops | Bulk-edit Nix module files using reliable patterns |
+| `system-migration-audit` | devops | Audit and plan system package manager migrations |
 | `jj-workflow` | vcs | Jujutsu daily workflow: commit, push, rebase, conflicts |
 | `windows-hermes-setup` | hermes | Windows-specific Hermes setup, pitfalls, and workarounds |
 
