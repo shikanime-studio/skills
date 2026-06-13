@@ -15,13 +15,15 @@ prerequisites:
 
 # Apple Notes
 
-Use `memo` to manage Apple Notes directly from the terminal. Notes sync across all Apple devices via iCloud.
+Use `memo` to manage Apple Notes directly from the terminal. Notes sync across
+all Apple devices via iCloud.
 
 ## Prerequisites
 
 - **macOS** with Notes.app
 - Install: `brew tap antoniorodr/memo && brew install antoniorodr/memo/memo`
-- Grant Automation access to Notes.app when prompted (System Settings → Privacy → Automation)
+- Grant Automation access to Notes.app when prompted (System Settings → Privacy
+  → Automation)
 
 ## When to Use
 
