@@ -31,9 +31,11 @@ else
   AUTH="git"
   if [ -z "$GITHUB_TOKEN" ]; then
     if [ -f ~/.hermes/.env ] && grep -q "^GITHUB_TOKEN=" ~/.hermes/.env; then
-      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d= -f2 | tr -d '\n\r')
+      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d=
+        -f2 | tr -d '\n\r')
     elif grep -q "github.com" ~/.git-credentials 2>/dev/null; then
-      GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials 2>/dev/null | head -1 | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
+      GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials 2>/dev/null | head -1
+        | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
     fi
   fi
 fi
@@ -86,13 +88,15 @@ git diff main...HEAD -- src/auth/login.py
 
 ```bash
 # Debug statements, TODOs, console.logs left behind
-git diff main...HEAD | grep -n "print(\|console\.log\|TODO\|FIXME\|HACK\|XXX\|debugger"
+git diff main...HEAD | grep -n
+  "print(\|console\.log\|TODO\|FIXME\|HACK\|XXX\|debugger"
 
 # Large files accidentally staged
 git diff main...HEAD --stat | sort -t'|' -k2 -rn | head -10
 
 # Secrets or credential patterns
-git diff main...HEAD | grep -in "password\|secret\|api_key\|token.*=\|private_key"
+git diff main...HEAD | grep -in
+  "password\|secret\|api_key\|token.*=\|private_key"
 
 # Merge conflict markers
 git diff main...HEAD | grep -n "<<<<<<\|>>>>>>\|======="
@@ -112,11 +116,13 @@ When reviewing local changes, present findings in this structure:
   Suggestion: Use parameterized queries.
 
 ### Warnings
-- **src/models/user.py:23** — Password stored in plaintext. Use bcrypt or argon2.
+- **src/models/user.py:23** — Password stored in plaintext. Use bcrypt or
+  argon2.
 - **src/api/routes.py:112** — No rate limiting on login endpoint.
 
 ### Suggestions
-- **src/utils/helpers.py:8** — Duplicates logic in `src/core/utils.py:34`. Consolidate.
+- **src/utils/helpers.py:8** — Duplicates logic in `src/core/utils.py:34`.
+  Consolidate.
 - **tests/test_auth.py** — Missing edge case: expired token test.
 
 ### Looks Good
@@ -163,7 +169,8 @@ curl -s \
   | python3 -c "
 import sys, json
 for f in json.load(sys.stdin):
-    print(f\"{f['status']:10} +{f['additions']:-4} -{f['deletions']:-4}  {f['filename']}\")"
+    print(f\"{f['status']:10} +{f['additions']:-4} -{f['deletions']:-4} 
+      {f['filename']}\")"
 ```
 
 ### Check Out PR Locally for Full Review
@@ -267,9 +274,12 @@ curl -s -X POST \
     \"event\": \"COMMENT\",
     \"body\": \"Code review from Hermes Agent\",
     \"comments\": [
-      {\"path\": \"src/auth.py\", \"line\": 45, \"body\": \"Use parameterized queries to prevent SQL injection.\"},
-      {\"path\": \"src/models/user.py\", \"line\": 23, \"body\": \"Hash passwords with bcrypt before storing.\"},
-      {\"path\": \"tests/test_auth.py\", \"line\": 1, \"body\": \"Add test for expired token edge case.\"}
+      {\"path\": \"src/auth.py\", \"line\": 45, \"body\": \"Use parameterized
+        queries to prevent SQL injection.\"},
+      {\"path\": \"src/models/user.py\", \"line\": 23, \"body\": \"Hash
+        passwords with bcrypt before storing.\"},
+      {\"path\": \"tests/test_auth.py\", \"line\": 1, \"body\": \"Add test for
+        expired token edge case.\"}
     ]
   }"
 ```
@@ -347,7 +357,8 @@ URL, follow this recipe:
 ### Step 1: Set up environment
 
 ```bash
-source "${HERMES_HOME:-$HOME/.hermes}/skills/github/github-auth/scripts/gh-env.sh"
+source
+  "${HERMES_HOME:-$HOME/.hermes}/skills/github/github-auth/scripts/gh-env.sh"
 # Or run the inline setup block from the top of this skill
 ```
 
@@ -428,10 +439,12 @@ Collect your findings and submit them as a formal review with inline comments.
 
 ```bash
 # If no issues — approve
-gh pr review $PR_NUMBER --approve --body "Reviewed by Hermes Agent. Code looks clean — good test coverage, no security concerns."
+gh pr review $PR_NUMBER --approve --body "Reviewed by Hermes Agent. Code looks
+  clean — good test coverage, no security concerns."
 
 # If issues found — request changes with inline comments
-gh pr review $PR_NUMBER --request-changes --body "Found a few issues — see inline comments."
+gh pr review $PR_NUMBER --request-changes --body "Found a few issues — see
+  inline comments."
 ```
 
 **With curl — atomic review with multiple inline comments:**
@@ -448,11 +461,15 @@ curl -s -X POST \
   -d "{
     \"commit_id\": \"$HEAD_SHA\",
     \"event\": \"REQUEST_CHANGES\",
-    \"body\": \"## Hermes Agent Review\n\nFound 2 issues, 1 suggestion. See inline comments.\",
+    \"body\": \"## Hermes Agent Review\n\nFound 2 issues, 1 suggestion. See
+      inline comments.\",
     \"comments\": [
-      {\"path\": \"src/auth.py\", \"line\": 45, \"body\": \"🔴 **Critical:** User input passed directly to SQL query — use parameterized queries.\"},
-      {\"path\": \"src/models.py\", \"line\": 23, \"body\": \"⚠️ **Warning:** Password stored without hashing.\"},
-      {\"path\": \"src/utils.py\", \"line\": 8, \"body\": \"💡 **Suggestion:** This duplicates logic in core/utils.py:34.\"}
+      {\"path\": \"src/auth.py\", \"line\": 45, \"body\": \"🔴 **Critical:** User
+        input passed directly to SQL query — use parameterized queries.\"},
+      {\"path\": \"src/models.py\", \"line\": 23, \"body\": \"⚠️ **Warning:**
+        Password stored without hashing.\"},
+      {\"path\": \"src/utils.py\", \"line\": 8, \"body\": \"💡 **Suggestion:**
+        This duplicates logic in core/utils.py:34.\"}
     ]
   }"
 ```

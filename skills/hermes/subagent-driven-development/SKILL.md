@@ -55,8 +55,10 @@ generating 10+ similar components), you may **skip the two-stage review** if:
 # Same-pattern route files: skip review, rely on existence test
 for route in ["index", "new", "edit"]:
     delegate_task(
-        goal=f"Create {route} form following the exact pattern of existing route files",
-        context=f"Use createFileRoute, same DaisyUI/Tailwind patterns as existing files",
+        goal=f"Create {route} form following the exact pattern of existing route
+          files",
+        context=f"Use createFileRoute, same DaisyUI/Tailwind patterns as
+          existing files",
     )
 
 # Then verify with a route-structure test
@@ -99,8 +101,10 @@ read_file("docs/plans/feature-plan.md")
 
 # Create todo list with all tasks
 todo([
-    {"id": "task-1", "content": "Create User model with email field", "status": "pending"},
-    {"id": "task-2", "content": "Add password hashing utility", "status": "pending"},
+    {"id": "task-1", "content": "Create User model with email field", "status":
+      "pending"},
+    {"id": "task-2", "content": "Add password hashing utility", "status":
+      "pending"},
     {"id": "task-3", "content": "Create login endpoint", "status": "pending"},
 ])
 ```
@@ -118,7 +122,8 @@ Use `delegate_task` with complete context:
 
 ```python
 delegate_task(
-    goal="Implement Task 1: Create User model with email and password_hash fields",
+    goal="Implement Task 1: Create User model with email and password_hash
+      fields",
     context="""
     TASK FROM PLAN:
     - Create: src/models/user.py
@@ -132,7 +137,8 @@ delegate_task(
     3. Write minimal implementation
     4. Run: pytest tests/models/test_user.py -v (verify PASS)
     5. Run: pytest tests/ -q (verify no regressions)
-    6. Commit: git add -A && git commit -m "feat: add User model with password hashing"
+    6. Commit: git add -A && git commit -m "feat: add User model with password
+      hashing"
 
     PROJECT CONTEXT:
     - Python 3.11, Flask app in src/app.py
@@ -209,7 +215,8 @@ delegate_task(
 #### Step 4: Mark Complete
 
 ```python
-todo([{"id": "task-1", "content": "Create User model with email field", "status": "completed"}], merge=True)
+todo([{"id": "task-1", "content": "Create User model with email field",
+  "status": "completed"}], merge=True)
 ```
 
 ### 3. Final Review
@@ -218,7 +225,8 @@ After ALL tasks are complete, dispatch a final integration reviewer:
 
 ```python
 delegate_task(
-    goal="Review the entire implementation for consistency and integration issues",
+    goal="Review the entire implementation for consistency and integration
+      issues",
     context="""
     All tasks from the plan are complete. Review the full implementation:
     - Do all components work together?
@@ -372,7 +380,8 @@ If a subagent encounters bugs during implementation:
   Implementer: No questions, implemented, 5/5 tests passing.
 
 [Dispatch spec reviewer]
-  Spec reviewer: ❌ Missing: password strength validation (spec says "min 8 chars")
+  Spec reviewer: ❌ Missing: password strength validation (spec says "min 8
+    chars")
 
 [Implementer fixes]
   Implementer: Added validation, 7/7 tests passing.

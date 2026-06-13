@@ -37,7 +37,8 @@ package, not a blanket tool:
 
 ```text
 # For each package that depends on the target:
-patch mode=replace path=<package.json> old_string='"vite": "^7.x.x"' new_string='"vite": "^8.x.x"'
+patch mode=replace path=<package.json> old_string='"vite": "^7.x.x"'
+  new_string='"vite": "^8.x.x"'
 ```
 
 If using taze, scope it with `--include`:
@@ -322,7 +323,8 @@ Then update consumers from deep paths to root:
 
 ```ts
 // Before:
-import type { VaultProjectApi } from "@cpn-console/vault-plugin/types/vault-project-api.js";
+import type { VaultProjectApi } from
+  "@cpn-console/vault-plugin/types/vault-project-api.js";
 // After:
 import type { VaultProjectApi } from "@cpn-console/vault-plugin";
 ```

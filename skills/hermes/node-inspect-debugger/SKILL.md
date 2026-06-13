@@ -253,7 +253,8 @@ skill.
 ```bash
 cd /home/bb/hermes-agent/ui-tui
 # Run a single test file paused on entry
-node --inspect-brk ./node_modules/vitest/vitest.mjs run --no-file-parallelism src/app/foo.test.tsx
+node --inspect-brk ./node_modules/vitest/vitest.mjs run --no-file-parallelism
+  src/app/foo.test.tsx
 ```
 
 In another terminal: `node inspect -p <pid>`, then `sb('src/app/foo.tsx', 42)`,
@@ -302,7 +303,8 @@ require("fs").writeFileSync("/tmp/heap.heapsnapshot", chunks.join(""));
    `/json/list`:
 
    ```bash
-   curl -s http://127.0.0.1:9229/json/list   # lists all inspectable targets on the host
+   curl -s http://127.0.0.1:9229/json/list   # lists all inspectable targets on
+     the host
    ```
 
 4. **Child processes.** `--inspect` on a parent does NOT inspect its children.

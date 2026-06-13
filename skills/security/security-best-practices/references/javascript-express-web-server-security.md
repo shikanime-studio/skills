@@ -836,7 +836,8 @@ Fix:
   set safe `Content-Type` and `Content-Disposition: attachment` when
   appropriate.
 - Configure
-  `express.static(root, { dotfiles: 'deny'|'ignore', index: false (if desired) })`.
+  `express.static(root, { dotfiles: 'deny'|'ignore', index: false (if desired)
+  })`.
 
 Notes:
 

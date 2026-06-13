@@ -64,7 +64,8 @@ _Reviewed by Hermes Agent_
 Prefix inline comments with the severity icon so they're scannable:
 
 ```text
-🔴 **Critical:** User input passed directly to SQL query — use parameterized queries to prevent injection.
+🔴 **Critical:** User input passed directly to SQL query — use parameterized
+  queries to prevent injection.
 ```
 
 ```text

@@ -105,7 +105,8 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
   provides `KeycloakJwtService`. `AuthModule` imports `KeycloakJwtModule`.
 - **`CacheModule.register()` defaults**: Default in-memory store uses TTL in
   milliseconds. Make cache TTLs configurable via `ConfigurationService` (e.g.,
-  `keycloakJwksCacheTtlMs = Number(process.env.KEYCLOAK_JWKS_CACHE_TTL_MS ?? 300_000)`)
+  `keycloakJwksCacheTtlMs = Number(process.env.KEYCLOAK_JWKS_CACHE_TTL_MS ??
+  300_000)`)
   rather than hardcoding them. Use a named constant `JWKS_CACHE_TTL_MS` in the
   service to reference the config value.
 - **Don't register `CacheModule` inside small shared modules**: Registering
@@ -122,7 +123,8 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
 - **Keycloak subfolder**: Keycloak JWT service, module, schema, and testing
   utils live in `auth/keycloak/` subfolder, not directly in `auth/`.
 - **`secretOrKeyProvider` returns PEM string**:
-  `createPublicKey({ key: { kty: 'RSA', n, e }, format: 'jwk' }).export({ format: 'pem', type: 'pkcs1' })`
+  `createPublicKey({ key: { kty: 'RSA', n, e }, format: 'jwk' }).export({
+  format: 'pem', type: 'pkcs1' })`
   produces the right format.
 - **Prisma mockDeep strict types**: `mockDeep<PrismaService>()` generates strict
   return types that reject partial objects. Never use `as any` on mock return
@@ -263,7 +265,8 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
     })
     export class AdminModule {}
 
-    // project/project.module.ts (no circular dep — ProjectGuard has no AuthService)
+    // project/project.module.ts (no circular dep — ProjectGuard has no
+      AuthService)
     @Module({
       imports: [DatabaseModule],
       providers: [ProjectGuard, ProjectService, ProjectPolicy],
@@ -341,13 +344,15 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
     includeLocked?: boolean
     includePermissions?: boolean
   }\n
-  function makeProjectSelect(requirements?: ProjectRequirements): Prisma.ProjectSelect {
+  function makeProjectSelect(requirements?: ProjectRequirements):
+    Prisma.ProjectSelect {
     const perm = requirements?.includePermissions ?? true
     return {
       id: true, slug: true,
       ...(requirements?.includeStatus ? { status: true } : {}),
       ...(requirements?.includeLocked ? { locked: true } : {}),
-      ...(perm ? { ownerId: true, everyonePerms: true, roles: { select: { id: true, permissions: true } }, members: { select: { userId: true, roleIds: true } } } : {}),
+      ...(perm ? { ownerId: true, everyonePerms: true, roles: { select: { id:
+        true, permissions: true } }, members: { select: { userId: true, roleIds: true } } } : {}),
     } satisfies Prisma.ProjectSelect
   }\n
   // Guard derives requirements from policy and passes to loader
@@ -458,7 +463,8 @@ When migrating Keycloak JWT validation from a legacy Fastify app to NestJS:
      tracking)
 
 2. **Register `JwtModule.registerAsync`** with:
-   - `secretOrKeyProvider: async (_type, token) => { const { kid } = decodeJweHeader(token); return getPublicKey(kid) }`
+   - `secretOrKeyProvider: async (_type, token) => { const { kid } =
+     decodeJweHeader(token); return getPublicKey(kid) }`
    - `verifyOptions: { algorithms: ['RS256'], issuer }`
 
 3. **Guard uses `jwtService.verifyAsync(token)`** directly (not a separate

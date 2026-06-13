@@ -31,7 +31,8 @@ Caused by:
    `[[package]]` dependencies, not `[[patch.unused]]`):
 
    ```bash
-   grep '"<crate>"' Cargo.lock | grep -v "patch"  # check if any package depends on it
+   grep '"<crate>"' Cargo.lock | grep -v "patch"  # check if any package depends
+     on it
    ```
 
 ## Fix

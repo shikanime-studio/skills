@@ -52,12 +52,14 @@ workers read what you did. Patterns that work:
 
 ```python
 kanban_complete(
-    summary="shipped rate limiter — token bucket, keys on user_id with IP fallback, 14 tests pass",
+    summary="shipped rate limiter — token bucket, keys on user_id with IP
+      fallback, 14 tests pass",
     metadata={
         "changed_files": ["rate_limiter.py", "tests/test_rate_limiter.py"],
         "tests_run": 14,
         "tests_passed": 14,
-        "decisions": ["user_id primary, IP fallback for unauthenticated requests"],
+        "decisions": ["user_id primary, IP fallback for unauthenticated
+          requests"],
     },
 )
 ```
@@ -82,11 +84,13 @@ kanban_comment(
         "tests_run": 14,
         "tests_passed": 14,
         "diff_path": "/path/to/worktree",  # or PR url if pushed
-        "decisions": ["user_id primary, IP fallback for unauthenticated requests"],
+        "decisions": ["user_id primary, IP fallback for unauthenticated
+          requests"],
     }, indent=2),
 )
 kanban_block(
-    reason="review-required: rate limiter shipped, 14/14 tests pass — needs eyes on the user_id/IP fallback choice before merging",
+    reason="review-required: rate limiter shipped, 14/14 tests pass — needs eyes
+      on the user_id/IP fallback choice before merging",
 )
 ```
 
@@ -98,7 +102,8 @@ where the artifact IS the writeup itself.
 
 ```python
 kanban_complete(
-    summary="3 competing libraries reviewed; vLLM wins on throughput, SGLang on latency, Tensorrt-LLM on memory efficiency",
+    summary="3 competing libraries reviewed; vLLM wins on throughput, SGLang on
+      latency, Tensorrt-LLM on memory efficiency",
     metadata={
         "sources_read": 12,
         "recommendation": "vLLM",
@@ -111,12 +116,15 @@ kanban_complete(
 
 ```python
 kanban_complete(
-    summary="reviewed PR #123; 2 blocking issues found (SQL injection in /search, missing CSRF on /settings)",
+    summary="reviewed PR #123; 2 blocking issues found (SQL injection in
+      /search, missing CSRF on /settings)",
     metadata={
         "pr_number": 123,
         "findings": [
-            {"severity": "critical", "file": "api/search.py", "line": 42, "issue": "raw SQL concat"},
-            {"severity": "high", "file": "api/settings.py", "issue": "missing CSRF middleware"},
+            {"severity": "critical", "file": "api/search.py", "line": 42,
+              "issue": "raw SQL concat"},
+            {"severity": "high", "file": "api/settings.py", "issue": "missing
+              CSRF middleware"},
         ],
         "approved": False,
     },
@@ -152,7 +160,8 @@ kanban_complete(
 # BAD — claiming ids you don't have captured return values for.
 kanban_complete(
     summary="Created remediation cards t_a1b2c3d4, t_deadbeef",  # hallucinated
-    created_cards=["t_a1b2c3d4", "t_deadbeef"],                   # → gate rejects
+    created_cards=["t_a1b2c3d4", "t_deadbeef"],                   # → gate
+      rejects
 )
 ```
 
@@ -173,9 +182,11 @@ as a comment instead.
 ```python
 kanban_comment(
     task_id=os.environ["HERMES_KANBAN_TASK"],
-    body="Full context: I have user IPs from Cloudflare headers but some users are behind NATs with thousands of peers. Keying on IP alone causes false positives.",
+    body="Full context: I have user IPs from Cloudflare headers but some users
+      are behind NATs with thousands of peers. Keying on IP alone causes false positives.",
 )
-kanban_block(reason="Rate limit key choice: IP (simple, NAT-unsafe) or user_id (requires auth, skips anonymous endpoints)?")
+kanban_block(reason="Rate limit key choice: IP (simple, NAT-unsafe) or user_id
+  (requires auth, skips anonymous endpoints)?")
 ```
 
 The block message is what appears in the dashboard / gateway notifier. The

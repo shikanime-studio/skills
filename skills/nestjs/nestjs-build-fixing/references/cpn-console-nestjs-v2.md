@@ -10,26 +10,34 @@ apps/server-nestjs/src/
 ├── modules/
 │   ├── infrastructure/
 │   │   ├── auth/
-│   │   │   ├── user.guard.ts                   → UserGuard, UserContext, RequestWithUserContext
+│   │   │   ├── user.guard.ts                   → UserGuard, UserContext,
+  RequestWithUserContext
 │   │   │   ├── user.decorator.ts                → @User()
-│   │   │   ├── project.guard.ts                 → ProjectContextGuard, ProjectContext, RequestWithProjectContext
+│   │   │   ├── project.guard.ts                 → ProjectContextGuard,
+  ProjectContext, RequestWithProjectContext
 │   │   │   ├── project.decorator.ts             → @Project()
 │   │   │   ├── project-status.guard.ts          → ProjectStatusGuard
 │   │   │   ├── project-status.decorator.ts      → @RequireProjectStatus(...)
 │   │   │   ├── project-locked.guard.ts          → ProjectLockedGuard
 │   │   │   ├── project-permission.guard.ts      → ProjectPermissionGuard
-│   │   │   ├── project-permission.decorator.ts  → @RequireProjectPermission(...)
+│   │   │   ├── project-permission.decorator.ts  →
+  @RequireProjectPermission(...)
 │   │   │   ├── admin-permission.guard.ts        → AdminPermissionGuard
 │   │   │   ├── admin-permission.decorator.ts    → @RequireAdminPermission(...)
-│   │   │   ├── keycloak-jwt.service.ts          → KeycloakJwtService (JWKS-based JWT validation)
-│   │   │   └── auth.module.ts                   → AuthModule (exports AuthService, KeycloakJwtService, guards)
+│   │   │   ├── keycloak-jwt.service.ts          → KeycloakJwtService
+  (JWKS-based JWT validation)
+│   │   │   └── auth.module.ts                   → AuthModule (exports
+  AuthService, KeycloakJwtService, guards)
 │   │   ├── pipe/
-│   │   │   └── zod-validation.pipe.ts           → ZodValidationPipe (wraps Zod schemas for NestJS)
+│   │   │   └── zod-validation.pipe.ts           → ZodValidationPipe (wraps Zod
+  schemas for NestJS)
 │   │   └── database/
 │   │       └── prisma.service.ts
 │   ├── project/
-│   │   ├── project.controller.ts                → All project + member routes (single controller)
-│   │   ├── project.service.ts                   → All project + member business logic
+│   │   ├── project.controller.ts                → All project + member routes
+  (single controller)
+│   │   ├── project.service.ts                   → All project + member business
+  logic
 │   │   ├── project.module.ts
 │   │   ├── project.utils.ts
 │   │   └── project-datastore.service.ts
@@ -50,11 +58,14 @@ import { UserGuard } from "../infrastructure/auth/user.guard";
 import { User } from "../infrastructure/auth/user.decorator";
 import { ProjectContextGuard } from "../infrastructure/auth/project.guard";
 import { Project } from "../infrastructure/auth/project.decorator";
-import { ProjectPermissionGuard } from "../infrastructure/auth/project-permission.guard";
-import { RequireProjectPermission } from "../infrastructure/auth/project-permission.decorator";
+import { ProjectPermissionGuard } from
+  "../infrastructure/auth/project-permission.guard";
+import { RequireProjectPermission } from
+  "../infrastructure/auth/project-permission.decorator";
 
 // Runtime schema extraction from ts-rest contracts
-const ListProjectsQuerySchema = projectContract.listProjects.query; // runtime Zod schema
+const ListProjectsQuerySchema = projectContract.listProjects.query; // runtime
+  Zod schema
 const BulkActionSchema = projectContract.bulkActionProject.body;
 const UpdateProjectSchema = projectContract.updateProject.body;
 ```
@@ -92,7 +103,8 @@ the full check including the self-bypass:
 ```typescript
 // Controller — no permission guard, just status/locked guards
 @Delete('/:projectId/members/:userId')
-@UseGuards(UserGuard, ProjectContextGuard, ProjectStatusGuard, ProjectLockedGuard)
+@UseGuards(UserGuard, ProjectContextGuard, ProjectStatusGuard,
+  ProjectLockedGuard)
 async removeMember(...) { ... }
 
 // Service — full permission check with self-bypass
@@ -227,7 +239,8 @@ JwtModule.registerAsync({
     },
     verifyOptions: {
       algorithms: ["RS256"],
-      issuer: `${config.keycloakProtocol}://${config.keycloakDomain}/realms/${config.keycloakRealm}`,
+      issuer:
+        `${config.keycloakProtocol}://${config.keycloakDomain}/realms/${config.keycloakRealm}`,
     },
   }),
 });

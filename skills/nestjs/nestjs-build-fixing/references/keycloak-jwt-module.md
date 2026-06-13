@@ -6,14 +6,20 @@ validation to NestJS:
 ```text
 auth/
 ├── keycloak/
-│   ├── keycloak.service.ts          # KeycloakJwtService: JWKS caching, header decoding
-│   ├── keycloak.module.ts           # KeycloakJwtModule: provides KeycloakJwtService
-│   ├── keycloak.service.spec.ts     # Unit tests for decodeJweHeader, getPublicKey
+│   ├── keycloak.service.ts          # KeycloakJwtService: JWKS caching, header
+  decoding
+│   ├── keycloak.module.ts           # KeycloakJwtModule: provides
+  KeycloakJwtService
+│   ├── keycloak.service.spec.ts     # Unit tests for decodeJweHeader,
+  getPublicKey
 │   ├── keycloak-payload.schema.ts   # Zod schema for JWT payload validation
 │   └── keycloak-testing.utils.ts    # makeKeycloakPayload(overrides?) factory
-├── auth.module.ts                   # AuthModule: imports KeycloakJwtModule + JwtModule
-├── auth.service.ts                  # AuthService: validateToken, validateKeycloakPayload
-├── auth.service.spec.ts             # Unit tests for token + JWT payload validation
+├── auth.module.ts                   # AuthModule: imports KeycloakJwtModule +
+  JwtModule
+├── auth.service.ts                  # AuthService: validateToken,
+  validateKeycloakPayload
+├── auth.service.spec.ts             # Unit tests for token + JWT payload
+  validation
 ├── admin-permission.guard.ts        # Guard: x-dso-token OR Bearer JWT auth
 ├── admin-permission.guard.spec.ts   # Guard tests
 └── admin-permission.decorator.ts    # @RequireAdminPermission()

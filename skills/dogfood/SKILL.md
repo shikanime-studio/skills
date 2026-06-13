@@ -86,7 +86,8 @@ For each page or feature in your plan:
    interactive elements:
 
    ```text
-   browser_vision(question="Describe the page layout, identify any visual issues, broken elements, or accessibility concerns", annotate=true)
+   browser_vision(question="Describe the page layout, identify any visual
+     issues, broken elements, or accessibility concerns", annotate=true)
    ```
 
    The `annotate=true` flag overlays numbered `[N]` labels on interactive
@@ -114,7 +115,8 @@ For every issue found:
 1. **Take a screenshot** showing the issue:
 
    ```text
-   browser_vision(question="Capture and describe the issue visible on this page", annotate=false)
+   browser_vision(question="Capture and describe the issue visible on this
+     page", annotate=false)
    ```
 
    Save the `screenshot_path` from the response — you will reference it in the

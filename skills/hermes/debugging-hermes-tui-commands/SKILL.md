@@ -65,14 +65,16 @@ autocomplete data shipped to Ink.
    ```bash
    read_file ui-tui/src/app/slash/commands/core.ts
    # If not there:
-   search_files --pattern "commandname" --path ui-tui/src/app/slash/commands --target files
+   search_files --pattern "commandname" --path ui-tui/src/app/slash/commands
+     --target files
    ```
 
 3. **Check if the command exists in the Python backend:**
 
    ```bash
    search_files --pattern "CommandDef" --file_glob "*.py" --path hermes_cli/
-   search_files --pattern "commandname" --path hermes_cli/commands.py --context 3
+   search_files --pattern "commandname" --path hermes_cli/commands.py --context
+     3
    ```
 
 4. **Examine the gateway implementation:**

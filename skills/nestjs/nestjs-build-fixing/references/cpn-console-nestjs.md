@@ -10,19 +10,23 @@ apps/server-nestjs/src/
 ├── modules/
 │   ├── infrastructure/
 │   │   ├── auth/
-│   │   │   ├── user.guard.ts          → UserGuard, UserContext, RequestWithUserContext
+│   │   │   ├── user.guard.ts          → UserGuard, UserContext,
+  RequestWithUserContext
 │   │   │   ├── user.decorator.ts      → @User()
-│   │   │   ├── project.guard.ts       → ProjectContextGuard, ProjectContext, RequestWithProjectContext
+│   │   │   ├── project.guard.ts       → ProjectContextGuard, ProjectContext,
+  RequestWithProjectContext
 │   │   │   ├── project.decorator.ts   → @Project()
 │   │   │   ├── project-status.guard.ts           → ProjectStatusGuard
 │   │   │   ├── project-status.decorator.ts       → @RequireProjectStatus(...)
 │   │   │   ├── project-locked.guard.ts           → ProjectLockedGuard
 │   │   │   ├── project-permission.guard.ts       → ProjectPermissionGuard
-│   │   │   ├── project-permission.decorator.ts   → @RequireProjectPermission(...)
+│   │   │   ├── project-permission.decorator.ts   →
+  @RequireProjectPermission(...)
 │   │   │   ├── admin-permission.guard.ts         → AdminPermissionGuard
 │   │   │   └── admin-permission.decorator.ts     → @RequireAdminPermission(...)
 │   │   ├── pipe/
-│   │   │   └── zod-validation.pipe.ts → ZodValidationPipe (wraps Zod schemas for NestJS)
+│   │   │   └── zod-validation.pipe.ts → ZodValidationPipe (wraps Zod schemas
+  for NestJS)
 │   │   └── database/
 │   │       └── prisma.service.ts
 │   ├── project/
@@ -50,7 +54,8 @@ import { Project } from '../infrastructure/auth/project.decorator'
 
 // Runtime schema extraction from ts-rest contracts
 const CreateProjectSchema = ProjectSchemaV2.pick({ name: true, ... })
-const ListProjectsQuerySchema = projectContract.listProjects.query   // runtime Zod schema
+const ListProjectsQuerySchema = projectContract.listProjects.query   // runtime
+  Zod schema
 const BulkActionSchema = projectContract.bulkActionProject.body
 const UpdateProjectSchema = projectContract.updateProject.body
 ```
@@ -102,7 +107,8 @@ non-migrated routes.
 **Diagnosing port conflicts:**
 
 ```bash
-lsof -i -P -n | grep -E 'node.*LISTEN'    # See which node process owns each port
+lsof -i -P -n | grep -E 'node.*LISTEN'    # See which node process owns each
+  port
 ```
 
 **Symptom:** All requests land on NestJS, non-migrated routes (e.g.,
@@ -156,5 +162,6 @@ uses strings (`permissions: '4'`).
 To inspect generated Prisma types:
 
 ```bash
-rg 'permissions.*bigint' node_modules/.pnpm/@prisma+client*/node_modules/.prisma/client/index.d.ts
+rg 'permissions.*bigint'
+  node_modules/.pnpm/@prisma+client*/node_modules/.prisma/client/index.d.ts
 ```

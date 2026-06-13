@@ -102,18 +102,21 @@ at runtime.
 ## Example — a review loop with all four gate types
 
 ```text
-[Pre-flight] plan.md exists and is non-empty?   → no: bail, ask user to write a plan first
+[Pre-flight] plan.md exists and is non-empty?   → no: bail, ask user to write a
+  plan first
                 ↓ yes
 [Execute]  subagent implements task
                 ↓
-[Revision] reviewer checks against must-haves  → fail: loop back to subagent (max 3)
+[Revision] reviewer checks against must-haves  → fail: loop back to subagent
+  (max 3)
                 ↓ pass
 [Pre-flight] tests pass?                       → no: bail, report failing tests
                 ↓ yes
 [Commit]
                 ↓
 (on revision loop exhaustion)
-[Escalation] "3 review cycles failed to converge on issue X — pick: force-merge, rewrite task, abandon"
+[Escalation] "3 review cycles failed to converge on issue X — pick: force-merge,
+  rewrite task, abandon"
                 ↓ user picks
 (on any tier-POOR context pressure during loop)
 [Abort] "context at 73%, checkpointing and stopping"

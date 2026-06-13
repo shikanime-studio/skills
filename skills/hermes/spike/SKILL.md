@@ -158,7 +158,8 @@ it's a spike.
 
 ```text
 terminal("mkdir -p spikes/001-websocket-streaming")
-write_file("spikes/001-websocket-streaming/README.md", "# 001: websocket-streaming\n\n...")
+write_file("spikes/001-websocket-streaming/README.md", "# 001:
+  websocket-streaming\n\n...")
 write_file("spikes/001-websocket-streaming/main.py", "...")
 terminal("cd spikes/001-websocket-streaming && python3 main.py")
 # Observe output, iterate.
@@ -170,8 +171,10 @@ with `delegate_task`:
 
 ```text
 delegate_task(tasks=[
-    {"goal": "Build 002a-pdf-parse-pdfjs: ...", "toolsets": ["terminal", "file", "web"]},
-    {"goal": "Build 002b-pdf-parse-camelot: ...", "toolsets": ["terminal", "file", "web"]},
+    {"goal": "Build 002a-pdf-parse-pdfjs: ...", "toolsets": ["terminal", "file",
+      "web"]},
+    {"goal": "Build 002b-pdf-parse-camelot: ...", "toolsets": ["terminal",
+      "file", "web"]},
 ])
 ```
 

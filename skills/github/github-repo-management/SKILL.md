@@ -29,9 +29,11 @@ else
   AUTH="git"
   if [ -z "$GITHUB_TOKEN" ]; then
     if [ -f ~/.hermes/.env ] && grep -q "^GITHUB_TOKEN=" ~/.hermes/.env; then
-      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d= -f2 | tr -d '\n\r')
+      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d=
+        -f2 | tr -d '\n\r')
     elif grep -q "github.com" ~/.git-credentials 2>/dev/null; then
-      GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials 2>/dev/null | head -1 | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
+      GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials 2>/dev/null | head -1
+        | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
     fi
   fi
 fi
@@ -40,7 +42,8 @@ fi
 if [ "$AUTH" = "gh" ]; then
   GH_USER=$(gh api user --jq '.login')
 else
-  GH_USER=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user | python3 -c "import sys,json; print(json.load(sys.stdin)['login'])")
+  GH_USER=$(curl -s -H "Authorization: token $GITHUB_TOKEN"
+    https://api.github.com/user | python3 -c "import sys,json; print(json.load(sys.stdin)['login'])")
 fi
 ```
 
@@ -92,7 +95,8 @@ gh repo clone owner/repo-name -- --depth 1
 gh repo create my-new-project --public --clone
 
 # Private, with description and license
-gh repo create my-new-project --private --description "A useful tool" --license MIT --clone
+gh repo create my-new-project --private --description "A useful tool" --license
+  MIT --clone
 
 # Under an organization
 gh repo create my-org/my-new-project --public --clone
@@ -231,15 +235,18 @@ curl -s \
 import sys, json
 for r in json.load(sys.stdin):
     vis = 'private' if r['private'] else 'public'
-    print(f\"  {r['full_name']:40}  {vis:8}  {r.get('language', ''):10}  ★{r['stargazers_count']}\")"
+    print(f\"  {r['full_name']:40}  {vis:8}  {r.get('language', ''):10} 
+      ★{r['stargazers_count']}\")"
 
 # Search repos
 curl -s \
-  "https://api.github.com/search/repositories?q=machine+learning+language:python&sort=stars&per_page=10" \
+ 
+    "https://api.github.com/search/repositories?q=machine+learning+language:python&sort=stars&per_page=10" \
   | python3 -c "
 import sys, json
 for r in json.load(sys.stdin)['items']:
-    print(f\"  {r['full_name']:40}  ★{r['stargazers_count']:6}  {r['description'][:60] if r['description'] else ''}\")"
+    print(f\"  {r['full_name']:40}  ★{r['stargazers_count']:6} 
+      {r['description'][:60] if r['description'] else ''}\")"
 ```
 
 ## 5. Repository Settings
@@ -396,14 +403,16 @@ curl -s \
 import sys, json
 for r in json.load(sys.stdin):
     tag = r.get('tag_name', 'no tag')
-    print(f\"  {tag:15}  {r['name']:30}  {'draft' if r['draft'] else 'published'}\")"
+    print(f\"  {tag:15}  {r['name']:30}  {'draft' if r['draft'] else
+      'published'}\")"
 
 # Upload a release asset (binary file)
 RELEASE_ID=<id_from_create_response>
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
   -H "Content-Type: application/octet-stream" \
-  "https://uploads.github.com/repos/$OWNER/$REPO/releases/$RELEASE_ID/assets?name=binary-amd64" \
+ 
+    "https://uploads.github.com/repos/$OWNER/$REPO/releases/$RELEASE_ID/assets?name=binary-amd64" \
   --data-binary @./dist/binary-amd64
 ```
 
@@ -441,7 +450,8 @@ curl -s \
   | python3 -c "
 import sys, json
 for r in json.load(sys.stdin)['workflow_runs']:
-    print(f\"  Run {r['id']}  {r['name']:30}  {r['conclusion'] or r['status']}\")"
+    print(f\"  Run {r['id']}  {r['name']:30}  {r['conclusion'] or
+      r['status']}\")"
 
 # Download failed run logs
 RUN_ID=<run_id>
@@ -459,13 +469,15 @@ curl -s -X POST \
 # Re-run only failed jobs
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
-  https://api.github.com/repos/$OWNER/$REPO/actions/runs/$RUN_ID/rerun-failed-jobs
+ 
+    https://api.github.com/repos/$OWNER/$REPO/actions/runs/$RUN_ID/rerun-failed-jobs
 
 # Trigger a workflow manually (workflow_dispatch)
 WORKFLOW_ID=<workflow_id_or_filename>
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
-  https://api.github.com/repos/$OWNER/$REPO/actions/workflows/$WORKFLOW_ID/dispatches \
+ 
+    https://api.github.com/repos/$OWNER/$REPO/actions/workflows/$WORKFLOW_ID/dispatches \
   -d '{"ref": "main", "inputs": {"environment": "staging"}}'
 ```
 

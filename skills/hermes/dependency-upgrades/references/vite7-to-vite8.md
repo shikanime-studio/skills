@@ -14,7 +14,8 @@
 
 ```typescript
 build: {
-  target: 'baseline-widely-available',  // or 'esnext' for JS-only, but CSS needs browser targets
+  target: 'baseline-widely-available',  // or 'esnext' for JS-only, but CSS
+    needs browser targets
 }
 ```
 

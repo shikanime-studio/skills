@@ -30,9 +30,11 @@ else
   AUTH="git"
   if [ -z "$GITHUB_TOKEN" ]; then
     if [ -f ~/.hermes/.env ] && grep -q "^GITHUB_TOKEN=" ~/.hermes/.env; then
-      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d= -f2 | tr -d '\n\r')
+      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d=
+        -f2 | tr -d '\n\r')
     elif grep -q "github.com" ~/.git-credentials 2>/dev/null; then
-      GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials 2>/dev/null | head -1 | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
+      GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials 2>/dev/null | head -1
+        | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
     fi
   fi
 fi
@@ -74,7 +76,8 @@ for i in json.load(sys.stdin):
 # Filter by label
 curl -s \
   -H "Authorization: token $GITHUB_TOKEN" \
-  "https://api.github.com/repos/$OWNER/$REPO/issues?state=open&labels=bug&per_page=20" \
+ 
+    "https://api.github.com/repos/$OWNER/$REPO/issues?state=open&labels=bug&per_page=20" \
   | python3 -c "
 import sys, json
 for i in json.load(sys.stdin):
@@ -98,7 +101,8 @@ print(f\"\n{i['body']}\")"
 # Search issues
 curl -s \
   -H "Authorization: token $GITHUB_TOKEN" \
-  "https://api.github.com/search/issues?q=authentication+error+repo:$OWNER/$REPO" \
+ 
+    "https://api.github.com/search/issues?q=authentication+error+repo:$OWNER/$REPO" \
   | python3 -c "
 import sys, json
 for i in json.load(sys.stdin)['items']:
@@ -135,7 +139,8 @@ curl -s -X POST \
   https://api.github.com/repos/$OWNER/$REPO/issues \
   -d '{
     "title": "Login redirect ignores ?next= parameter",
-    "body": "## Description\nAfter logging in, users always land on /dashboard.\n\n## Steps to Reproduce\n1. Navigate to /settings while logged out\n2. Get redirected to /login?next=/settings\n3. Log in\n4. Actual: redirected to /dashboard\n\n## Expected Behavior\nRespect the ?next= query parameter.",
+    "body": "## Description\nAfter logging in, users always land on
+      /dashboard.\n\n## Steps to Reproduce\n1. Navigate to /settings while logged out\n2. Get redirected to /login?next=/settings\n3. Log in\n4. Actual: redirected to /dashboard\n\n## Expected Behavior\nRespect the ?next= query parameter.",
     "labels": ["bug", "backend"],
     "assignees": ["username"]
   }'
@@ -236,7 +241,8 @@ curl -s -X POST \
 **With gh:**
 
 ```bash
-gh issue comment 42 --body "Investigated — root cause is in auth middleware. Working on a fix."
+gh issue comment 42 --body "Investigated — root cause is in auth middleware.
+  Working on a fix."
 ```
 
 **With curl:**
@@ -245,7 +251,8 @@ gh issue comment 42 --body "Investigated — root cause is in auth middleware. W
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
   https://api.github.com/repos/$OWNER/$REPO/issues/42/comments \
-  -d '{"body": "Investigated — root cause is in auth middleware. Working on a fix."}'
+  -d '{"body": "Investigated — root cause is in auth middleware. Working on a
+    fix."}'
 ```
 
 ### Closing and Reopening
@@ -310,11 +317,15 @@ milestones so labels/milestone/assignee follow repository conventions.
 Useful inspection commands:
 
 ```bash
-gh issue view 42 --json number,title,body,labels,milestone,assignees,author,state
-gh issue list --state open --limit 30 --json number,title,labels,milestone,assignees
-gh issue list --state all --search "keyword from target issue" --limit 20 --json number,title,body,labels,milestone,assignees
+gh issue view 42 --json
+  number,title,body,labels,milestone,assignees,author,state
+gh issue list --state open --limit 30 --json
+  number,title,labels,milestone,assignees
+gh issue list --state all --search "keyword from target issue" --limit 20 --json
+  number,title,body,labels,milestone,assignees
 gh label list --limit 200 --json name,description
-gh api repos/{owner}/{repo}/milestones --paginate --jq '.[] | [.title,.state,.open_issues,.due_on] | @tsv'
+gh api repos/{owner}/{repo}/milestones --paginate --jq '.[] |
+  [.title,.state,.open_issues,.due_on] | @tsv'
 ```
 
 For substantial body rewrites, write the body to a temporary Markdown file and
@@ -335,7 +346,8 @@ and report the actual resulting labels, milestone, and assignees:
 
 ```bash
 gh issue view 42 --json number,title,body,labels,milestone,assignees,state,url \
-  --jq '{number,title,state,url,labels:[.labels[].name],milestone:(.milestone.title//null),assignees:[.assignees[].login]}'
+  --jq
+    '{number,title,state,url,labels:[.labels[].name],milestone:(.milestone.title//null),assignees:[.assignees[].login]}'
 ```
 
 When asked to triage issues:
@@ -349,7 +361,8 @@ gh issue list --label "needs-triage" --state open
 # With curl
 curl -s \
   -H "Authorization: token $GITHUB_TOKEN" \
-  "https://api.github.com/repos/$OWNER/$REPO/issues?labels=needs-triage&state=open" \
+ 
+    "https://api.github.com/repos/$OWNER/$REPO/issues?labels=needs-triage&state=open" \
   | python3 -c "
 import sys, json
 for i in json.load(sys.stdin):

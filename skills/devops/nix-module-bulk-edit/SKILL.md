@@ -53,7 +53,8 @@ Many assumed templates don't exist. Always check:
 When removing previously-added blocks, use `perl -0pe` with `/s` flag:
 
 ```bash
-perl -i -0pe 's/^\s+integrations\.gitnr\."\.gitignore"\.templates = \[\n.*?\];\n//gms' file.nix
+perl -i -0pe 's/^\s+integrations\.gitnr\."\.gitignore"\.templates =
+  \[\n.*?\];\n//gms' file.nix
 ```
 
 ## Workflow
@@ -101,12 +102,15 @@ pattern.
 ```bash
 # Step 1: Clean any previous attempts
 for f in $(grep -rl 'integrations\.gitnr\|gitnr\.' src/modules/languages/); do
-  perl -i -0pe 's/^\s+integrations\.gitnr\."\.gitignore"\.templates = \[.*?\];\n//gm' "$f"
-  perl -i -0pe 's/^\s+integrations\.gitnr\."\.gitignore"\.templates = \[\n.*?\];\n//gms' "$f"
+  perl -i -0pe 's/^\s+integrations\.gitnr\."\.gitignore"\.templates =
+    \[.*?\];\n//gm' "$f"
+  perl -i -0pe 's/^\s+integrations\.gitnr\."\.gitignore"\.templates =
+    \[\n.*?\];\n//gms' "$f"
 done
 
 # Step 2: Add correct line (example for go.nix)
-perl -i -pe 's/(config = lib\.mkIf cfg\.enable \{)/$1\n    gitnr.\".gitignore\".templates = [ \"gh:Go\" ];/' src/modules/languages/go.nix
+perl -i -pe 's/(config = lib\.mkIf cfg\.enable \{)/$1\n   
+  gitnr.\".gitignore\".templates = [ \"gh:Go\" ];/' src/modules/languages/go.nix
 
 # Step 3: Verify
 grep -rn 'gitnr' src/modules/languages/

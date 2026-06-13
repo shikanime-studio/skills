@@ -81,7 +81,8 @@ remindctl add --title "Meeting prep" --due "2026-02-15 09:00"
 For a reminder due at 2:00 PM with a notification 30 minutes earlier:
 
 ```bash
-remindctl add --title "Hairdresser" --due "2026-05-15 14:00" --alarm "2026-05-15 13:30"
+remindctl add --title "Hairdresser" --due "2026-05-15 14:00" --alarm "2026-05-15
+  13:30"
 ```
 
 To edit an existing reminder:

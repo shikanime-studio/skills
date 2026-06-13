@@ -121,15 +121,18 @@ project permissions/status/locked.
 authenticateHeaders(headers)
   ├── authenticateDsoToken(headers)
   │     └── validateToken(rawToken, requirements)
-  │           └── findAndValidateToken(hash) → TokenUserResult (raw, no resolution)
+  │           └── findAndValidateToken(hash) → TokenUserResult (raw, no
+    resolution)
   │     returns UserContext { userId, userType, tokenResult }
   └── authenticateBearerToken(headers)
         └── keycloakJwtService.validatePayload(payload, requirements)
-        returns UserContext { userId, adminPermissions, userType } (already resolved)
+        returns UserContext { userId, adminPermissions, userType } (already
+          resolved)
 
 AdminGuard then:
   if (user.tokenResult && requirements.includeAdminRoleIds)
-    user.adminPermissions = await adminService.resolveAdminPermissions(user.tokenResult)
+    user.adminPermissions = await
+      adminService.resolveAdminPermissions(user.tokenResult)
   adminService.validate(policy, user)
 ```
 
@@ -159,7 +162,8 @@ auth/
 │   ├── project.permission.decorator.ts
 │   └── project.status.decorator.ts
 ├── auth.module.ts
-├── auth.service.ts               (+ TokenUserResult type, UserContext.tokenResult)
+├── auth.service.ts               (+ TokenUserResult type,
+  UserContext.tokenResult)
 ├── auth.service.spec.ts
 ├── auth-testing.utils.ts
 ├── user-type.decorator.ts
@@ -181,8 +185,10 @@ export interface ProjectConfig {
   id: string;
   slug: string;
   locked?: boolean; // only loaded if policy includes locked check
-  status?: PrismaProject["status"]; // only loaded if policy includes status check
-  projectPermissions?: bigint; // resolved at load time — not raw role/member data
+  status?: PrismaProject["status"]; // only loaded if policy includes status
+    check
+  projectPermissions?: bigint; // resolved at load time — not raw role/member
+    data
 }
 ```
 
@@ -217,7 +223,8 @@ permissions inline, and builds a slim `ProjectConfig`:
 
 ```ts
 class ProjectLoaderService {
-  async load(projectId: string, userId: string, requirements?: ProjectRequirements): Promise<ProjectConfig> {
+  async load(projectId: string, userId: string, requirements?:
+    ProjectRequirements): Promise<ProjectConfig> {
     const project = await this.prisma.project.findUnique({
       where: { id: projectId },
       select: makeProjectSelect(requirements),
@@ -229,12 +236,14 @@ class ProjectLoaderService {
       ...(requirements?.includeStatus ? { status: project.status } : {}),
       ...(requirements?.includeLocked ? { locked: project.locked } : {}),
       ...(requirements?.includePermissions
-        ? { projectPermissions: this.resolveProjectPermissions(project, userId) }
+        ? { projectPermissions: this.resolveProjectPermissions(project, userId)
+          }
         : {}),
     }
   }
 
-  private resolveProjectPermissions(project: ProjectWithRolesMembers, userId: string): bigint { ... }
+  private resolveProjectPermissions(project: ProjectWithRolesMembers, userId:
+    string): bigint { ... }
 }
 ```
 
@@ -293,7 +302,8 @@ const ctx = {
 **❌ Incorrect — `mockDeep` proxies strip nested properties:**
 
 ```ts
-const ctx = mockDeep<ExecutionContext>(); // BAD — project prop becomes undefined
+const ctx = mockDeep<ExecutionContext>(); // BAD — project prop becomes
+  undefined
 const httpArgs = mockDeep<any>();
 httpArgs.getRequest.mockReturnValue(request);
 ctx.switchToHttp.mockReturnValue(httpArgs);

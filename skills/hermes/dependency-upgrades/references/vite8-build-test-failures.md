@@ -28,7 +28,8 @@ paths and the bundles cover all needed styles.
 ## zod-validation-error v3 exports field rejected by Vite 8 resolver
 
 Symptom: Vitest tests fail with
-`"./v3" is not exported under the conditions ["node", "development", "import"] from package zod-validation-error`
+`"./v3" is not exported under the conditions ["node", "development", "import"]
+from package zod-validation-error`
 even though the package's `exports` field maps `"."` to `"./v3/index.mjs"`.
 
 Root cause: `zod-validation-error@3.x` uses non-standard export keys
@@ -100,7 +101,8 @@ function formatIssue(issue: ZodIssue): string {
 
 export function parseZodError(zodError: ZodError) {
   if (zodError.issues.length === 0) return zodError.message;
-  return `Validation error: ${zodError.issues.map(formatIssue).join(issueSeparator)}`;
+  return `Validation error:
+    ${zodError.issues.map(formatIssue).join(issueSeparator)}`;
 }
 ```
 
@@ -224,7 +226,8 @@ Verification: run a focused passing spec with coverage so the command reaches
 the coverage generation phase even if the full suite has unrelated failures.
 
 ```sh
-pnpm --filter @cpn-console/server exec vitest run --coverage src/utils/date.spec.ts
+pnpm --filter @cpn-console/server exec vitest run --coverage
+  src/utils/date.spec.ts
 ```
 
 A clean coverage report without `.sql` parse messages validates the glob fix. If

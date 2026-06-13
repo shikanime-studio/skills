@@ -313,7 +313,8 @@ Detection hints:
 Fix:
 
 - Use
-  `http.Server{ReadHeaderTimeout: ..., ReadTimeout: ..., WriteTimeout: ..., IdleTimeout: ..., MaxHeaderBytes: ...}`.
+  `http.Server{ReadHeaderTimeout: ..., ReadTimeout: ..., WriteTimeout: ...,
+  IdleTimeout: ..., MaxHeaderBytes: ...}`.
 - Calibrate timeouts per endpoint type (streaming vs JSON APIs).
 
 Notes:

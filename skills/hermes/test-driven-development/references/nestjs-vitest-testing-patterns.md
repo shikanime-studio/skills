@@ -12,7 +12,8 @@ data factories and mocks only; avoid exporting a generic
 standardizes on that.
 
 ```text
-project.service.spec.ts          ← test cases + local createProjectServiceTestingModule()
+project.service.spec.ts          ← test cases + local
+  createProjectServiceTestingModule()
 project-testing.utils.ts         ← factories and reusable mock objects only
 ```
 
@@ -164,26 +165,30 @@ in a typed helper function in `*-testing.utils.ts`:
 import type { Prisma } from "@prisma/client";
 import type { Project } from "@prisma/client";
 
-/** Shape returned by Prisma `tx.project.findUniqueOrThrow` with members include. */
+/** Shape returned by Prisma `tx.project.findUniqueOrThrow` with members
+  include. */
 export type ProjectWithMembers = Prisma.ProjectGetPayload<{
   include: { members: { include: { user: true } } };
 }>;
 
-/** Create a mock result for `tx.project.findMany` / `prisma.project.findMany`. */
+/** Create a mock result for `tx.project.findMany` / `prisma.project.findMany`.
+  */
 export function makeProjectFindManyResult(
   projects: Array<Partial<Project> & { id: string }> = [],
 ): Project[] {
   return projects as Project[];
 }
 
-/** Create a mock result for `tx.project.create` (or any single-record create). */
+/** Create a mock result for `tx.project.create` (or any single-record create).
+  */
 export function makeProjectCreateResult(
   overrides: Partial<Project> & { id: string },
 ): Project {
   return overrides as Project;
 }
 
-/** Create a mock result for `tx.project.findUniqueOrThrow` with members include. */
+/** Create a mock result for `tx.project.findUniqueOrThrow` with members
+  include. */
 export function makeProjectWithMembersResult(
   project: ProjectWithDetails,
   members: Array<
@@ -198,16 +203,19 @@ export function makeProjectWithMembersResult(
 
 ```typescript
 // Before (inline casts scattered through spec):
-tx.project.findMany.mockResolvedValue(existingSlugs.map(slug => ({ slug })) as never)
+tx.project.findMany.mockResolvedValue(existingSlugs.map(slug => ({ slug })) as
+  never)
 tx.project.create.mockResolvedValue({ id: pwd.id } as never)
-tx.project.findUniqueOrThrow.mockResolvedValue({ ...pwd, members: [] } as Prisma.ProjectGetPayload<...>)
+tx.project.findUniqueOrThrow.mockResolvedValue({ ...pwd, members: [] } as
+  Prisma.ProjectGetPayload<...>)
 
 // After (typed helpers in testing utils, spec is cast-free):
 tx.project.findMany.mockResolvedValue(makeProjectFindManyResult(existingSlugs.map(slug => ({ slug }))))
 tx.project.create.mockResolvedValue(makeProjectCreateResult({ id: pwd.id }))
 tx.project.findUniqueOrThrow.mockResolvedValue(makeProjectWithMembersResult(pwd))
 tx.project.findUniqueOrThrow.mockResolvedValue(
-  makeProjectWithMembersResult(pwd, [makeProjectMemberWithUser(newUser, { roleIds: ['r1'] })]),
+  makeProjectWithMembersResult(pwd, [makeProjectMemberWithUser(newUser, {
+    roleIds: ['r1'] })]),
 )
 ```
 
@@ -262,7 +270,8 @@ tx.project.findUnique.mockResolvedValue(someValue);
 prisma.$transaction.mockImplementation(async (cb) => cb(tx));
 // tx.project.create is NOT mocked → returns undefined
 // service code: const created = await tx.project.create(...)
-//               created.id  → TypeError: Cannot read properties of undefined (reading 'id')
+//               created.id  → TypeError: Cannot read properties of undefined
+  (reading 'id')
 ```
 
 **The error message references the SERVICE code line, not the test.** Always

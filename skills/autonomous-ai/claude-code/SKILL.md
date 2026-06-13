@@ -53,7 +53,8 @@ Print mode runs a one-shot task, returns the result, and exits. No PTY needed.
 No interactive prompts. This is the cleanest integration path.
 
 ```text
-terminal(command="claude -p 'Add error handling to all API calls in src/' --allowedTools 'Read,Edit' --max-turns 10", workdir="/path/to/project", timeout=120)
+terminal(command="claude -p 'Add error handling to all API calls in src/'
+  --allowedTools 'Read,Edit' --max-turns 10", workdir="/path/to/project", timeout=120)
 ```
 
 **When to use print mode:**
@@ -78,17 +79,20 @@ follow-up prompts, use slash commands, and watch Claude work in real time.
 terminal(command="tmux new-session -d -s claude-work -x 140 -y 40")
 
 # Launch Claude Code inside it
-terminal(command="tmux send-keys -t claude-work 'cd /path/to/project && claude' Enter")
+terminal(command="tmux send-keys -t claude-work 'cd /path/to/project && claude'
+  Enter")
 
 # Wait for startup, then send your task
 # (after ~3-5 seconds for the welcome screen)
-terminal(command="sleep 5 && tmux send-keys -t claude-work 'Refactor the auth module to use JWT tokens' Enter")
+terminal(command="sleep 5 && tmux send-keys -t claude-work 'Refactor the auth
+  module to use JWT tokens' Enter")
 
 # Monitor progress by capturing the pane
 terminal(command="sleep 15 && tmux capture-pane -t claude-work -p -S -50")
 
 # Send follow-up tasks
-terminal(command="tmux send-keys -t claude-work 'Now add unit tests for the new JWT code' Enter")
+terminal(command="tmux send-keys -t claude-work 'Now add unit tests for the new
+  JWT code' Enter")
 
 # Exit when done
 terminal(command="tmux send-keys -t claude-work '/exit' Enter")
@@ -126,20 +130,23 @@ correct.
 **Handling:** Must navigate DOWN first, then Enter:
 
 ```text
-tmux send-keys -t <session> Down && sleep 0.3 && tmux send-keys -t <session> Enter
+tmux send-keys -t <session> Down && sleep 0.3 && tmux send-keys -t <session>
+  Enter
 ```
 
 ### Robust Dialog Handling Pattern
 
 ```text
 # Launch with permissions bypass
-terminal(command="tmux send-keys -t claude-work 'claude --dangerously-skip-permissions \"your task\"' Enter")
+terminal(command="tmux send-keys -t claude-work 'claude
+  --dangerously-skip-permissions \"your task\"' Enter")
 
 # Handle trust dialog (Enter for default "Yes")
 terminal(command="sleep 4 && tmux send-keys -t claude-work Enter")
 
 # Handle permissions dialog (Down then Enter for "Yes, I accept")
-terminal(command="sleep 3 && tmux send-keys -t claude-work Down && sleep 0.3 && tmux send-keys -t claude-work Enter")
+terminal(command="sleep 3 && tmux send-keys -t claude-work Down && sleep 0.3 &&
+  tmux send-keys -t claude-work Enter")
 
 # Now wait for Claude to work
 terminal(command="sleep 15 && tmux capture-pane -t claude-work -p -S -60")
@@ -178,7 +185,8 @@ won't appear again. Only the permissions dialog recurs each time you use
 ### Structured JSON Output
 
 ```text
-terminal(command="claude -p 'Analyze auth.py for security issues' --output-format json --max-turns 5", workdir="/project", timeout=120)
+terminal(command="claude -p 'Analyze auth.py for security issues'
+  --output-format json --max-turns 5", workdir="/project", timeout=120)
 ```
 
 Returns a JSON object with:
@@ -195,7 +203,8 @@ Returns a JSON object with:
   "stop_reason": "end_turn",
   "terminal_reason": "completed",
   "usage": { "input_tokens": 5, "output_tokens": 603, ... },
-  "modelUsage": { "claude-sonnet-4-6": { "costUSD": 0.078, "contextWindow": 200000 } }
+  "modelUsage": { "claude-sonnet-4-6": { "costUSD": 0.078, "contextWindow":
+    200000 } }
 }
 ```
 
@@ -208,14 +217,17 @@ Returns a JSON object with:
 For real-time token streaming, use `stream-json` with `--verbose`:
 
 ```text
-terminal(command="claude -p 'Write a summary' --output-format stream-json --verbose --include-partial-messages", timeout=60)
+terminal(command="claude -p 'Write a summary' --output-format stream-json
+  --verbose --include-partial-messages", timeout=60)
 ```
 
 Returns newline-delimited JSON events. Filter with jq for live text:
 
 ```text
-claude -p "Explain X" --output-format stream-json --verbose --include-partial-messages | \
-  jq -rj 'select(.type == "stream_event" and .event.delta.type? == "text_delta") | .event.delta.text'
+claude -p "Explain X" --output-format stream-json --verbose
+  --include-partial-messages | \
+  jq -rj 'select(.type == "stream_event" and .event.delta.type? == "text_delta")
+    | .event.delta.text'
 ```
 
 Stream events include `system/api_retry` with `attempt`, `max_retries`, and
@@ -226,7 +238,8 @@ Stream events include `system/api_retry` with `attempt`, `max_retries`, and
 For real-time input AND output streaming:
 
 ```text
-claude -p "task" --input-format stream-json --output-format stream-json --replay-user-messages
+claude -p "task" --input-format stream-json --output-format stream-json
+  --replay-user-messages
 ```
 
 `--replay-user-messages` re-emits user messages on stdout for acknowledgment.
@@ -235,19 +248,23 @@ claude -p "task" --input-format stream-json --output-format stream-json --replay
 
 ```text
 # Pipe a file for analysis
-terminal(command="cat src/auth.py | claude -p 'Review this code for bugs' --max-turns 1", timeout=60)
+terminal(command="cat src/auth.py | claude -p 'Review this code for bugs'
+  --max-turns 1", timeout=60)
 
 # Pipe multiple files
-terminal(command="cat src/*.py | claude -p 'Find all TODO comments' --max-turns 1", timeout=60)
+terminal(command="cat src/*.py | claude -p 'Find all TODO comments' --max-turns
+  1", timeout=60)
 
 # Pipe command output
-terminal(command="git diff HEAD~3 | claude -p 'Summarize these changes' --max-turns 1", timeout=60)
+terminal(command="git diff HEAD~3 | claude -p 'Summarize these changes'
+  --max-turns 1", timeout=60)
 ```
 
 ### JSON Schema for Structured Extraction
 
 ```text
-terminal(command="claude -p 'List all functions in src/' --output-format json --json-schema '{\"type\":\"object\",\"properties\":{\"functions\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"required\":[\"functions\"]}' --max-turns 5", workdir="/project", timeout=90)
+terminal(command="claude -p 'List all functions in src/' --output-format json
+  --json-schema '{\"type\":\"object\",\"properties\":{\"functions\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"required\":[\"functions\"]}' --max-turns 5", workdir="/project", timeout=90)
 ```
 
 Parse `structured_output` from the JSON result. Claude validates output against
@@ -257,22 +274,27 @@ the schema before returning.
 
 ```text
 # Start a task
-terminal(command="claude -p 'Start refactoring the database layer' --output-format json --max-turns 10 > /tmp/session.json", workdir="/project", timeout=180)
+terminal(command="claude -p 'Start refactoring the database layer'
+  --output-format json --max-turns 10 > /tmp/session.json", workdir="/project", timeout=180)
 
 # Resume with session ID
-terminal(command="claude -p 'Continue and add connection pooling' --resume $(cat /tmp/session.json | python3 -c 'import json,sys; print(json.load(sys.stdin)[\"session_id\"])') --max-turns 5", workdir="/project", timeout=120)
+terminal(command="claude -p 'Continue and add connection pooling' --resume $(cat
+  /tmp/session.json | python3 -c 'import json,sys; print(json.load(sys.stdin)[\"session_id\"])') --max-turns 5", workdir="/project", timeout=120)
 
 # Or resume the most recent session in the same directory
-terminal(command="claude -p 'What did you do last time?' --continue --max-turns 1", workdir="/project", timeout=30)
+terminal(command="claude -p 'What did you do last time?' --continue --max-turns
+  1", workdir="/project", timeout=30)
 
 # Fork a session (new ID, keeps history)
-terminal(command="claude -p 'Try a different approach' --resume <id> --fork-session --max-turns 10", workdir="/project", timeout=120)
+terminal(command="claude -p 'Try a different approach' --resume <id>
+  --fork-session --max-turns 10", workdir="/project", timeout=120)
 ```
 
 ### Bare Mode for CI/Scripting
 
 ```text
-terminal(command="claude --bare -p 'Run all tests and report failures' --allowedTools 'Read,Bash' --max-turns 10", workdir="/project", timeout=180)
+terminal(command="claude --bare -p 'Run all tests and report failures'
+  --allowedTools 'Read,Bash' --max-turns 10", workdir="/project", timeout=180)
 ```
 
 `--bare` skips hooks, plugins, MCP discovery, and CLAUDE.md loading. Fastest
@@ -287,7 +309,8 @@ To selectively load context in bare mode: | To load | Flag | |---------|------|
 ### Fallback Model for Overload
 
 ```text
-terminal(command="claude -p 'task' --fallback-model haiku --max-turns 5", timeout=90)
+terminal(command="claude -p 'task' --fallback-model haiku --max-turns 5",
+  timeout=90)
 ```
 
 Automatically falls back to the specified model when the default is overloaded
@@ -554,23 +577,27 @@ specific turn. This triggers the deepest thinking mode regardless of the current
 ### Quick Review (Print Mode)
 
 ```text
-terminal(command="cd /path/to/repo && git diff main...feature-branch | claude -p 'Review this diff for bugs, security issues, and style problems. Be thorough.' --max-turns 1", timeout=60)
+terminal(command="cd /path/to/repo && git diff main...feature-branch | claude -p
+  'Review this diff for bugs, security issues, and style problems. Be thorough.' --max-turns 1", timeout=60)
 ```
 
 ### Deep Review (Interactive + Worktree)
 
 ```text
 terminal(command="tmux new-session -d -s review -x 140 -y 40")
-terminal(command="tmux send-keys -t review 'cd /path/to/repo && claude -w pr-review' Enter")
+terminal(command="tmux send-keys -t review 'cd /path/to/repo && claude -w
+  pr-review' Enter")
 terminal(command="sleep 5 && tmux send-keys -t review Enter")  # Trust dialog
-terminal(command="sleep 2 && tmux send-keys -t review 'Review all changes vs main. Check for bugs, security issues, race conditions, and missing tests.' Enter")
+terminal(command="sleep 2 && tmux send-keys -t review 'Review all changes vs
+  main. Check for bugs, security issues, race conditions, and missing tests.' Enter")
 terminal(command="sleep 30 && tmux capture-pane -t review -p -S -60")
 ```
 
 ### PR Review from Number
 
 ```text
-terminal(command="claude -p 'Review this PR thoroughly' --from-pr 42 --max-turns 10", workdir="/path/to/repo", timeout=120)
+terminal(command="claude -p 'Review this PR thoroughly' --from-pr 42 --max-turns
+  10", workdir="/path/to/repo", timeout=120)
 ```
 
 ### Claude Worktree with tmux
@@ -589,16 +616,20 @@ Run multiple independent Claude tasks simultaneously:
 
 ```text
 # Task 1: Fix backend
-terminal(command="tmux new-session -d -s task1 -x 140 -y 40 && tmux send-keys -t task1 'cd ~/project && claude -p \"Fix the auth bug in src/auth.py\" --allowedTools \"Read,Edit\" --max-turns 10' Enter")
+terminal(command="tmux new-session -d -s task1 -x 140 -y 40 && tmux send-keys -t
+  task1 'cd ~/project && claude -p \"Fix the auth bug in src/auth.py\" --allowedTools \"Read,Edit\" --max-turns 10' Enter")
 
 # Task 2: Write tests
-terminal(command="tmux new-session -d -s task2 -x 140 -y 40 && tmux send-keys -t task2 'cd ~/project && claude -p \"Write integration tests for the API endpoints\" --allowedTools \"Read,Write,Bash\" --max-turns 15' Enter")
+terminal(command="tmux new-session -d -s task2 -x 140 -y 40 && tmux send-keys -t
+  task2 'cd ~/project && claude -p \"Write integration tests for the API endpoints\" --allowedTools \"Read,Write,Bash\" --max-turns 15' Enter")
 
 # Task 3: Update docs
-terminal(command="tmux new-session -d -s task3 -x 140 -y 40 && tmux send-keys -t task3 'cd ~/project && claude -p \"Update README.md with the new API endpoints\" --allowedTools \"Read,Edit\" --max-turns 5' Enter")
+terminal(command="tmux new-session -d -s task3 -x 140 -y 40 && tmux send-keys -t
+  task3 'cd ~/project && claude -p \"Update README.md with the new API endpoints\" --allowedTools \"Read,Edit\" --max-turns 5' Enter")
 
 # Monitor all
-terminal(command="sleep 30 && for s in task1 task2 task3; do echo '=== '$s' ==='; tmux capture-pane -t $s -p -S -5 2>/dev/null; done")
+terminal(command="sleep 30 && for s in task1 task2 task3; do echo '=== '$s'
+  ==='; tmux capture-pane -t $s -p -S -5 2>/dev/null; done")
 ```
 
 ## CLAUDE.md — Project Context File
@@ -689,7 +720,8 @@ Invoke via: `@security-reviewer review the auth module`
 ### Dynamic Agents via CLI
 
 ```text
-terminal(command="claude --agents '{\"reviewer\": {\"description\": \"Reviews code\", \"prompt\": \"You are a code reviewer focused on performance\"}}' -p 'Use @reviewer to check auth.py'", timeout=120)
+terminal(command="claude --agents '{\"reviewer\": {\"description\": \"Reviews
+  code\", \"prompt\": \"You are a code reviewer focused on performance\"}}' -p 'Use @reviewer to check auth.py'", timeout=120)
 ```
 
 Claude can orchestrate multiple agents: "Use @db-expert to optimize queries,
@@ -720,7 +752,8 @@ Configure in `.claude/settings.json` (project) or `~/.claude/settings.json`
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -q 'rm -rf'; then echo 'Blocked!' && exit 2; fi"
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -q 'rm -rf'; then
+              echo 'Blocked!' && exit 2; fi"
           }
         ]
       }
@@ -730,7 +763,8 @@ Configure in `.claude/settings.json` (project) or `~/.claude/settings.json`
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'Claude finished a response' >> /tmp/claude-activity.log"
+            "command": "echo 'Claude finished a response' >>
+              /tmp/claude-activity.log"
           }
         ]
       }
@@ -770,7 +804,8 @@ Configure in `.claude/settings.json` (project) or `~/.claude/settings.json`
       "hooks": [
         {
           "type": "command",
-          "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'rm -rf|git push.*--force|:(){ :|:& };:'; then echo 'Dangerous command blocked!' && exit 2; fi"
+          "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'rm -rf|git
+            push.*--force|:(){ :|:& };:'; then echo 'Dangerous command blocked!' && exit 2; fi"
         }
       ]
     }
@@ -784,13 +819,16 @@ Add external tool servers for databases, APIs, and services:
 
 ```text
 # GitHub integration
-terminal(command="claude mcp add -s user github -- npx @modelcontextprotocol/server-github", timeout=30)
+terminal(command="claude mcp add -s user github -- npx
+  @modelcontextprotocol/server-github", timeout=30)
 
 # PostgreSQL queries
-terminal(command="claude mcp add -s local postgres -- npx @anthropic-ai/server-postgres --connection-string postgresql://localhost/mydb", timeout=30)
+terminal(command="claude mcp add -s local postgres -- npx
+  @anthropic-ai/server-postgres --connection-string postgresql://localhost/mydb", timeout=30)
 
 # Puppeteer for web testing
-terminal(command="claude mcp add puppeteer -- npx @anthropic-ai/server-puppeteer", timeout=30)
+terminal(command="claude mcp add puppeteer -- npx
+  @anthropic-ai/server-puppeteer", timeout=30)
 ```
 
 ### MCP Scopes
@@ -804,7 +842,8 @@ terminal(command="claude mcp add puppeteer -- npx @anthropic-ai/server-puppeteer
 ### MCP in Print/CI Mode
 
 ```text
-terminal(command="claude --bare -p 'Query database' --mcp-config mcp-servers.json --strict-mcp-config", timeout=60)
+terminal(command="claude --bare -p 'Query database' --mcp-config
+  mcp-servers.json --strict-mcp-config", timeout=60)
 ```
 
 `--strict-mcp-config` ignores all MCP servers except those from `--mcp-config`.
