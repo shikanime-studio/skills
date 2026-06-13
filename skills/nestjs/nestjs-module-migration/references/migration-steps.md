@@ -21,4 +21,5 @@
 8. Run:
    - `pnpm --filter server-nestjs exec tsc --noEmit`
    - or module-scoped vitest from `apps/server-nestjs`:
-     `pnpm --filter server-nestjs exec vitest run src/modules/<name>/<name>.spec.ts`
+     `pnpm --filter server-nestjs exec vitest run
+     src/modules/<name>/<name>.spec.ts`

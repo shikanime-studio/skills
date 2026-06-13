@@ -74,7 +74,9 @@ We have a codebase located at {repo_directory/path}, currently on branch
   {branch_name}.
 
 Please produce a security-oriented summary of the repository (or the specified
-  sub-path) with the goal of helping a follow-on security engineer quickly understand the system well enough to build an initial threat model and investigate potential security hypotheses.
+  sub-path) with the goal of helping a follow-on security engineer quickly
+    understand the system well enough to build an initial threat model and
+    investigate potential security hypotheses.
 
 Objectives
 1.	Project overview
@@ -108,7 +110,8 @@ Adapt the analysis to the project type. For example:
 	  memory corruption, logic flaws) that could lead to LPE or RCE.
 
 Be thorough but pragmatic: the goal is to help a security engineer quickly
-  determine whether a discovered bug is security-relevant and where deeper investigation should focus.
+  determine whether a discovered bug is security-relevant and where deeper
+    investigation should focus.
 
 Tooling Notes
 
@@ -207,7 +210,8 @@ You MUST follow this process and reflect outputs in the final document:
   report)
    - Summarize key assumptions that materially affect scope or risk ranking.
    - Ask 1 to 3 targeted questions to resolve missing service meta-context
-     (service owner/environment, scale/users, deployment model, authn/authz, internet exposure, data sensitivity, multi-tenancy).
+     (service owner/environment, scale/users, deployment model, authn/authz,
+       internet exposure, data sensitivity, multi-tenancy).
    - Pause and wait for user feedback before producing the final report.
    - If the user cannot answer, proceed with explicit assumptions and mark any
      conditional conclusions.
@@ -263,7 +267,10 @@ Represent the system as a sequence of arrow-style bullets (e.g., Internet → AP
 
 #### Diagram
 - Include a single, compact Mermaid diagram (`flowchart TD` or `flowchart LR`)
-  showing primary components and trust boundaries (e.g., separate trust zones via subgraphs). Keep it compact, use only `-->`, avoid `title`/`style`, keep node labels short (no paths/URLs), and keep edge labels to plain words only (avoid `{}`, `[]`, `()`, or quotes).
+  showing primary components and trust boundaries (e.g., separate trust zones
+    via subgraphs). Keep it compact, use only `-->`, avoid `title`/`style`, keep
+    node labels short (no paths/URLs), and keep edge labels to plain words only
+    (avoid `{}`, `[]`, `()`, or quotes).
 
 
 ## Assets and security objectives
@@ -284,7 +291,8 @@ Represent the system as a sequence of arrow-style bullets (e.g., Internet → AP
 ## Threat model table
 - A Markdown table with columns:
   Threat ID | Threat source | Prerequisites | Threat action | Impact | Impacted
-    assets | Existing controls (evidence) | Gaps | Recommended mitigations | Detection ideas | Likelihood | Impact severity | Priority
+    assets | Existing controls (evidence) | Gaps | Recommended mitigations |
+      Detection ideas | Likelihood | Impact severity | Priority
 
 Rules:
 - Threat IDs must be stable and formatted: TM-001, TM-002, ...

@@ -4,7 +4,8 @@
 
 ```text
 [ERR_PNPM_TRUST_DOWNGRADE] N lockfile entries failed verification:
-  <pkg>@<ver> High-risk trust downgrade for "<pkg>@<ver>" (possible package takeover)
+  <pkg>@<ver> High-risk trust downgrade for "<pkg>@<ver>" (possible package
+    takeover)
 ```
 
 ## Verified workaround (this repo, 2026-06-09)

@@ -1089,7 +1089,8 @@ Primary Django documentation:
 OWASP:
 
 ```text
-- OWASP Cheat Sheet Series: Django Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Django_Security_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Django Security Cheat Sheet:
+  https://cheatsheetseries.owasp.org/cheatsheets/Django_Security_Cheat_Sheet.html
 ```
 
 [1]:

@@ -8,7 +8,8 @@ module, a circular dependency forms.
 
 ```text
 Nest cannot create the module instance.
-A circular dependency has been detected (modules: AuthModule → AdminModule → AuthModule).
+A circular dependency has been detected (modules: AuthModule → AdminModule →
+  AuthModule).
 ```
 
 ## Solution — `forwardRef`

@@ -9,7 +9,8 @@ pattern.
 Consumers import types from deep paths like:
 
 ```ts
-import type { VaultProjectApi } from "@cpn-console/vault-plugin/types/vault-project-api.js";
+import type { VaultProjectApi } from
+  "@cpn-console/vault-plugin/types/vault-project-api.js";
 ```
 
 This is fragile — it depends on internal file layout and requires subpath
@@ -54,7 +55,8 @@ No subpath exports needed.
 
 ```ts
 // Before:
-import type { VaultProjectApi } from "@cpn-console/vault-plugin/types/vault-project-api.js";
+import type { VaultProjectApi } from
+  "@cpn-console/vault-plugin/types/vault-project-api.js";
 // After:
 import type { VaultProjectApi } from "@cpn-console/vault-plugin";
 ```

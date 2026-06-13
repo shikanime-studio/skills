@@ -22,7 +22,10 @@ Verification lesson:
 
 Relevant paths:
 
-- `apps/server-nestjs/src/modules/infrastructure/auth/keycloak/keycloak.service.ts`
-- `apps/server-nestjs/src/modules/infrastructure/auth/keycloak/keycloak-testing.utils.ts`
-- `apps/server-nestjs/src/modules/infrastructure/auth/keycloak/keycloak.service.spec.ts`
+-
+`apps/server-nestjs/src/modules/infrastructure/auth/keycloak/keycloak.service.ts`
+-
+`apps/server-nestjs/src/modules/infrastructure/auth/keycloak/keycloak-testing.utils.ts`
+-
+`apps/server-nestjs/src/modules/infrastructure/auth/keycloak/keycloak.service.spec.ts`
 - `apps/server-nestjs/src/modules/infrastructure/auth/admin-permission.guard.ts`

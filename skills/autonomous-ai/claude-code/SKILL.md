@@ -54,7 +54,8 @@ No interactive prompts. This is the cleanest integration path.
 
 ```text
 terminal(command="claude -p 'Add error handling to all API calls in src/'
-  --allowedTools 'Read,Edit' --max-turns 10", workdir="/path/to/project", timeout=120)
+  --allowedTools 'Read,Edit' --max-turns 10", workdir="/path/to/project",
+    timeout=120)
 ```
 
 **When to use print mode:**
@@ -264,7 +265,8 @@ terminal(command="git diff HEAD~3 | claude -p 'Summarize these changes'
 
 ```text
 terminal(command="claude -p 'List all functions in src/' --output-format json
-  --json-schema '{\"type\":\"object\",\"properties\":{\"functions\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"required\":[\"functions\"]}' --max-turns 5", workdir="/project", timeout=90)
+  --json-schema
+    '{\"type\":\"object\",\"properties\":{\"functions\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"required\":[\"functions\"]}' --max-turns 5", workdir="/project", timeout=90)
 ```
 
 Parse `structured_output` from the JSON result. Claude validates output against
@@ -275,11 +277,13 @@ the schema before returning.
 ```text
 # Start a task
 terminal(command="claude -p 'Start refactoring the database layer'
-  --output-format json --max-turns 10 > /tmp/session.json", workdir="/project", timeout=180)
+  --output-format json --max-turns 10 > /tmp/session.json", workdir="/project",
+    timeout=180)
 
 # Resume with session ID
 terminal(command="claude -p 'Continue and add connection pooling' --resume $(cat
-  /tmp/session.json | python3 -c 'import json,sys; print(json.load(sys.stdin)[\"session_id\"])') --max-turns 5", workdir="/project", timeout=120)
+  /tmp/session.json | python3 -c 'import json,sys;
+    print(json.load(sys.stdin)[\"session_id\"])') --max-turns 5", workdir="/project", timeout=120)
 
 # Or resume the most recent session in the same directory
 terminal(command="claude -p 'What did you do last time?' --continue --max-turns
@@ -578,7 +582,8 @@ specific turn. This triggers the deepest thinking mode regardless of the current
 
 ```text
 terminal(command="cd /path/to/repo && git diff main...feature-branch | claude -p
-  'Review this diff for bugs, security issues, and style problems. Be thorough.' --max-turns 1", timeout=60)
+  'Review this diff for bugs, security issues, and style problems. Be thorough.'
+    --max-turns 1", timeout=60)
 ```
 
 ### Deep Review (Interactive + Worktree)
@@ -589,7 +594,8 @@ terminal(command="tmux send-keys -t review 'cd /path/to/repo && claude -w
   pr-review' Enter")
 terminal(command="sleep 5 && tmux send-keys -t review Enter")  # Trust dialog
 terminal(command="sleep 2 && tmux send-keys -t review 'Review all changes vs
-  main. Check for bugs, security issues, race conditions, and missing tests.' Enter")
+  main. Check for bugs, security issues, race conditions, and missing tests.'
+    Enter")
 terminal(command="sleep 30 && tmux capture-pane -t review -p -S -60")
 ```
 
@@ -617,15 +623,18 @@ Run multiple independent Claude tasks simultaneously:
 ```text
 # Task 1: Fix backend
 terminal(command="tmux new-session -d -s task1 -x 140 -y 40 && tmux send-keys -t
-  task1 'cd ~/project && claude -p \"Fix the auth bug in src/auth.py\" --allowedTools \"Read,Edit\" --max-turns 10' Enter")
+  task1 'cd ~/project && claude -p \"Fix the auth bug in src/auth.py\"
+    --allowedTools \"Read,Edit\" --max-turns 10' Enter")
 
 # Task 2: Write tests
 terminal(command="tmux new-session -d -s task2 -x 140 -y 40 && tmux send-keys -t
-  task2 'cd ~/project && claude -p \"Write integration tests for the API endpoints\" --allowedTools \"Read,Write,Bash\" --max-turns 15' Enter")
+  task2 'cd ~/project && claude -p \"Write integration tests for the API
+    endpoints\" --allowedTools \"Read,Write,Bash\" --max-turns 15' Enter")
 
 # Task 3: Update docs
 terminal(command="tmux new-session -d -s task3 -x 140 -y 40 && tmux send-keys -t
-  task3 'cd ~/project && claude -p \"Update README.md with the new API endpoints\" --allowedTools \"Read,Edit\" --max-turns 5' Enter")
+  task3 'cd ~/project && claude -p \"Update README.md with the new API
+    endpoints\" --allowedTools \"Read,Edit\" --max-turns 5' Enter")
 
 # Monitor all
 terminal(command="sleep 30 && for s in task1 task2 task3; do echo '=== '$s'
@@ -721,7 +730,8 @@ Invoke via: `@security-reviewer review the auth module`
 
 ```text
 terminal(command="claude --agents '{\"reviewer\": {\"description\": \"Reviews
-  code\", \"prompt\": \"You are a code reviewer focused on performance\"}}' -p 'Use @reviewer to check auth.py'", timeout=120)
+  code\", \"prompt\": \"You are a code reviewer focused on performance\"}}' -p
+    'Use @reviewer to check auth.py'", timeout=120)
 ```
 
 Claude can orchestrate multiple agents: "Use @db-expert to optimize queries,
@@ -805,7 +815,8 @@ Configure in `.claude/settings.json` (project) or `~/.claude/settings.json`
         {
           "type": "command",
           "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'rm -rf|git
-            push.*--force|:(){ :|:& };:'; then echo 'Dangerous command blocked!' && exit 2; fi"
+            push.*--force|:(){ :|:& };:'; then echo 'Dangerous command blocked!'
+              && exit 2; fi"
         }
       ]
     }
@@ -824,7 +835,8 @@ terminal(command="claude mcp add -s user github -- npx
 
 # PostgreSQL queries
 terminal(command="claude mcp add -s local postgres -- npx
-  @anthropic-ai/server-postgres --connection-string postgresql://localhost/mydb", timeout=30)
+  @anthropic-ai/server-postgres --connection-string
+    postgresql://localhost/mydb", timeout=30)
 
 # Puppeteer for web testing
 terminal(command="claude mcp add puppeteer -- npx

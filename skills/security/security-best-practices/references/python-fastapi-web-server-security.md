@@ -1255,10 +1255,12 @@ Selected supply-chain/advisory references (Starlette examples):
   "<https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>"
 [9]:
   <https://advisories.gitlab.com/pkg/pypi/starlette/CVE-2024-47874/>
-  "Starlette Denial of service (DoS) via multipart/form-data | GitLab Advisory Database"
+  "Starlette Denial of service (DoS) via multipart/form-data | GitLab Advisory
+  Database"
 [10]:
   <https://advisories.gitlab.com/pkg/pypi/starlette/CVE-2023-29159/>
-  "Starlette has Path Traversal vulnerability in StaticFiles | GitLab Advisory Database"
+  "Starlette has Path Traversal vulnerability in StaticFiles | GitLab Advisory
+  Database"
 [11]:
   <https://fastapi.tiangolo.com/tutorial/security/first-steps/?utm_source=chatgpt.com>
   "Security - First Steps - FastAPI"

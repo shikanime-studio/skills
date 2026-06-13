@@ -43,7 +43,8 @@ if [ "$AUTH" = "gh" ]; then
   GH_USER=$(gh api user --jq '.login')
 else
   GH_USER=$(curl -s -H "Authorization: token $GITHUB_TOKEN"
-    https://api.github.com/user | python3 -c "import sys,json; print(json.load(sys.stdin)['login'])")
+    https://api.github.com/user | python3 -c "import sys,json;
+      print(json.load(sys.stdin)['login'])")
 fi
 ```
 
@@ -241,7 +242,8 @@ for r in json.load(sys.stdin):
 # Search repos
 curl -s \
  
-    "https://api.github.com/search/repositories?q=machine+learning+language:python&sort=stars&per_page=10" \
+   
+      "https://api.github.com/search/repositories?q=machine+learning+language:python&sort=stars&per_page=10" \
   | python3 -c "
 import sys, json
 for r in json.load(sys.stdin)['items']:
@@ -412,7 +414,8 @@ curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
   -H "Content-Type: application/octet-stream" \
  
-    "https://uploads.github.com/repos/$OWNER/$REPO/releases/$RELEASE_ID/assets?name=binary-amd64" \
+   
+      "https://uploads.github.com/repos/$OWNER/$REPO/releases/$RELEASE_ID/assets?name=binary-amd64" \
   --data-binary @./dist/binary-amd64
 ```
 
@@ -470,14 +473,16 @@ curl -s -X POST \
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
  
-    https://api.github.com/repos/$OWNER/$REPO/actions/runs/$RUN_ID/rerun-failed-jobs
+   
+      https://api.github.com/repos/$OWNER/$REPO/actions/runs/$RUN_ID/rerun-failed-jobs
 
 # Trigger a workflow manually (workflow_dispatch)
 WORKFLOW_ID=<workflow_id_or_filename>
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
  
-    https://api.github.com/repos/$OWNER/$REPO/actions/workflows/$WORKFLOW_ID/dispatches \
+   
+      https://api.github.com/repos/$OWNER/$REPO/actions/workflows/$WORKFLOW_ID/dispatches \
   -d '{"ref": "main", "inputs": {"environment": "staging"}}'
 ```
 

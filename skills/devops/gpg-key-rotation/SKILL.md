@@ -112,7 +112,8 @@ Sapling uses git hooks under the hood. Ensure the git config from step 3 is set.
 If sapling has its own username config, update it:
 
 ```bash
-sl config ui.username "William Phetsinorath <william.phetsinorath@shikanime.studio>"
+sl config ui.username "William Phetsinorath
+  <william.phetsinorath@shikanime.studio>"
 ```
 
 ### 6. Export Public Key
@@ -130,7 +131,8 @@ Save the output — this is what gets uploaded to GitHub.
 gpg --armor --export "${NEW_KEY}" > /tmp/gpg-new-key.asc
 
 # Upload via gh CLI
-gh gpg-key add /tmp/gpg-new-key.asc --title "GPG signing key ($(date +%Y-%m-%d))"
+gh gpg-key add /tmp/gpg-new-key.asc --title "GPG signing key ($(date
+  +%Y-%m-%d))"
 
 # Verify
 gh gpg-key list
@@ -143,8 +145,10 @@ verify with `gh gpg-key list`.
 **Windows note:** Use a path under the workspace for the temp file:
 
 ```powershell
-gpg --armor --export "${NEW_KEY}" > "$env:USERPROFILE\.hermes\tmp\gpg-new-key.asc"
-gh gpg-key add "$env:USERPROFILE\.hermes\tmp\gpg-new-key.asc" --title "GPG signing key ($(Get-Date -Format 'yyyy-MM-dd'))"
+gpg --armor --export "${NEW_KEY}" >
+  "$env:USERPROFILE\.hermes\tmp\gpg-new-key.asc"
+gh gpg-key add "$env:USERPROFILE\.hermes\tmp\gpg-new-key.asc" --title "GPG
+  signing key ($(Get-Date -Format 'yyyy-MM-dd'))"
 ```
 
 ### 8. Cleanup Old Keys (Optional)
@@ -219,7 +223,9 @@ To run annually, create a cron job:
 
 ```text
 Schedule: 0 9 1 6 *   (June 1st at 9am, adjust as needed)
-Prompt: Run the gpg-key-rotation skill. Generate a new GPG signing key, configure git/jj/sl, export the public key, upload it to GitHub via gh gpg-key add, and report the new key fingerprint.
+Prompt: Run the gpg-key-rotation skill. Generate a new GPG signing key,
+  configure git/jj/sl, export the public key, upload it to GitHub via gh gpg-key
+  add, and report the new key fingerprint.
 Skills: [gpg-key-rotation]
 ```
 

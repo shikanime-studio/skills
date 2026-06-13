@@ -183,7 +183,8 @@ as a comment instead.
 kanban_comment(
     task_id=os.environ["HERMES_KANBAN_TASK"],
     body="Full context: I have user IPs from Cloudflare headers but some users
-      are behind NATs with thousands of peers. Keying on IP alone causes false positives.",
+      are behind NATs with thousands of peers. Keying on IP alone causes false
+        positives.",
 )
 kanban_block(reason="Rate limit key choice: IP (simple, NAT-unsafe) or user_id
   (requires auth, skips anonymous endpoints)?")

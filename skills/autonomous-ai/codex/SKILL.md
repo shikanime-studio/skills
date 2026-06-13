@@ -86,7 +86,8 @@ Clone to a temp directory for safe review:
 
 ```text
 terminal(command="REVIEW=$(mktemp -d) && git clone
-  https://github.com/user/repo.git $REVIEW && cd $REVIEW && gh pr checkout 42 && codex review --base origin/main", pty=true)
+  https://github.com/user/repo.git $REVIEW && cd $REVIEW && gh pr checkout 42 &&
+    codex review --base origin/main", pty=true)
 ```
 
 ## Parallel Issue Fixing with Worktrees

@@ -352,7 +352,8 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
       ...(requirements?.includeStatus ? { status: true } : {}),
       ...(requirements?.includeLocked ? { locked: true } : {}),
       ...(perm ? { ownerId: true, everyonePerms: true, roles: { select: { id:
-        true, permissions: true } }, members: { select: { userId: true, roleIds: true } } } : {}),
+        true, permissions: true } }, members: { select: { userId: true, roleIds:
+          true } } } : {}),
     } satisfies Prisma.ProjectSelect
   }\n
   // Guard derives requirements from policy and passes to loader

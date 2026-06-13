@@ -201,7 +201,8 @@ jj squash --from main
 
 ```bash
 # Compact log with bookmarks
-jj log -T 'commit_id.short() ++ " " ++ description.first_line() ++ " " ++ bookmarks'
+jj log -T 'commit_id.short() ++ " " ++ description.first_line() ++ " " ++
+  bookmarks'
 
 # Full diff of a commit
 jj show <rev>

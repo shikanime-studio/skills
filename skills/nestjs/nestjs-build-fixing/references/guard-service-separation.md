@@ -13,7 +13,8 @@ belongs in services. This avoids hidden dependency chains that cause
 UserService (authentication domain logic)
   └── authenticate(request)
         ├── DSO token (x-dso-token header) → AuthService.validateToken()
-        └── Bearer JWT (Authorization header) → JwtService.verifyAsync → KeycloakJwtService.validatePayload
+        └── Bearer JWT (Authorization header) → JwtService.verifyAsync →
+          KeycloakJwtService.validatePayload
   └── Returns UserContext { userId, adminPermissions }
 
 UserGuard (thin guard — authentication only)

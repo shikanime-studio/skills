@@ -77,7 +77,8 @@ for i in json.load(sys.stdin):
 curl -s \
   -H "Authorization: token $GITHUB_TOKEN" \
  
-    "https://api.github.com/repos/$OWNER/$REPO/issues?state=open&labels=bug&per_page=20" \
+   
+      "https://api.github.com/repos/$OWNER/$REPO/issues?state=open&labels=bug&per_page=20" \
   | python3 -c "
 import sys, json
 for i in json.load(sys.stdin):
@@ -102,7 +103,8 @@ print(f\"\n{i['body']}\")"
 curl -s \
   -H "Authorization: token $GITHUB_TOKEN" \
  
-    "https://api.github.com/search/issues?q=authentication+error+repo:$OWNER/$REPO" \
+   
+      "https://api.github.com/search/issues?q=authentication+error+repo:$OWNER/$REPO" \
   | python3 -c "
 import sys, json
 for i in json.load(sys.stdin)['items']:
@@ -140,7 +142,8 @@ curl -s -X POST \
   -d '{
     "title": "Login redirect ignores ?next= parameter",
     "body": "## Description\nAfter logging in, users always land on
-      /dashboard.\n\n## Steps to Reproduce\n1. Navigate to /settings while logged out\n2. Get redirected to /login?next=/settings\n3. Log in\n4. Actual: redirected to /dashboard\n\n## Expected Behavior\nRespect the ?next= query parameter.",
+      /dashboard.\n\n## Steps to Reproduce\n1. Navigate to /settings while
+        logged out\n2. Get redirected to /login?next=/settings\n3. Log in\n4. Actual: redirected to /dashboard\n\n## Expected Behavior\nRespect the ?next= query parameter.",
     "labels": ["bug", "backend"],
     "assignees": ["username"]
   }'
@@ -347,7 +350,8 @@ and report the actual resulting labels, milestone, and assignees:
 ```bash
 gh issue view 42 --json number,title,body,labels,milestone,assignees,state,url \
   --jq
-    '{number,title,state,url,labels:[.labels[].name],milestone:(.milestone.title//null),assignees:[.assignees[].login]}'
+   
+      '{number,title,state,url,labels:[.labels[].name],milestone:(.milestone.title//null),assignees:[.assignees[].login]}'
 ```
 
 When asked to triage issues:
@@ -362,7 +366,8 @@ gh issue list --label "needs-triage" --state open
 curl -s \
   -H "Authorization: token $GITHUB_TOKEN" \
  
-    "https://api.github.com/repos/$OWNER/$REPO/issues?labels=needs-triage&state=open" \
+   
+      "https://api.github.com/repos/$OWNER/$REPO/issues?labels=needs-triage&state=open" \
   | python3 -c "
 import sys, json
 for i in json.load(sys.stdin):

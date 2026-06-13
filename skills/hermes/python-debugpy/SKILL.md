@@ -239,13 +239,15 @@ def recv():
     header = b""
     while b"\r\n\r\n" not in header:
         header += s.recv(1)
-    length = int(header.decode().split("Content-Length:")[1].split("\r\n")[0].strip())
+    length =
+      int(header.decode().split("Content-Length:")[1].split("\r\n")[0].strip())
     body = b""
     while len(body) < length:
         body += s.recv(length - len(body))
     return json.loads(body)
 
-send({"type": "request", "command": "initialize", "arguments": {"adapterID": "python"}})
+send({"type": "request", "command": "initialize", "arguments": {"adapterID":
+  "python"}})
 print(recv())
 send({"type": "request", "command": "attach", "arguments": {}})
 print(recv())

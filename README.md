@@ -109,7 +109,8 @@ Windows-specific Hermes setup, pitfalls, and workarounds | +++++++ tnwpmpzz
  comments via gh or REST |  | `github-issues` | github
  assign GitHub issues |  | `github-repo-management` | github
  repos; manage remotes, releases |  | `ghstack-workflow` | github
- with ghstack + jj: create, update, land stacks |  | `darwin-host-provisioning` |  
+ with ghstack + jj: create, update, land stacks |  | `darwin-host-provisioning`
+ |
  devops | Provision and restore macOS Nix-Darwin hosts |  |  
  `home-manager-pitfalls` | devops | Home Manager module gotchas and silent |  
  failures |  | `nix-module-bulk-edit` | devops

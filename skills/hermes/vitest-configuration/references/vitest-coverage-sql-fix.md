@@ -15,7 +15,8 @@ CI job `unit-tests / Unit tests` failed with:
 Error [RollupError]: Expected ';', '}' or <eof>
 ...
 Excluding it from coverage.
-Failed to parse file:///.../prisma/migrations/20250916134454_add_project_resources/migration.sql
+Failed to parse
+  file:///.../prisma/migrations/20250916134454_add_project_resources/migration.sql
 ...
 FAIL  src/prepare-app.spec.ts [ src/prepare-app.spec.ts ]
 ```

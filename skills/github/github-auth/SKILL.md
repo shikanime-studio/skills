@@ -37,7 +37,8 @@ gh --version 2>/dev/null || echo "gh not installed"
 
 # Check if already authenticated
 gh auth status 2>/dev/null || echo "gh not authenticated"
-git config --global credential.helper 2>/dev/null || echo "no git credential helper"
+git config --global credential.helper 2>/dev/null || echo "no git credential
+  helper"
 ```
 
 **Decision tree:**
@@ -97,7 +98,8 @@ git config --global credential.helper 'cache --timeout=28800'
 
 ```bash
 # Embed token in the remote URL (avoids credential prompts entirely)
-git remote set-url origin https://<username>:<token>@github.com/<owner>/<repo>.git
+git remote set-url origin
+  https://<username>:<token>@github.com/<owner>/<repo>.git
 ```
 
 ## Step 3: Configure git identity
@@ -223,7 +225,8 @@ token can be extracted:
 
 ```bash
 # Read from git credential store
-grep "github.com" ~/.git-credentials 2>/dev/null | head -1 | sed 's|https://[^:]*:\([^@]*\)@.*|\1|'
+grep "github.com" ~/.git-credentials 2>/dev/null | head -1 | sed
+  's|https://[^:]*:\([^@]*\)@.*|\1|'
 ```
 
 ### Helper: Detect Auth Method
@@ -245,7 +248,8 @@ elif [ -f ~/.hermes/.env ] && grep -q "^GITHUB_TOKEN=" ~/.hermes/.env; then
   )
   echo "AUTH_METHOD=curl"
 elif grep -q "github.com" ~/.git-credentials 2>/dev/null; then
-  export GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials | head -1 | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
+  export GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials | head -1 | sed
+    's|https://[^:]*:\([^@]*\)@.*|\1|')
   echo "AUTH_METHOD=curl"
 else
   echo "AUTH_METHOD=none"

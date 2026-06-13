@@ -240,7 +240,8 @@ JwtModule.registerAsync({
     verifyOptions: {
       algorithms: ["RS256"],
       issuer:
-        `${config.keycloakProtocol}://${config.keycloakDomain}/realms/${config.keycloakRealm}`,
+       
+          `${config.keycloakProtocol}://${config.keycloakDomain}/realms/${config.keycloakRealm}`,
     },
   }),
 });

@@ -87,7 +87,8 @@ fault.
 
 ```bash
 journalctl --no-pager -u rke2-server | egrep -i
-  'cni|canal|flannel|calico|cilium|containerd|runtime core not ready|pod sandbox|cluster-cidr'
+  'cni|canal|flannel|calico|cilium|containerd|runtime core not ready|pod
+    sandbox|cluster-cidr'
 ip -br link
 ip -br addr
 ip route

@@ -54,7 +54,8 @@ delegate_task(
     tasks=[
         {
             "goal": "Clone and review <org>/<repo>. Check for: code quality
-              issues, duplicated code, outdated patterns, potential bugs, configuration inconsistencies, unused imports, missing error handling, and general improvements. Read ALL source files thoroughly. Report findings with specific file paths and line numbers.",
+              issues, duplicated code, outdated patterns, potential bugs,
+                configuration inconsistencies, unused imports, missing error handling, and general improvements. Read ALL source files thoroughly. Report findings with specific file paths and line numbers.",
             "context": "Repository: <org>/<repo> on GitHub. Use `gh repo clone
               <org>/<repo> /tmp/review-<shortname>` to clone it.",
             "toolsets": ["terminal", "file"]

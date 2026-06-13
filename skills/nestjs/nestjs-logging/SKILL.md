@@ -35,7 +35,8 @@ class SomeService {
       this.logger.log("someService.doWork completed");
     } catch (error) {
       this.logger.error(
-        `someService.doWork failed: ${error instanceof Error ? error.message : String(error)}`,
+        `someService.doWork failed: ${error instanceof Error ? error.message :
+          String(error)}`,
         error instanceof Error ? error.stack : undefined,
       );
       throw error;
@@ -61,7 +62,8 @@ class SomeController {
 @Post('')
 @HttpCode(201)
 async create(@Body() body, @User() user) {
-  this.logger.log(`someController.create (userId=${user.id}, name=${body.name})`)
+  this.logger.log(`someController.create (userId=${user.id},
+    name=${body.name})`)
   return this.service.create(body, user.id)
 }
 ```

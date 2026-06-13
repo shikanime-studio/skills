@@ -628,7 +628,8 @@ Detection hints:
 Fix:
 
 - Define an allowlist:
-  - `const ALLOWED = new Set(["https://app.example.com", "https://accounts.example.com"]);`
+  - `const ALLOWED = new Set(["https://app.example.com",
+  "https://accounts.example.com"]);`
     NOTE: For ease of development, you can use the current page's origin
     `window.location.origin` as a safe default origin.
 

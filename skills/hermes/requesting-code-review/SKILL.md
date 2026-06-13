@@ -64,7 +64,8 @@ Scan added lines only. Any match is a security concern fed into Step 5.
 
 ```bash
 # Hardcoded secrets
-git diff --cached | grep "^+" | grep -iE "(api_key|secret|password|token|passwd)\s*=\s*['\"][^'\"]{6,}['\"]"
+git diff --cached | grep "^+" | grep -iE
+  "(api_key|secret|password|token|passwd)\s*=\s*['\"][^'\"]{6,}['\"]"
 
 # Shell injection
 git diff --cached | grep "^+" | grep -E "os\.system\(|subprocess.*shell=True"
@@ -76,7 +77,8 @@ git diff --cached | grep "^+" | grep -E "\beval\(|\bexec\("
 git diff --cached | grep "^+" | grep -E "pickle\.loads?\("
 
 # SQL injection (string formatting in queries)
-git diff --cached | grep "^+" | grep -E "execute\(f\"|\.format\(.*SELECT|\.format\(.*INSERT"
+git diff --cached | grep "^+" | grep -E
+  "execute\(f\"|\.format\(.*SELECT|\.format\(.*INSERT"
 ```
 
 ## Step 3 — Baseline tests and linting
