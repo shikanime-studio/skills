@@ -50,6 +50,26 @@
       "description": "Bulk-edit Nix module files using reliable patterns."
     },
     {
+      "name": "darwin-host-provisioning",
+      "path": "skills/devops/darwin-host-provisioning",
+      "description": "Provision and restore macOS (Darwin) Nix-Darwin hosts: host configuration, home-manager, SOPS secrets, flake registration."
+    },
+    {
+      "name": "system-migration-audit",
+      "path": "skills/devops/system-migration-audit",
+      "description": "Audit and plan system package manager migrations (e.g. Homebrew to MacPorts)."
+    },
+    {
+      "name": "windows-hermes-setup",
+      "path": "skills/hermes/windows-hermes-setup",
+      "description": "Windows-specific Hermes setup, pitfalls, and workarounds."
+    },
+    {
+      "name": "jj-workflow",
+      "path": "skills/vcs/jj-workflow",
+      "description": "Jujutsu daily workflow: commit, push, rebase, conflicts."
+    },
+    {
       "name": "dogfood",
       "path": "skills/dogfood",
       "description": "Exploratory QA of web apps: find bugs, evidence, reports."
