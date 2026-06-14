@@ -53,9 +53,9 @@ gh auth status
 Generate a clean `ed25519` signing-only key with no subkeys:
 
 ```bash
-# Set key parameters
-REAL_NAME="William Phetsinorath"
-EMAIL="william.phetsinorath@shikanime.studio"
+# Set key parameters — replace with your own values
+REAL_NAME="Your Full Name"
+EMAIL="your-email@example.com"
 COMMENT="GitHub"
 EXPIRY="2y"
 
@@ -103,7 +103,7 @@ Sapling uses git hooks under the hood. Ensure the git config from step 3 is set.
 If sapling has its own username config, update it:
 
 ```bash
-sl config ui.username "William Phetsinorath <william.phetsinorath@shikanime.studio>"
+sl config ui.username "${REAL_NAME} <${EMAIL}>"
 ```
 
 ### 6. Export Public Key
