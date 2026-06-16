@@ -1,16 +1,25 @@
 ---
 name: darwin-host-provisioning
-description: "Provision and restore macOS Nix-Darwin hosts, including host
-  configuration, home-manager, SOPS secrets, and flake registration. Covers
-  both new host creation and restoring retired hosts from git history."
+description:
+  "Provision and restore macOS Nix-Darwin hosts, including host configuration,
+  home-manager, SOPS secrets, and flake registration. Covers both new host
+  creation and restoring retired hosts from git history."
 version: 1.0.0
 author: Operator 11O
 license: MIT
 platforms: [macos]
 metadata:
   hermes:
-    tags: [macOS, Nix, Nix-Darwin, Home-Manager, SOPS, Provisioning,
-           Host-Management]
+    tags:
+      [
+        macOS,
+        Nix,
+        Nix-Darwin,
+        Home-Manager,
+        SOPS,
+        Provisioning,
+        Host-Management,
+      ]
     related_skills: [github-auth, github-repo-management]
 ---
 
@@ -23,10 +32,10 @@ Shikanime Studio monorepo.
 
 This skill covers two scenarios:
 
-1. **New host** — a brand-new macOS machine needs Nix-Darwin flakes, a
-   user profile, secrets, and HCP vault access.
-2. **Restore from git history** — the machine's config was previously
-   removed (e.g. NixOS-to-Darwin migration) and needs reconstruction.
+1. **New host** — a brand-new macOS machine needs Nix-Darwin flakes, a user
+   profile, secrets, and HCP vault access.
+2. **Restore from git history** — the machine's config was previously removed
+   (e.g. NixOS-to-Darwin migration) and needs reconstruction.
 
 ## Detection
 
@@ -43,13 +52,13 @@ Use this skill when the user mentions:
 
 Every host requires these items:
 
-| Layer  | What                                              | Where                    |
-|--------|---------------------------------------------------|--------------------------|
-| Host   | `hosts/<host>/darwin-configuration.nix`           | `modules/flake/darwin.nix` |
-| User   | `hosts/<host>/users/<user>/home-configuration.nix`| `modules/flake/home-manager.nix` |
-| Secret | SOPS rule for host `<host>.age`                   | `.sops.yaml`             |
-| devenv | `.envrc` registering the host                     | `modules/flake/devenv.nix` |
-| Flake  | Output registered in `flake.nix`                  | Monorepo root            |
+| Layer  | What                                               | Where                            |
+| ------ | -------------------------------------------------- | -------------------------------- |
+| Host   | `hosts/<host>/darwin-configuration.nix`            | `modules/flake/darwin.nix`       |
+| User   | `hosts/<host>/users/<user>/home-configuration.nix` | `modules/flake/home-manager.nix` |
+| Secret | SOPS rule for host `<host>.age`                    | `.sops.yaml`                     |
+| devenv | `.envrc` registering the host                      | `modules/flake/devenv.nix`       |
+| Flake  | Output registered in `flake.nix`                   | Monorepo root                    |
 
 ### Step 1: Inventory
 
@@ -78,21 +87,20 @@ age-keygen -y ~/.ssh/id_ed25519
 
 - Add the host age public key to `.sops.yaml` under `creation_rules`.
 - Re-encrypt affected secrets: `sops updatekeys <file>`.
-- Push the new `.sops.yaml` **before** the host config (separate PR if
-  stacked).
+- Push the new `.sops.yaml` **before** the host config (separate PR if stacked).
 
 ### Step 3: Confirm Host Facts
 
 Collect these before writing any file:
 
-| Fact            | Source / Command                                             |
-|-----------------|--------------------------------------------------------------|
-| Hostname        | User input                                                   |
-| Architecture    | `uname -m` -> `aarch64` or `x86_64`                        |
-| Nix profile     | `nix profile info` or `/nix/var/nix/profiles`               |
-| Tailscale status| `tailscale status`                                           |
-| hardware uuid   | `system_profiler SPHardwareDataType 2>/dev/null | grep UUID`|
-| SSH host key    | `/etc/ssh_host_ed25519_key.pub`                             |
+| Fact             | Source / Command                                |
+| ---------------- | ----------------------------------------------- |
+| Hostname         | User input                                      |
+| Architecture     | `uname -m` -> `aarch64` or `x86_64`             |
+| Nix profile      | `nix profile info` or `/nix/var/nix/profiles`   |
+| Tailscale status | `tailscale status`                              |
+| hardware uuid    | `system_profiler SPHardwareDataType 2>/dev/null | grep UUID` |
+| SSH host key     | `/etc/ssh_host_ed25519_key.pub`                 |
 
 ### Step 4: Write Host Config
 
@@ -155,21 +163,20 @@ nix build .#darwinConfigurations.<host>.system --no-link 2>&1 | tail -20
    containing tokens or passwords.
 
 2. **`SSH_AUTH_SOCK` in Nix-Darwin.** macOS provides this natively via
-   `launchd`. Do **not** add a hardcoded `SSH_AUTH_SOCK` value -- it
-   changes between sessions and breaks non-nix-darwin builds.
+   `launchd`. Do **not** add a hardcoded `SSH_AUTH_SOCK` value -- it changes
+   between sessions and breaks non-nix-darwin builds.
 
-3. **`hardware.uuid`.** Required for services that bind to hardware
-   identity. Without it, HCP vault and tailgate may refuse to connect.
-   Use `system_profiler` to retrieve it; never fabricate one.
+3. **`hardware.uuid`.** Required for services that bind to hardware identity.
+   Without it, HCP vault and tailgate may refuse to connect. Use
+   `system_profiler` to retrieve it; never fabricate one.
 
-4. **Nixpkgs Darwin support lifecycle.** Verify the target nixpkgs
-   version still ships `darwin` lib. Nixpkgs `26.11`+ dropped
-   `x86_64-darwin`.
+4. **Nixpkgs Darwin support lifecycle.** Verify the target nixpkgs version still
+   ships `darwin` lib. Nixpkgs `26.11`+ dropped `x86_64-darwin`.
 
-5. **Files that require host identity.** `gpg-agent.conf`,
-   `ssh_config`, and `1password` socket paths may differ across hosts.
-   Use conditional Nix expressions rather than hardcoded paths.
+5. **Files that require host identity.** `gpg-agent.conf`, `ssh_config`, and
+   `1password` socket paths may differ across hosts. Use conditional Nix
+   expressions rather than hardcoded paths.
 
-6. **The `stdenv.hostPlatform` vs `nixpkgs.hostPlatform` mismatch.**
-   Always set `nixpkgs.hostPlatform` as the default. Setting `stdenv`
-   directly will silently break cross-compilation.
+6. **The `stdenv.hostPlatform` vs `nixpkgs.hostPlatform` mismatch.** Always set
+   `nixpkgs.hostPlatform` as the default. Setting `stdenv` directly will
+   silently break cross-compilation.

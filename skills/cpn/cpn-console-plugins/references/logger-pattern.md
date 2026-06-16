@@ -17,9 +17,13 @@ Reference for adding structured logging to console plugins.
 ## Log level policy
 
 - `info` — hook enter and successful completion in exported step functions
-- `debug` — intermediate state inside helpers (`removeInfraEnvValues`, `cleanupProjectInfra`, environment-loop milestones)
-- `error` — caught exceptions; include structured fields `action`, identifier, `err`
+- `debug` — intermediate state inside helpers (`removeInfraEnvValues`,
+  `cleanupProjectInfra`, environment-loop milestones)
+- `error` — caught exceptions; include structured fields `action`, identifier,
+  `err`
 
 ## Structured fields
 
-Use `projectSlug` when available. For resources without slugs, use the corresponding object ID or name. Always log `action` matching the exported function name.
+Use `projectSlug` when available. For resources without slugs, use the
+corresponding object ID or name. Always log `action` matching the exported
+function name.
