@@ -1,13 +1,50 @@
 # Skills
 
-A curated catalog of self-improved agent skills for Hermes and compatible agents. Each skill lives in its own directory with a `SKILL.md`.
+A curated catalog of self-improved agent skills for
+[Hermes](https://hermes-agent.nousresearch.com/docs) and compatible agents. Each
+skill lives in its own directory with a `SKILL.md`.
 
 **Language:** Markdown (SKILL.md)
 
 ## Structure
 
 - `skills/` — Individual skill directories, each containing a `SKILL.md`
+  - `apple/` — Apple ecosystem CLI tools
+  - `autonomous-ai/` — Agent orchestration and delegation
+  - `cpn/` — Cloud Pi Native console plugins
+  - `devops/` — Infrastructure, Nix, Kubernetes, CI/CD
+  - `dogfood/` — Exploratory QA
+  - `github/` — GitHub workflows, issues, PRs
+  - `hermes/` — Hermes Agent operations
+  - `nestjs/` — NestJS development
+  - `security/` — Security review and threat modeling
+  - `vcs/` — Version control systems
+  - `yuanbao/` — Yuanbao group chat
 - `README.md` — Installation and usage documentation
+- `package.json` — npm package manifest with `agents` field for skill discovery
+
+## Installation
+
+```bash
+# Via npx skills (Claude Code, Codex, Cursor, OpenCode, …)
+npx skills add shikanime-studio/skills -g -y
+
+# Via Hermes tap
+hermes skills tap add shikanime-studio/skills
+
+# Via npm
+npm install @shikanime-studio/skills
+```
+
+## Adding a New Skill
+
+1. Create a directory under the appropriate category in `skills/`
+2. Write a `SKILL.md` following the
+   [skill authoring](https://hermes-agent.nousresearch.com/docs) format with
+   valid YAML frontmatter
+3. Add the skill to the catalog table in `README.md`
+4. Test against the target agent before submitting
+5. Commit with a descriptive message
 
 ## Commit Style
 
@@ -17,12 +54,18 @@ A curated catalog of self-improved agent skills for Hermes and compatible agents
 
 ## Stack
 
-- 1 commit == 1 PR via ghstack
-- Amend + `ghstack` to resubmit
-- `ghstack land` on head PR to land the entire stack
+- 1 commit == 1 PR via ghstack (1 commit is 1 logical atomic change)
+- The commit title **is** the PR title; the commit body **is** the PR body
+- Split work into stacked PRs to keep each PR small and reviewable
+- To pull down an existing stack: `ghstack checkout <PR_NUMBER>`
+- To update a PR: edit files, then `jj squash` (or `git commit --amend`) into the
+  **target commit** of the stack — the one that PR represents; the commit message
+  updates the PR title and body automatically when resubmitted
+- Resubmit with `ghstack` after squashing
+- `ghstack land` on the head PR to land the entire stack
 - Never `gh pr merge` (creates poisoned commits)
 - Never force-push ghstack branches
-- ghstack only works on HEAD commit chains, not detached HEADs
+
 
 ## Protect `main`
 
@@ -31,21 +74,5 @@ A curated catalog of self-improved agent skills for Hermes and compatible agents
 - Require signed commits
 - Squash+rebase merge only
 
-## Adding a New Skill
-
-1. Create a directory under the appropriate category
-2. Write a `SKILL.md` following the [skill authoring](https://hermes-agent.nousresearch.com/docs) format
-3. Add the skill to the catalog table in `README.md`
-4. Commit with a descriptive message
-
-## Skill Categories
-
-- `autonomous-ai` — Agent orchestration and delegation
-- `devops` — Infrastructure, Nix, Kubernetes, CI/CD
-- `github` — GitHub workflows, issues, PRs
-- `productivity` — Communication, documents, automation
-- `reconnaissance` — Domain intelligence, OSINT
-- `software-dev` — Development workflows, debugging, testing
-- `vcs` — Version control systems
-
-*Each skill must include a valid `SKILL.md` with YAML frontmatter. Test against the target agent before submitting*
+*Licensed under Apache-2.0. Each skill must include a valid `SKILL.md` with
+YAML frontmatter. Always use worktrees when making changes.*
