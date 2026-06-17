@@ -28,8 +28,8 @@ paths and the bundles cover all needed styles.
 ## zod-validation-error v3 exports field rejected by Vite 8 resolver
 
 Symptom: Vitest tests fail with
-`"./v3" is not exported under the conditions ["node", "development", "import"]
-from package zod-validation-error`
+`"./v3" is not exported under the conditions
+["node", "development", "import"] from package zod-validation-error`
 even though the package's `exports` field maps `"."` to `"./v3/index.mjs"`.
 
 Root cause: `zod-validation-error@3.x` uses non-standard export keys
