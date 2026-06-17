@@ -6,198 +6,198 @@
   "skills": [
     {
       "name": "apple-notes",
-      "path": "skills/apple/apple-notes",
-      "description": "Manage Apple Notes via memo CLI: create, search, edit."
+      "description": "Manage Apple Notes via memo CLI: create, search, edit.",
+      "path": "skills/apple/apple-notes"
     },
     {
       "name": "apple-reminders",
-      "path": "skills/apple/apple-reminders",
-      "description": "Apple Reminders via remindctl: add, list, complete."
+      "description": "Apple Reminders via remindctl: add, list, complete.",
+      "path": "skills/apple/apple-reminders"
     },
     {
       "name": "claude-code",
-      "path": "skills/autonomous-ai/claude-code",
-      "description": "Delegate coding to Claude Code CLI (features, PRs)."
+      "description": "Delegate coding to Claude Code CLI (features, PRs).",
+      "path": "skills/autonomous-ai/claude-code"
     },
     {
       "name": "codex",
-      "path": "skills/autonomous-ai/codex",
-      "description": "Delegate coding to OpenAI Codex CLI (features, PRs)."
+      "description": "Delegate coding to OpenAI Codex CLI (features, PRs).",
+      "path": "skills/autonomous-ai/codex"
     },
     {
       "name": "kanban-worker",
-      "path": "skills/autonomous-ai/kanban-worker",
-      "description": "Pitfalls, examples, and edge cases for Hermes Kanban workers."
+      "description": "Pitfalls, examples, and edge cases for Hermes Kanban workers.",
+      "path": "skills/autonomous-ai/kanban-worker"
     },
     {
       "name": "cpn-console-plugins",
-      "path": "skills/cpn/cpn-console-plugins",
-      "description": "Develop, debug, and fix plugins for the cloud-pi-native console."
+      "description": "Develop, debug, and fix plugins for the cloud-pi-native console.",
+      "path": "skills/cpn/cpn-console-plugins"
     },
     {
       "name": "cpn-documentation",
-      "path": "skills/cpn/cpn-documentation",
-      "description": "Write and maintain cloud-pi-native/documentation (VitePress site)."
+      "description": "Write and maintain cloud-pi-native/documentation (VitePress site).",
+      "path": "skills/cpn/cpn-documentation"
     },
     {
       "name": "home-manager-pitfalls",
-      "path": "skills/devops/home-manager-pitfalls",
-      "description": "Home Manager module gotchas — silent failures, hidden dependencies."
+      "description": "Home Manager module gotchas — silent failures, hidden dependencies.",
+      "path": "skills/devops/home-manager-pitfalls"
     },
     {
       "name": "darwin-host-provisioning",
-      "path": "skills/devops/darwin-host-provisioning",
-      "description": "Provision and restore macOS Nix-Darwin hosts, including host configuration, home-manager, SOPS secrets, and flake registration."
+      "description": "Provision and restore macOS Nix-Darwin hosts, including host configuration, home-manager, SOPS secrets, and flake registration.",
+      "path": "skills/devops/darwin-host-provisioning"
     },
     {
       "name": "nix-module-bulk-edit",
-      "path": "skills/devops/nix-module-bulk-edit",
-      "description": "Bulk-edit Nix module files using reliable patterns."
+      "description": "Bulk-edit Nix module files using reliable patterns.",
+      "path": "skills/devops/nix-module-bulk-edit"
     },
     {
       "name": "system-migration-audit",
-      "path": "skills/devops/system-migration-audit",
-      "description": "Audit and plan system package manager migrations (e.g. Homebrew to MacPorts), including inventory, categorization, migration planning, and cleanup."
+      "description": "Audit and plan system package manager migrations (e.g. Homebrew to MacPorts), including inventory, categorization, migration planning, and cleanup.",
+      "path": "skills/devops/system-migration-audit"
     },
     {
       "name": "dogfood",
-      "path": "skills/dogfood",
-      "description": "Exploratory QA of web apps: find bugs, evidence, reports."
+      "description": "Exploratory QA of web apps: find bugs, evidence, reports.",
+      "path": "skills/dogfood"
     },
     {
       "name": "ghstack-workflow",
-      "path": "skills/github/ghstack-workflow",
-      "description": "Stacked PRs with ghstack + Jujutsu (jj). Create, update, land, and manage stacked pull requests."
+      "description": "Stacked PRs with ghstack + Jujutsu (jj). Create, update, land, and manage stacked pull requests.",
+      "path": "skills/github/ghstack-workflow"
     },
     {
       "name": "github-auth",
-      "path": "skills/github/github-auth",
-      "description": "GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login."
+      "description": "GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login.",
+      "path": "skills/github/github-auth"
     },
     {
       "name": "github-code-review",
-      "path": "skills/github/github-code-review",
-      "description": "Review PRs: diffs, inline comments via gh or REST."
+      "description": "Review PRs: diffs, inline comments via gh or REST.",
+      "path": "skills/github/github-code-review"
     },
     {
       "name": "github-issues",
-      "path": "skills/github/github-issues",
-      "description": "Create, triage, label, assign GitHub issues via gh or REST."
+      "description": "Create, triage, label, assign GitHub issues via gh or REST.",
+      "path": "skills/github/github-issues"
     },
     {
       "name": "github-repo-management",
-      "path": "skills/github/github-repo-management",
-      "description": "Clone/create/fork repos; manage remotes, releases."
+      "description": "Clone/create/fork repos; manage remotes, releases.",
+      "path": "skills/github/github-repo-management"
     },
     {
       "name": "debugging-hermes-tui-commands",
-      "path": "skills/hermes/debugging-hermes-tui-commands",
-      "description": "Debug Hermes TUI slash commands: Python, gateway, Ink UI."
+      "description": "Debug Hermes TUI slash commands: Python, gateway, Ink UI.",
+      "path": "skills/hermes/debugging-hermes-tui-commands"
     },
     {
       "name": "dependency-upgrades",
-      "path": "skills/hermes/dependency-upgrades",
-      "description": "Upgrade dependencies in a pnpm monorepo — surgical targeted upgrades vs blanket major bumps."
+      "description": "Upgrade dependencies in a pnpm monorepo — surgical targeted upgrades vs blanket major bumps.",
+      "path": "skills/hermes/dependency-upgrades"
     },
     {
       "name": "hermes-agent-skill-authoring",
-      "path": "skills/hermes/hermes-agent-skill-authoring",
-      "description": "Author in-repo SKILL.md: frontmatter, validator, structure."
+      "description": "Author in-repo SKILL.md: frontmatter, validator, structure.",
+      "path": "skills/hermes/hermes-agent-skill-authoring"
     },
     {
       "name": "multi-repo-review",
-      "path": "skills/hermes/multi-repo-review",
-      "description": "Review multiple repositories in parallel for code quality, security, configuration issues."
+      "description": "Review multiple repositories in parallel for code quality, security, configuration issues.",
+      "path": "skills/hermes/multi-repo-review"
     },
     {
       "name": "nix-docker-builds",
-      "path": "skills/hermes/nix-docker-builds",
-      "description": "Build Docker images with Nix: pure Nix vs hybrid builder patterns."
+      "description": "Build Docker images with Nix: pure Nix vs hybrid builder patterns.",
+      "path": "skills/hermes/nix-docker-builds"
     },
     {
       "name": "node-inspect-debugger",
-      "path": "skills/hermes/node-inspect-debugger",
-      "description": "Debug Node.js via --inspect + Chrome DevTools Protocol CLI."
+      "description": "Debug Node.js via --inspect + Chrome DevTools Protocol CLI.",
+      "path": "skills/hermes/node-inspect-debugger"
     },
     {
       "name": "plan",
-      "path": "skills/hermes/plan",
-      "description": "Plan mode: write an actionable markdown plan to .hermes/plans/, no execution."
+      "description": "Plan mode: write an actionable markdown plan to .hermes/plans/, no execution.",
+      "path": "skills/hermes/plan"
     },
     {
       "name": "python-debugpy",
-      "path": "skills/hermes/python-debugpy",
-      "description": "Debug Python: pdb REPL + debugpy remote (DAP)."
+      "description": "Debug Python: pdb REPL + debugpy remote (DAP).",
+      "path": "skills/hermes/python-debugpy"
     },
     {
       "name": "requesting-code-review",
-      "path": "skills/hermes/requesting-code-review",
-      "description": "Pre-commit review: security scan, quality gates, auto-fix."
+      "description": "Pre-commit review: security scan, quality gates, auto-fix.",
+      "path": "skills/hermes/requesting-code-review"
     },
     {
       "name": "sonarqube-refactoring",
-      "path": "skills/hermes/sonarqube-refactoring",
-      "description": "Fix SonarQube quality gate issues: cognitive complexity, unnecessary assertions."
+      "description": "Fix SonarQube quality gate issues: cognitive complexity, unnecessary assertions.",
+      "path": "skills/hermes/sonarqube-refactoring"
     },
     {
       "name": "spike",
-      "path": "skills/hermes/spike",
-      "description": "Throwaway experiments to validate an idea before build."
+      "description": "Throwaway experiments to validate an idea before build.",
+      "path": "skills/hermes/spike"
     },
     {
       "name": "subagent-driven-development",
-      "path": "skills/hermes/subagent-driven-development",
-      "description": "Execute plans via delegate_task subagents (2-stage review)."
+      "description": "Execute plans via delegate_task subagents (2-stage review).",
+      "path": "skills/hermes/subagent-driven-development"
     },
     {
       "name": "systematic-debugging",
-      "path": "skills/hermes/systematic-debugging",
-      "description": "4-phase root cause debugging: understand bugs before fixing."
+      "description": "4-phase root cause debugging: understand bugs before fixing.",
+      "path": "skills/hermes/systematic-debugging"
     },
     {
       "name": "test-driven-development",
-      "path": "skills/hermes/test-driven-development",
-      "description": "TDD: enforce RED-GREEN-REFACTOR, tests before code."
+      "description": "TDD: enforce RED-GREEN-REFACTOR, tests before code.",
+      "path": "skills/hermes/test-driven-development"
     },
     {
       "name": "vitest-configuration",
-      "path": "skills/hermes/vitest-configuration",
-      "description": "Troubleshoot and fix Vitest configuration issues."
+      "description": "Troubleshoot and fix Vitest configuration issues.",
+      "path": "skills/hermes/vitest-configuration"
     },
     {
       "name": "writing-plans",
-      "path": "skills/hermes/writing-plans",
-      "description": "Write implementation plans: bite-sized tasks, paths, code."
+      "description": "Write implementation plans: bite-sized tasks, paths, code.",
+      "path": "skills/hermes/writing-plans"
     },
     {
       "name": "nestjs-build-fixing",
-      "path": "skills/nestjs/nestjs-build-fixing",
-      "description": "Fix NestJS + TypeScript build errors and migrate auth/routes from legacy Fastify to NestJS."
+      "description": "Fix NestJS + TypeScript build errors and migrate auth/routes from legacy Fastify to NestJS.",
+      "path": "skills/nestjs/nestjs-build-fixing"
     },
     {
       "name": "nestjs-logging",
-      "path": "skills/nestjs/nestjs-logging",
-      "description": "Add consistent, debug-friendly logging to NestJS modules."
+      "description": "Add consistent, debug-friendly logging to NestJS modules.",
+      "path": "skills/nestjs/nestjs-logging"
     },
     {
       "name": "nestjs-module-migration",
-      "path": "skills/nestjs/nestjs-module-migration",
-      "description": "Migrate a legacy backend module into the NestJS monorepo."
+      "description": "Migrate a legacy backend module into the NestJS monorepo.",
+      "path": "skills/nestjs/nestjs-module-migration"
     },
     {
       "name": "security-best-practices",
-      "path": "skills/security/security-best-practices",
-      "description": "Language/framework security best-practice reviews (Python, JS/TS, Go)."
+      "description": "Language/framework security best-practice reviews (Python, JS/TS, Go).",
+      "path": "skills/security/security-best-practices"
     },
     {
       "name": "security-threat-model",
-      "path": "skills/security/security-threat-model",
-      "description": "Repository-grounded threat modeling that enumerates trust boundaries, assets, attack paths."
+      "description": "Repository-grounded threat modeling that enumerates trust boundaries, assets, attack paths.",
+      "path": "skills/security/security-threat-model"
     },
     {
       "name": "yuanbao",
-      "path": "skills/yuanbao",
-      "description": "Yuanbao (元宝) groups: @mention users, query info/members."
+      "description": "Yuanbao (元宝) groups: @mention users, query info/members.",
+      "path": "skills/yuanbao"
     }
   ]
 }

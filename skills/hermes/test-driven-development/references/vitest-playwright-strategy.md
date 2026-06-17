@@ -2,12 +2,16 @@
 
 ## Overview
 
-For full-stack projects (Vite + React + TanStack Start), use a two-layer test strategy:
+For full-stack projects (Vite + React + TanStack Start), use a two-layer test
+strategy:
 
-- **Vitest** (unit tests) — fast, isolated, runs in < 1s. Tests data models, validation logic, collections, route structure, and feature parity.
-- **Playwright** (e2e tests) — browser-level, verifies routing, navigation, form interaction, responsive layout. Runs on a hot dev server or preview build.
+- **Vitest** (unit tests) — fast, isolated, runs in < 1s. Tests data models,
+  validation logic, collections, route structure, and feature parity.
+- **Playwright** (e2e tests) — browser-level, verifies routing, navigation, form
+  interaction, responsive layout. Runs on a hot dev server or preview build.
 
-Both tools live side by side. The rule: unit tests run on every change, e2e on commit/CI.
+Both tools live side by side. The rule: unit tests run on every change, e2e on
+commit/CI.
 
 ## Vitest Configuration
 
@@ -69,7 +73,8 @@ Implement the minimal model/logic.
 
 ### Write E2E test (second RED)
 
-After the unit test passes, write a Playwright test for the user-facing behavior:
+After the unit test passes, write a Playwright test for the user-facing
+behavior:
 
 ```ts
 import { test, expect } from "@playwright/test";
@@ -82,7 +87,8 @@ test("can navigate to page", async ({ page }) => {
 
 ### Route Structure Tests (Vitest)
 
-An additional useful pattern: verify that all route files exist and the route tree is complete:
+An additional useful pattern: verify that all route files exist and the route
+tree is complete:
 
 ```ts
 import { describe, expect, it } from "vitest";
@@ -127,8 +133,19 @@ describe("route structure", () => {
 
 ## Pitfalls
 
-- **Playwright needs browsers installed** — `pnpm exec playwright install` on fresh machines.
-- **Vitest config import issue** — If `vitest` is not directly listed in the app's `package.json`, use `npx vitest run` or add it as an explicit devDependency (not just hoisted from another workspace package).
-- **Route files missing from tree** — TanStack Router auto-generates `routeTree.gen.ts` via its Vite plugin, but if the plugin isn't running (dev server is off), you may need to maintain it manually. Write a route-structure test that catches orphaned files.
-- **E2E tests depend on dev server** — Playwright's `webServer` config starts it automatically; use `reuseExistingServer: !process.env.CI` to avoid restarting during local dev.
-- **Strictest tsconfig + vitest** — `@tsconfig/strictest` may cause `Cannot find module 'vitest'` LSP errors. These are harmless for the build (Vite resolves modules at runtime), but `vitest/config` may also fail at import time. Use `npx vitest run` to bypass.
+- **Playwright needs browsers installed** — `pnpm exec playwright install` on
+  fresh machines.
+- **Vitest config import issue** — If `vitest` is not directly listed in the
+  app's `package.json`, use `npx vitest run` or add it as an explicit
+  devDependency (not just hoisted from another workspace package).
+- **Route files missing from tree** — TanStack Router auto-generates
+  `routeTree.gen.ts` via its Vite plugin, but if the plugin isn't running (dev
+  server is off), you may need to maintain it manually. Write a route-structure
+  test that catches orphaned files.
+- **E2E tests depend on dev server** — Playwright's `webServer` config starts it
+  automatically; use `reuseExistingServer: !process.env.CI` to avoid restarting
+  during local dev.
+- **Strictest tsconfig + vitest** — `@tsconfig/strictest` may cause
+  `Cannot find module 'vitest'` LSP errors. These are harmless for the build
+  (Vite resolves modules at runtime), but `vitest/config` may also fail at
+  import time. Use `npx vitest run` to bypass.
