@@ -136,13 +136,33 @@ For each commit N in a stack, ghstack creates three branches:
 | `gh/user/N/head` | The actual change. PR targets `base`. Never force-pushed. |
 | `gh/user/N/orig` | Exact local commit. Not visible on GitHub.                |
 
+## PR Review Gate
+
+**Always prepare PRs as drafts or hold off on opening until the user reviews.**
+The user wants to review diffs before PRs are created. When asked to "fix X" or
+"update Y":
+
+1. Commit the changes locally
+2. Run `ghstack` to push branches (this may auto-open PRs)
+3. **Tell the user the PR link and wait for review before taking further
+   action**
+4. If `ghstack` auto-opens PRs, note that the user wants to review first — do
+   NOT land, merge, or take further action on the PR until explicitly told to
+
+This applies to all repos using ghstack (algorithm, curriculum-vitae,
+identities, dotfiles, niximgs, etc.).
+
 ## Pitfalls
 
 1. **Never `gh pr merge` on a ghstack PR.** Always use `ghstack land`. The UI
    merge button breaks base branch tracking.
 
 2. **Never force-push ghstack branches manually.** ghstack manages branch
-   pointers. Manual force-poisoning corrupts the stack.
+   pointers. Manual force-poisoning corrupts the stack. **Additionally, raw
+   `git push --force` to `gh/user/N/head` does NOT update the PR — ghstack
+   tracks PRs via commit message metadata (`[ghstack ...]` trailers). Without
+   this metadata, `ghstack submit` will create NEW PRs instead of updating
+   existing ones. Always use `ghstack submit` to update PRs.**
 
 3. **Never `git merge` into a ghstack branch.** Use `jj rebase` instead. Merge
    commits break the 1-commit-1-PR invariant.
@@ -150,17 +170,23 @@ For each commit N in a stack, ghstack creates three branches:
 4. **Use `jj squash` not `jj commit` for updates.** A new commit means a new PR.
    Squashing preserves the existing PR.
 
-5. **Rebase before resubmit.** If `main` has moved, rebase your stack first:
+5. **Repos may use git, not jj.** The user says "jj squash" to mean "squash into
+   the target commit" regardless of VCS. If the repo is git-based (check with
+   `jj status` — "no jj repo" means git), use
+   `git reset --soft HEAD~N && git commit` or interactive rebase to squash. Do
+   NOT try to init jj in a git repo unless asked.
+
+6. **Rebase before resubmit.** If `main` has moved, rebase your stack first:
    `jj rebase -d main` then `ghstack`.
 
-6. **Stack order matters.** Commits are stacked in topological order (oldest =
+7. **Stack order matters.** Commits are stacked in topological order (oldest =
    bottom). Reorder with `jj rebase -r <rev> -d <target>` before submitting.
 
-7. **`ghstack` vs `gh stack`:** `ghstack` (ezyang) is the Python CLI with
+8. **`ghstack` vs `gh stack`:** `ghstack` (ezyang) is the Python CLI with
    `~/.ghstackrc`. `gh stack` (GitHub official) is a Go-based `gh` extension
    with `.git/gh-stack` metadata. They are NOT compatible — pick one per repo.
 
-8. **Splitting a stack into separate PRs.** When asked to split changes into
+9. **Splitting a stack into separate PRs.** When asked to split changes into
    individual PRs (1 commit == 1 PR), use `ghstack submit` for each commit. If
    `ghstack submit` fails mid-stack (e.g., timeout, duplicate commit error),
    push remaining commits as separate branches and create PRs manually:
@@ -175,14 +201,24 @@ For each commit N in a stack, ghstack creates three branches:
    This preserves the stack relationship without relying on ghstack's internal
    tracking.
 
+10. **Updating an existing PR after history rewrite.** If you squash, rebase, or
+    otherwise rewrite commits that were previously submitted via ghstack, the
+    new commits will lack ghstack metadata. `ghstack submit` will create NEW PRs
+    instead of updating the existing one. To fix this:
+    - Use `ghstack checkout <PR_NUMBER>` to restore the original branch with
+      metadata intact
+    - Apply your changes (edit files, then `jj squash` into the target commit)
+    - Run `ghstack submit` to update the existing PR
+    - Do NOT use `git push --force` to `gh/user/N/head` — it won't carry
+      metadata
+
+    See `references/update-after-rewrite.md` for the full recovery procedure
+    including how to undo duplicate PRs if already created.
+
 ## Quick Reference
 
-| Task              | Command                                 |
-| ----------------- | --------------------------------------- |
-| Create stack      | `jj commit -m "..."` x N → `ghstack`    |
-| Update PR         | edit → `jj squash -r <rev>` → `ghstack` |
-| Land PR           | `ghstack land <URL>`                    |
-| Rebase stack      | `jj rebase -d main` → `ghstack`         |
-| Checkout PR       | `ghstack checkout <N>`                  |
-| Sync descriptions | `ghstack sync`                          |
-| View stack        | `jj log -r main..@`                     |
+| ----------------- | --------------------------------------- | | Create stack |
+`jj commit -m "..."` x N → `ghstack` | | Update PR | edit → `jj squash -r <rev>`
+→ `ghstack` | | Land PR | `ghstack land <URL>` | | Rebase stack |
+`jj rebase -d main` → `ghstack` | | Checkout PR | `ghstack checkout <N>` | |
+Sync descriptions | `ghstack sync` | | View stack | `jj log -r main..@` |

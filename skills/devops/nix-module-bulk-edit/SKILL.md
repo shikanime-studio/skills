@@ -109,7 +109,7 @@ for f in $(grep -rl 'integrations\.gitnr\|gitnr\.' src/modules/languages/); do
 done
 
 # Step 2: Add correct line (example for go.nix)
-perl -i -pe 's/(config = lib\.mkIf cfg\.enable \{)/$1\n   
+perl -i -pe 's/(config = lib\.mkIf cfg\.enable \{)/$1\n
   gitnr.\".gitignore\".templates = [ \"gh:Go\" ];/' src/modules/languages/go.nix
 
 # Step 3: Verify

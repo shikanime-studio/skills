@@ -1,5 +1,7 @@
 # Express (Node.js) Web Security Spec (Express 5.x / 4.19.2+, Node.js LTS)
 
+<!-- markdownlint-disable MD013 -->
+
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new Express apps and routes.
@@ -836,8 +838,7 @@ Fix:
   set safe `Content-Type` and `Content-Disposition: attachment` when
   appropriate.
 - Configure
-  `express.static(root, { dotfiles: 'deny'|'ignore', index: false (if desired)
-  })`.
+  `express.static(root, { dotfiles: 'deny'|'ignore', index: false (if desired) })`.
 
 Notes:
 

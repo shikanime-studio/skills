@@ -248,6 +248,12 @@ jj config list repo
    `jj config set --repo signing.key ~/.ssh/id_ed25519.pub`. Then rebase to
    re-sign existing commits. See `github-auth` skill for full SSH signing setup.
 
+7. **User says "jj squash" but repo uses git**: The user uses "jj squash" as a
+   verb meaning "squash into the target commit" regardless of VCS. If the repo
+   is git-based (check with `jj status` -- "no jj repo" means git), use
+   `git reset --soft HEAD~N && git commit` or interactive rebase. Do NOT try to
+   init jj in a git repo unless explicitly asked.
+
 ## See Also
 
 - `references/ghstack-integration.md` — how jj interacts with ghstack for

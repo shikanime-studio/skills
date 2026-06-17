@@ -323,8 +323,7 @@ Then update consumers from deep paths to root:
 
 ```ts
 // Before:
-import type { VaultProjectApi } from
-  "@cpn-console/vault-plugin/types/vault-project-api.js";
+import type { VaultProjectApi } from "@cpn-console/vault-plugin/types/vault-project-api.js";
 // After:
 import type { VaultProjectApi } from "@cpn-console/vault-plugin";
 ```

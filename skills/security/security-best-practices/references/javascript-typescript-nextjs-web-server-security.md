@@ -1,5 +1,7 @@
 # Next.js (TypeScript/JavaScript) Web Security Spec (Next.js 16.1.x, Node.js 20.9+)
 
+<!-- markdownlint-disable MD013 -->
+
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new Next.js backend code (Route

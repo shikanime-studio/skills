@@ -1,5 +1,7 @@
 # Vue.js Web Security Spec (Vue 3.x, TypeScript/JavaScript, common tooling: Vite)
 
+<!-- markdownlint-disable MD013 -->
+
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new Vue code.

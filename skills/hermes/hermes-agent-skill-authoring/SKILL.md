@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [skills, authoring, hermes-agent, conventions, skill-md]
     related_skills: [plan, requesting-code-review]
+<!-- markdownlint-disable MD013 MD076 -->
 ---
 
 # Authoring Hermes-Agent Skills (in-repo)
@@ -128,9 +129,9 @@ casually.
    ```
 
    Read 2-3 peer SKILL.md files to match tone and structure.
-2. **Check validator constraints** in `tools/skill_manager_tool.py` if unsure.
-3. **Draft** with `write_file` to `skills/<category>/<name>/SKILL.md`.
-4. **Validate locally**:
+
+2. **Draft** with `write_file` to `skills/<category>/<name>/SKILL.md`.
+3. **Validate locally**:
 
    ```python
    import yaml, re, pathlib
@@ -143,8 +144,8 @@ casually.
    assert len(content) <= 100_000
    ```
 
-5. **Git add + commit** on the active branch.
-6. **Note:** the CURRENT session's skill loader is cached — `skill_view` /
+4. **Git add + commit** on the active branch.
+5. **Note:** the CURRENT session's skill loader is cached — `skill_view` /
    `skills_list` will not see the new skill until a new session. This is
    expected, not a bug.
 

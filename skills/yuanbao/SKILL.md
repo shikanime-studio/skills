@@ -9,6 +9,8 @@ metadata:
     related_skills: []
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 # Yuanbao Group Interaction
 
 ## CRITICAL: How Messaging Works

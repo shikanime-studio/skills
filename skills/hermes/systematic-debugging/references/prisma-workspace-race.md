@@ -5,8 +5,7 @@ Observed in `console.project-migration`:
 - `pnpm -r --no-bail run test` could fail intermittently when `apps/server` and
   `apps/server-nestjs` ran in parallel.
 - The failure appeared during `pretest -> prisma generate` with errors such as:
-  - `EACCES: permission denied, copyfile ... libquery_engine.node ->
-  .../.prisma/client/libquery_engine.node`
+  - `EACCES: permission denied, copyfile ... libquery_engine.node -> .../.prisma/client/libquery_engine.node`
   - transient `SyntaxError: Invalid or unexpected token` from the generated
     Prisma client entrypoint.
 

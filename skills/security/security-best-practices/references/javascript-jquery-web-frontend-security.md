@@ -1,5 +1,7 @@
 # jQuery Frontend Security Spec (jQuery 4.0.x, modern browsers)
 
+<!-- markdownlint-disable MD013 MD075 -->
+
 This document is designed as a **security spec** that supports:
 
 1. **Secure-by-default code generation** for new jQuery-based frontend code.

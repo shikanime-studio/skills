@@ -136,8 +136,7 @@ Most list endpoints support:
 
 - Authenticated: 5,000 requests/hour
 - Check remaining:
-  `curl -s -H "Authorization: token $GITHUB_TOKEN"
-  https://api.github.com/rate_limit`
+  `curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/rate_limit`
 
 ## Common curl Patterns
 
