@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # Flask (Python) Web Security Spec (Flask 3.1.x, Python 3.x)
 
 This document is designed as a **security spec** that supports:

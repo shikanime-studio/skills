@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # NestJS + Vitest Testing Patterns
 
 ## Test File Structure
@@ -172,7 +174,7 @@ export type ProjectWithMembers = Prisma.ProjectGetPayload<{
 }>;
 
 /** Create a mock result for `tx.project.findMany` / `prisma.project.findMany`.
-  */
+ */
 export function makeProjectFindManyResult(
   projects: Array<Partial<Project> & { id: string }> = [],
 ): Project[] {
@@ -180,7 +182,7 @@ export function makeProjectFindManyResult(
 }
 
 /** Create a mock result for `tx.project.create` (or any single-record create).
-  */
+ */
 export function makeProjectCreateResult(
   overrides: Partial<Project> & { id: string },
 ): Project {

@@ -11,6 +11,8 @@ metadata:
     related_skills: [plan, requesting-code-review]
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 # Authoring Hermes-Agent Skills (in-repo)
 
 ## Overview
@@ -127,7 +129,6 @@ casually.
    ls skills/<category>/
    ```
 
-   Read 2-3 peer SKILL.md files to match tone and structure.
 2. **Check validator constraints** in `tools/skill_manager_tool.py` if unsure.
 3. **Draft** with `write_file` to `skills/<category>/<name>/SKILL.md`.
 4. **Validate locally**:

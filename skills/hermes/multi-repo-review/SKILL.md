@@ -14,6 +14,8 @@ metadata:
     related_skills: [requesting-code-review, codebase-inspection, dogfood]
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 # Multi-Repository Code Review
 
 Review multiple repositories in parallel using subagents, then synthesize

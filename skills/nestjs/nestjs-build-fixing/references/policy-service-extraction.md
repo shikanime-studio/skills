@@ -186,9 +186,9 @@ export interface ProjectConfig {
   slug: string;
   locked?: boolean; // only loaded if policy includes locked check
   status?: PrismaProject["status"]; // only loaded if policy includes status
-    check
+  check;
   projectPermissions?: bigint; // resolved at load time — not raw role/member
-    data
+  data;
 }
 ```
 
@@ -303,7 +303,7 @@ const ctx = {
 
 ```ts
 const ctx = mockDeep<ExecutionContext>(); // BAD — project prop becomes
-  undefined
+undefined;
 const httpArgs = mockDeep<any>();
 httpArgs.getRequest.mockReturnValue(request);
 ctx.switchToHttp.mockReturnValue(httpArgs);

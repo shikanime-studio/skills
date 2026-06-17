@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # React (JavaScript/TypeScript) Web Security Spec (React 19.x, TypeScript 5.x)
 
 This document is designed as a **security spec** that supports:
