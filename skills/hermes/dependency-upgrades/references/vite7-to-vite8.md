@@ -14,7 +14,8 @@
 
 ```typescript
 build: {
-  target: 'baseline-widely-available',  // or 'esnext' for JS-only, but CSS needs browser targets
+  target: 'baseline-widely-available',  // or 'esnext' for JS-only, but CSS
+    needs browser targets
 }
 ```
 
@@ -34,27 +35,29 @@ css: {
 
 ### Dependency Optimizer
 
-| esbuild (deprecated) | Rolldown (new) |
-|---|---|
-| `optimizeDeps.esbuildOptions.minify` | `optimizeDeps.rolldownOptions.output.minify` |
-| `optimizeDeps.esbuildOptions.treeShaking` | `optimizeDeps.rolldownOptions.treeshake` |
-| `optimizeDeps.esbuildOptions.define` | `optimizeDeps.rolldownOptions.transform.define` |
-| `optimizeDeps.esbuildOptions.loader` | `optimizeDeps.rolldownOptions.moduleTypes` |
-| `optimizeDeps.esbuildOptions.platform` | `optimizeDeps.rolldownOptions.platform` |
+| esbuild (deprecated)                      | Rolldown (new)                                  |
+| ----------------------------------------- | ----------------------------------------------- |
+| `optimizeDeps.esbuildOptions.minify`      | `optimizeDeps.rolldownOptions.output.minify`    |
+| `optimizeDeps.esbuildOptions.treeShaking` | `optimizeDeps.rolldownOptions.treeshake`        |
+| `optimizeDeps.esbuildOptions.define`      | `optimizeDeps.rolldownOptions.transform.define` |
+| `optimizeDeps.esbuildOptions.loader`      | `optimizeDeps.rolldownOptions.moduleTypes`      |
+| `optimizeDeps.esbuildOptions.platform`    | `optimizeDeps.rolldownOptions.platform`         |
 
 ### JS Transform
 
-| esbuild (deprecated) | Oxc (new) |
-|---|---|
-| `esbuild.jsx: 'automatic'` | `oxc.jsx: { runtime: 'automatic' }` |
-| `esbuild.jsxImportSource` | `oxc.jsx.importSource` |
-| `esbuild.jsxFactory` | `oxc.jsx.pragma` |
-| `esbuild.define` | `oxc.define` |
-| `esbuild.supported` | Not supported — track oxc-project/oxc#15373 |
+| esbuild (deprecated)       | Oxc (new)                                   |
+| -------------------------- | ------------------------------------------- |
+| `esbuild.jsx: 'automatic'` | `oxc.jsx: { runtime: 'automatic' }`         |
+| `esbuild.jsxImportSource`  | `oxc.jsx.importSource`                      |
+| `esbuild.jsxFactory`       | `oxc.jsx.pragma`                            |
+| `esbuild.define`           | `oxc.define`                                |
+| `esbuild.supported`        | Not supported — track oxc-project/oxc#15373 |
 
 ## Not Supported
 
-- **NativeDecorator lowering**: Oxc does not support it yet. Use `@rolldown/plugin-babel` with `@babel/plugin-proposal-decorators` (version `2023-11`) or `@rollup/plugin-swc`.
+- **NativeDecorator lowering**: Oxc does not support it yet. Use
+  `@rolldown/plugin-babel` with `@babel/plugin-proposal-decorators` (version
+  `2023-11`) or `@rollup/plugin-swc`.
 - `esbuild.supported` option
 - `build.rollupOptions.output.format: 'system'` and `'amd'`
 - `shouldTransformCachedModule` hook

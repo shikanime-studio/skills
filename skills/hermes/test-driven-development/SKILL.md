@@ -8,7 +8,8 @@ platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [testing, tdd, development, quality, red-green-refactor]
-    related_skills: [systematic-debugging, writing-plans, subagent-driven-development]
+    related_skills:
+      [systematic-debugging, writing-plans, subagent-driven-development]
 ---
 
 # Test-Driven Development (TDD)
@@ -17,19 +18,22 @@ metadata:
 
 Write the test first. Watch it fail. Write minimal code to pass.
 
-**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
+**Core principle:** If you didn't watch the test fail, you don't know if it
+tests the right thing.
 
 **Violating the letter of the rules is violating the spirit of the rules.**
 
 ## When to Use
 
 **Always:**
+
 - New features
 - Bug fixes
 - Refactoring
 - Behavior changes
 
 **Exceptions (ask the user first):**
+
 - Throwaway prototypes
 - Generated code
 - Configuration files
@@ -38,13 +42,14 @@ Thinking "skip TDD just this once"? Stop. That's rationalization.
 
 ## The Iron Law
 
-```
+```text
 NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
 ```
 
 Write code before the test? Delete it. Start over.
 
 **No exceptions:**
+
 - Don't keep it as "reference"
 - Don't "adapt" it while writing tests
 - Don't look at it
@@ -59,6 +64,7 @@ Implement fresh from tests. Period.
 Write one minimal test showing what should happen.
 
 **Good test:**
+
 ```python
 def test_retries_failed_operations_3_times():
     attempts = 0
@@ -74,9 +80,11 @@ def test_retries_failed_operations_3_times():
     assert result == 'success'
     assert attempts == 3
 ```
+
 Clear name, tests real behavior, one thing.
 
 **Bad test:**
+
 ```python
 def test_retry_works():
     mock = MagicMock()
@@ -84,9 +92,11 @@ def test_retry_works():
     result = retry_operation(mock)
     assert result == 'success'  # What about retry count? Timing?
 ```
+
 Vague name, tests mock not real code.
 
 **Requirements:**
+
 - One behavior per test
 - Clear descriptive name ("and" in name? Split it)
 - Real code, not mocks (unless truly unavoidable)
@@ -102,6 +112,7 @@ pytest tests/test_feature.py::test_specific_behavior -v
 ```
 
 Confirm:
+
 - Test fails (not errors from typos)
 - Failure message is expected
 - Fails because the feature is missing
@@ -115,12 +126,14 @@ Confirm:
 Write the simplest code to pass the test. Nothing more.
 
 **Good:**
+
 ```python
 def add(a, b):
     return a + b  # Nothing extra
 ```
 
 **Bad:**
+
 ```python
 def add(a, b):
     result = a + b
@@ -131,6 +144,7 @@ def add(a, b):
 Don't add features, refactor other code, or "improve" beyond the test.
 
 **Cheating is OK in GREEN:**
+
 - Hardcode return values
 - Copy-paste
 - Duplicate code
@@ -151,6 +165,7 @@ pytest tests/ -q
 ```
 
 Confirm:
+
 - Test passes
 - Other tests still pass
 - Output pristine (no errors, warnings)
@@ -162,6 +177,7 @@ Confirm:
 ### REFACTOR — Clean Up
 
 After green only:
+
 - Remove duplication
 - Improve names
 - Extract helpers
@@ -177,9 +193,10 @@ Next failing test for next behavior. One cycle at a time.
 
 ## Why Order Matters
 
-**"I'll write tests after to verify it works"**
+## "I'll write tests after to verify it works"
 
 Tests written after code pass immediately. Passing immediately proves nothing:
+
 - Might test the wrong thing
 - Might test implementation, not behavior
 - Might miss edge cases you forgot
@@ -187,9 +204,10 @@ Tests written after code pass immediately. Passing immediately proves nothing:
 
 Test-first forces you to see the test fail, proving it actually tests something.
 
-**"I already manually tested all the edge cases"**
+## "I already manually tested all the edge cases"
 
 Manual testing is ad-hoc. You think you tested everything but:
+
 - No record of what you tested
 - Can't re-run when code changes
 - Easy to forget cases under pressure
@@ -197,17 +215,19 @@ Manual testing is ad-hoc. You think you tested everything but:
 
 Automated tests are systematic. They run the same way every time.
 
-**"Deleting X hours of work is wasteful"**
+## "Deleting X hours of work is wasteful"
 
 Sunk cost fallacy. The time is already gone. Your choice now:
+
 - Delete and rewrite with TDD (high confidence)
 - Keep it and add tests after (low confidence, likely bugs)
 
 The "waste" is keeping code you can't trust.
 
-**"TDD is dogmatic, being pragmatic means adapting"**
+## "TDD is dogmatic, being pragmatic means adapting"
 
 TDD IS pragmatic:
+
 - Finds bugs before commit (faster than debugging after)
 - Prevents regressions (tests catch breaks immediately)
 - Documents behavior (tests show how to use code)
@@ -215,27 +235,29 @@ TDD IS pragmatic:
 
 "Pragmatic" shortcuts = debugging in production = slower.
 
-**"Tests after achieve the same goals — it's spirit not ritual"**
+## "Tests after achieve the same goals — it's spirit not ritual"
 
-No. Tests-after answer "What does this do?" Tests-first answer "What should this do?"
+No. Tests-after answer "What does this do?" Tests-first answer "What should this
+do?"
 
-Tests-after are biased by your implementation. You test what you built, not what's required. Tests-first force edge case discovery before implementing.
+Tests-after are biased by your implementation. You test what you built, not
+what's required. Tests-first force edge case discovery before implementing.
 
 ## Common Rationalizations
 
-| Excuse | Reality |
-|--------|---------|
-| "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
-| "I'll test after" | Tests passing immediately prove nothing. |
-| "Tests after achieve same goals" | Tests-after = "what does this do?" Tests-first = "what should this do?" |
-| "Already manually tested" | Ad-hoc ≠ systematic. No record, can't re-run. |
-| "Deleting X hours is wasteful" | Sunk cost fallacy. Keeping unverified code is technical debt. |
-| "Keep as reference, write tests first" | You'll adapt it. That's testing after. Delete means delete. |
-| "Need to explore first" | Fine. Throw away exploration, start with TDD. |
-| "Test hard = design unclear" | Listen to the test. Hard to test = hard to use. |
-| "TDD will slow me down" | TDD faster than debugging. Pragmatic = test-first. |
-| "Manual test faster" | Manual doesn't prove edge cases. You'll re-test every change. |
-| "Existing code has no tests" | You're improving it. Add tests for the code you touch. |
+| Excuse                                 | Reality                                                                 |
+| -------------------------------------- | ----------------------------------------------------------------------- |
+| "Too simple to test"                   | Simple code breaks. Test takes 30 seconds.                              |
+| "I'll test after"                      | Tests passing immediately prove nothing.                                |
+| "Tests after achieve same goals"       | Tests-after = "what does this do?" Tests-first = "what should this do?" |
+| "Already manually tested"              | Ad-hoc ≠ systematic. No record, can't re-run.                           |
+| "Deleting X hours is wasteful"         | Sunk cost fallacy. Keeping unverified code is technical debt.           |
+| "Keep as reference, write tests first" | You'll adapt it. That's testing after. Delete means delete.             |
+| "Need to explore first"                | Fine. Throw away exploration, start with TDD.                           |
+| "Test hard = design unclear"           | Listen to the test. Hard to test = hard to use.                         |
+| "TDD will slow me down"                | TDD faster than debugging. Pragmatic = test-first.                      |
+| "Manual test faster"                   | Manual doesn't prove edge cases. You'll re-test every change.           |
+| "Existing code has no tests"           | You're improving it. Add tests for the code you touch.                  |
 
 ## Red Flags — STOP and Start Over
 
@@ -273,12 +295,12 @@ Can't check all boxes? You skipped TDD. Start over.
 
 ## When Stuck
 
-| Problem | Solution |
-|---------|----------|
+| Problem                | Solution                                                           |
+| ---------------------- | ------------------------------------------------------------------ |
 | Don't know how to test | Write the wished-for API. Write the assertion first. Ask the user. |
-| Test too complicated | Design too complicated. Simplify the interface. |
-| Must mock everything | Code too coupled. Use dependency injection. |
-| Test setup huge | Extract helpers. Still complex? Simplify the design. |
+| Test too complicated   | Design too complicated. Simplify the interface.                    |
+| Must mock everything   | Code too coupled. Use dependency injection.                        |
+| Test setup huge        | Extract helpers. Still complex? Simplify the design.               |
 
 ## Hermes Agent Integration
 
@@ -301,10 +323,13 @@ terminal("pytest tests/ -q")
 
 For full-stack React projects, use the dual test strategy:
 
-1. **Vitest** for unit tests — data model validation, Zod schemas, route structure, TanStack React DB collections. Fast (< 1s).
-2. **Playwright** for E2E — navigation, form interaction, responsive layout, keyboard shortcuts. Runs against dev server.
+1. **Vitest** for unit tests — data model validation, Zod schemas, route
+   structure, TanStack React DB collections. Fast (< 1s).
+2. **Playwright** for E2E — navigation, form interaction, responsive layout,
+   keyboard shortcuts. Runs against dev server.
 
-See `references/vitest-playwright-strategy.md` for setup config, workflow, and pitfalls.
+See `references/vitest-playwright-strategy.md` for setup config, workflow, and
+pitfalls.
 
 ```python
 # RED — unit test first
@@ -342,83 +367,131 @@ delegate_task(
 
 ### With systematic-debugging
 
-Bug found? Write failing test reproducing it. Follow TDD cycle. The test proves the fix and prevents regression.
+Bug found? Write failing test reproducing it. Follow TDD cycle. The test proves
+the fix and prevents regression.
 
 Never fix bugs without a test.
 
 ## Testing Anti-Patterns
 
-- **Testing mock behavior instead of real behavior** — mocks should verify interactions, not replace the system under test
-- **Testing implementation details** — test behavior/results, not internal method calls
+- **Testing mock behavior instead of real behavior** — mocks should verify
+  interactions, not replace the system under test
+- **Testing implementation details** — test behavior/results, not internal
+  method calls
 - **Happy path only** — always test edge cases, errors, and boundaries
-- **Brittle tests** — tests should verify behavior, not structure; refactoring shouldn't break them
+- **Brittle tests** — tests should verify behavior, not structure; refactoring
+  shouldn't break them
 
 ## NestJS + Vitest Testing Patterns
 
 When writing unit tests for NestJS services with Vitest:
 
-- **No decorative section comments** — no `// === methodName ===` or `// --- Helpers ---` dividers in spec files. `describe`/`it` blocks provide enough structure.
-- **Keep Nest testing module setup local to the spec** when matching the GitLab/NestJS style used in this repo; `*-testing.utils.ts` should focus on data factories and reusable mocks.
-- **Use `vitest-mock-extended`'s `mockDeep<T>()`** for Prisma/DI service mocks — not `Partial<T>` with `vi.fn()`, which loses `.mockResolvedValue()` type safety under NestJS DI.
-- **Use type-shaped `make<TypeName>` factory names** in testing utilities (`makeProject`, `makeCreateProjectBody`, `makeProjectWithDetails`, `makeTxMock`). Remove pass-through helpers that only return their input; inline simple request bodies in specs.
-- **Mock Prisma transactions directly** with `prisma.$transaction.mockImplementation(async cb => cb(tx as ...))`; do not add a separate `txFn` indirection unless the existing spec already standardizes on it.
-- **Use `faker`** for test data with factory functions accepting `overrides` spread last.
+- **No decorative section comments** — no `// === methodName ===` or
+  `// --- Helpers ---` dividers in spec files. `describe`/`it` blocks provide
+  enough structure.
+- **Keep Nest testing module setup local to the spec** when matching the
+  GitLab/NestJS style used in this repo; `*-testing.utils.ts` should focus on
+  data factories and reusable mocks.
+- **Use `vitest-mock-extended`'s `mockDeep<T>()`** for Prisma/DI service mocks —
+  not `Partial<T>` with `vi.fn()`, which loses `.mockResolvedValue()` type
+  safety under NestJS DI.
+- **Use type-shaped `make<TypeName>` factory names** in testing utilities
+  (`makeProject`, `makeCreateProjectBody`, `makeProjectWithDetails`,
+  `makeTxMock`). Remove pass-through helpers that only return their input;
+  inline simple request bodies in specs.
+- **Mock Prisma transactions directly** with
+  `prisma.$transaction.mockImplementation(async cb => cb(tx as ...))`; do not
+  add a separate `txFn` indirection unless the existing spec already
+  standardizes on it.
+- **Use `faker`** for test data with factory functions accepting `overrides`
+  spread last.
 
-See `references/nestjs-vitest-testing-patterns.md` for detailed patterns including mocking, factory functions, transaction testing, typed mock result helpers, the `as never` anti-pattern, and the `mockDeep`-returns-`undefined` pitfall.
+See `references/nestjs-vitest-testing-patterns.md` for detailed patterns
+including mocking, factory functions, transaction testing, typed mock result
+helpers, the `as never` anti-pattern, and the `mockDeep`-returns-`undefined`
+pitfall.
 
 ## Pitfall: `as never` on `mockResolvedValue` — Use Typed Mock Result Helpers
 
-`as never` on `.mockResolvedValue()` disables all type checking — real type errors in test fixtures become silent.
+`as never` on `.mockResolvedValue()` disables all type checking — real type
+errors in test fixtures become silent.
 
-**Best fix:** add typed mock result helpers in `*-testing.utils.ts` so the spec file stays completely free of inline `as` casts:
+**Best fix:** add typed mock result helpers in `*-testing.utils.ts` so the spec
+file stays completely free of inline `as` casts:
 
 ```typescript
 // In *-testing.utils.ts
 export function makeProjectFindManyResult(projects = []): Project[] {
-  return projects as Project[]
+  return projects as Project[];
 }
-export function makeProjectCreateResult(overrides: Partial<Project> & { id: string }): Project {
-  return overrides as Project
+export function makeProjectCreateResult(
+  overrides: Partial<Project> & { id: string },
+): Project {
+  return overrides as Project;
 }
-export function makeProjectWithMembersResult(project, members = []): ProjectWithMembers {
-  return { ...project, members } as ProjectWithMembers
+export function makeProjectWithMembersResult(
+  project,
+  members = [],
+): ProjectWithMembers {
+  return { ...project, members } as ProjectWithMembers;
 }
 ```
 
-Then in the spec: `tx.project.create.mockResolvedValue(makeProjectCreateResult({ id: pwd.id }))` — no inline `as` at all.
+Then in the spec:
+`tx.project.create.mockResolvedValue(makeProjectCreateResult({ id: pwd.id }))` —
+no inline `as` at all.
 
-**For one-off cases:** use `as Project` / `as Project[]` inline (never `as never`). Use `satisfies Pick<Project, 'field'>` on partial objects to catch typos at compile time.
+**For one-off cases:** use `as Project` / `as Project[]` inline (never
+`as never`). Use `satisfies Pick<Project, 'field'>` on partial objects to catch
+typos at compile time.
 
-See `references/nestjs-vitest-testing-patterns.md` for the full "Typed Mock Result Helpers" pattern.
+See `references/nestjs-vitest-testing-patterns.md` for the full "Typed Mock
+Result Helpers" pattern.
 
 ## Pitfall: `mockDeep` Silently Returns `undefined`
 
-When using `vitest-mock-extended`'s `mockDeep<T>()`, any nested method you don't explicitly configure returns `undefined` (not a promise). This causes `TypeError: Cannot read properties of undefined (reading '...')` at the **service code line**, not in the test — making it hard to diagnose.
+When using `vitest-mock-extended`'s `mockDeep<T>()`, any nested method you don't
+explicitly configure returns `undefined` (not a promise). This causes
+`TypeError: Cannot read properties of undefined (reading '...')` at the
+**service code line**, not in the test — making it hard to diagnose.
 
-**Fix**: Audit every `tx.xxx.yyy` (or `prisma.xxx.yyy`) call in the code path under test and mock each one, even with minimal values like `mockResolvedValue([])` or `mockResolvedValue({ id: '...' })`.
+**Fix**: Audit every `tx.xxx.yyy` (or `prisma.xxx.yyy`) call in the code path
+under test and mock each one, even with minimal values like
+`mockResolvedValue([])` or `mockResolvedValue({ id: '...' })`.
 
 ### NestJS Dependency Resolution
-When moving methods between services (e.g., during migration like moving `validateKeycloakPayload` from `AuthService` to `KeycloakJwtService`), you may introduce new dependencies (such as `PrismaService`, `ConfigurationService`, `CACHE_MANAGER`). This causes test failures with `Error: Nest can't resolve dependencies of the [ServiceName] (...)`.
+
+When moving methods between services (e.g., during migration like moving
+`validateKeycloakPayload` from `AuthService` to `KeycloakJwtService`), you may
+introduce new dependencies (such as `PrismaService`, `ConfigurationService`,
+`CACHE_MANAGER`). This causes test failures with
+`Error: Nest can't resolve dependencies of the [ServiceName] (...)`.
 
 **Fix protocol:**
-1. **Verify dependencies**: Check the target service's constructor for new dependencies.
-2. **Update test providers**: Add the new dependency to the `providers` array in `Test.createTestingModule`.
-3. **Mock the entire chain**: Pre-configure every nested method the service uses (even if returning `null`/empty arrays).
-4. **Watch for circular dependencies**: Ensure the mock setup doesn't create circular reference issues.
+
+1. **Verify dependencies**: Check the target service's constructor for new
+   dependencies.
+2. **Update test providers**: Add the new dependency to the `providers` array in
+   `Test.createTestingModule`.
+3. **Mock the entire chain**: Pre-configure every nested method the service uses
+   (even if returning `null`/empty arrays).
+4. **Watch for circular dependencies**: Ensure the mock setup doesn't create
+   circular reference issues.
 
 Example for migrating a method to `KeycloakJwtService`:
+
 ```typescript
 // In keycloak.service.spec.ts
 beforeEach(async () => {
-  prisma = mockDeep<PrismaService>()
-  config = mockDeep<ConfigurationService>()
-  cache = mockDeep<Cache>()
-  
+  prisma = mockDeep<PrismaService>();
+  config = mockDeep<ConfigurationService>();
+  cache = mockDeep<Cache>();
+
   // CRITICAL: Mock all nested calls the service makes
-  prisma.user.findUnique.mockResolvedValue(null)
-  prisma.adminRole.findMany.mockResolvedValue([])
+  prisma.user.findUnique.mockResolvedValue(null);
+  prisma.adminRole.findMany.mockResolvedValue([]);
   // ... other nested calls
-  
+
   module = await Test.createTestingModule({
     providers: [
       KeycloakJwtService,
@@ -426,13 +499,13 @@ beforeEach(async () => {
       { provide: ConfigurationService, useValue: config },
       { provide: CACHE_MANAGER, useValue: cache },
     ],
-  }).compile()
-})
+  }).compile();
+});
 ```
 
 ## Final Rule
 
-```
+```text
 Production code → test exists and failed first
 Otherwise → not TDD
 ```

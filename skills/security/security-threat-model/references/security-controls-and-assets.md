@@ -1,8 +1,10 @@
 # Security Controls and Asset Categories
 
-Use this as a lightweight checklist to keep outputs consistent across teams. Prefer concrete, system-specific items over generic text.
+Use this as a lightweight checklist to keep outputs consistent across teams.
+Prefer concrete, system-specific items over generic text.
 
 ## Asset categories (pick only what applies)
+
 - User data (PII, content, uploads)
 - Authentication artifacts (passwords, tokens, sessions, cookies)
 - Authorization state (roles, policies, ACLs)
@@ -15,8 +17,10 @@ Use this as a lightweight checklist to keep outputs consistent across teams. Pre
 - Tenant isolation boundaries and metadata
 
 ## Security control categories
+
 - Identity and access: authN, authZ, session handling, mTLS, key rotation
-- Input protection: schema validation, parsing hardening, upload scanning, sandboxing
+- Input protection: schema validation, parsing hardening, upload scanning,
+  sandboxing
 - Network safeguards: TLS, network policies, WAF, rate limiting, DoS controls
 - Data protection: encryption at rest/in transit, tokenization, redaction
 - Isolation: process sandboxing, container boundaries, tenant isolation, seccomp
@@ -25,6 +29,7 @@ Use this as a lightweight checklist to keep outputs consistent across teams. Pre
 - Change control: CI checks, deployment approvals, config guardrails
 
 ## Mitigation phrasing patterns
+
 - "Enforce schema at <boundary> for <payload> before <component>."
 - "Require authZ check for <action> on <resource> in <service>."
 - "Isolate <parser/component> in a sandbox with <resource limits>."
