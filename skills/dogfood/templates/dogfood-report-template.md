@@ -1,21 +1,19 @@
 # Dogfood QA Report
 
-**Target:** {target_url}
-**Date:** {date}
-**Scope:** {scope_description}
+**Target:** {target_url} **Date:** {date} **Scope:** {scope_description}
 **Tester:** Hermes Agent (automated exploratory QA)
 
 ---
 
 ## Executive Summary
 
-| Severity | Count |
-|----------|-------|
-| 🔴 Critical | {critical_count} |
-| 🟠 High | {high_count} |
-| 🟡 Medium | {medium_count} |
-| 🔵 Low | {low_count} |
-| **Total** | **{total_count}** |
+| Severity    | Count             |
+| ----------- | ----------------- |
+| 🔴 Critical | {critical_count}  |
+| 🟠 High     | {high_count}      |
+| 🟡 Medium   | {medium_count}    |
+| 🔵 Low      | {low_count}       |
+| **Total**   | **{total_count}** |
 
 **Overall Assessment:** {one_sentence_assessment}
 
@@ -27,31 +25,29 @@
 
 ### Issue #{issue_number}: {issue_title}
 
-| Field | Value |
-|-------|-------|
-| **Severity** | {severity} |
-| **Category** | {category} |
-| **URL** | {url_where_found} |
+| Field        | Value             |
+| ------------ | ----------------- |
+| **Severity** | {severity}        |
+| **Category** | {category}        |
+| **URL**      | {url_where_found} |
 
-**Description:**
-{detailed_description_of_the_issue}
+**Description:** {detailed_description_of_the_issue}
 
 **Steps to Reproduce:**
+
 1. {step_1}
 2. {step_2}
 3. {step_3}
 
-**Expected Behavior:**
-{what_should_happen}
+**Expected Behavior:** {what_should_happen}
 
-**Actual Behavior:**
-{what_actually_happens}
+**Actual Behavior:** {what_actually_happens}
 
-**Screenshot:**
-MEDIA:{screenshot_path}
+**Screenshot:** MEDIA:{screenshot_path}
 
 **Console Errors** (if applicable):
-```
+
+```text
 {console_error_output}
 ```
 
@@ -61,22 +57,26 @@ MEDIA:{screenshot_path}
 
 ## Issues Summary Table
 
-| # | Title | Severity | Category | URL |
-|---|-------|----------|----------|-----|
+| #   | Title   | Severity   | Category   | URL   |
+| --- | ------- | ---------- | ---------- | ----- |
 | {n} | {title} | {severity} | {category} | {url} |
 
 ## Testing Coverage
 
 ### Pages Tested
+
 - {list_of_pages_visited}
 
 ### Features Tested
+
 - {list_of_features_exercised}
 
 ### Not Tested / Out of Scope
+
 - {areas_not_covered_and_why}
 
 ### Blockers
+
 - {any_issues_that_prevented_testing_certain_areas}
 
 ---
