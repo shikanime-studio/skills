@@ -9,6 +9,7 @@ metadata:
   hermes:
     tags: [skills, authoring, hermes-agent, conventions, skill-md]
     related_skills: [plan, requesting-code-review]
+<!-- markdownlint-disable MD013 MD076 -->
 ---
 
 # Authoring Hermes-Agent Skills (in-repo)
@@ -17,18 +18,25 @@ metadata:
 
 There are two places a SKILL.md can live:
 
-1. **User-local:** `~/.hermes/skills/<maybe-category>/<name>/SKILL.md` — personal, not shared. Created via `skill_manage(action='create')`.
-2. **In-repo (this skill is about this case):** `/home/bb/hermes-agent/skills/<category>/<name>/SKILL.md` — committed, shipped with the package. Use `write_file` + `git add`. `skill_manage(action='create')` does NOT target this tree.
+1. **User-local:** `~/.hermes/skills/<maybe-category>/<name>/SKILL.md` —
+   personal, not shared. Created via `skill_manage(action='create')`.
+2. **In-repo (this skill is about this case):**
+   `/home/bb/hermes-agent/skills/<category>/<name>/SKILL.md` — committed,
+   shipped with the package. Use `write_file` + `git add`.
+   `skill_manage(action='create')` does NOT target this tree.
 
 ## When to Use
 
 - User asks you to add a skill "in this branch / repo / commit"
 - You're committing a reusable workflow that should ship with hermes-agent
-- You're editing an existing skill under `/home/bb/hermes-agent/skills/` (use `patch` for small edits, `write_file` for rewrites; `skill_manage` still works for patch on in-repo skills, but not for `create`)
+- You're editing an existing skill under `/home/bb/hermes-agent/skills/` (use
+  `patch` for small edits, `write_file` for rewrites; `skill_manage` still works
+  for patch on in-repo skills, but not for `create`)
 
 ## Required Frontmatter
 
-Source of truth: `tools/skill_manager_tool.py::_validate_frontmatter`. Hard requirements:
+Source of truth: `tools/skill_manager_tool.py::_validate_frontmatter`. Hard
+requirements:
 
 - Starts with `---` as the first bytes (no leading blank line).
 - Closes with `\n---\n` before the body.
@@ -41,7 +49,7 @@ Peer-matched shape used by every skill under `skills/software-development/`:
 
 ```yaml
 ---
-name: my-skill-name               # lowercase, hyphens, ≤64 chars (MAX_NAME_LENGTH)
+name: my-skill-name # lowercase, hyphens, ≤64 chars (MAX_NAME_LENGTH)
 description: Use when <trigger>. <one-line behavior>.
 version: 1.0.0
 author: Operator 21O
@@ -53,19 +61,23 @@ metadata:
 ---
 ```
 
-`version` / `author` / `license` / `metadata` are NOT enforced by the validator, but every peer has them — omit and your skill sticks out.
+`version` / `author` / `license` / `metadata` are NOT enforced by the validator,
+but every peer has them — omit and your skill sticks out.
 
 ## Size Limits
 
 - Description: ≤ 1024 chars (enforced).
-- Full SKILL.md: ≤ 100,000 chars (enforced as `MAX_SKILL_CONTENT_CHARS`, ~36k tokens).
-- Peer skills in `software-development/` sit at **8-14k chars**. Aim for that range. If you're pushing past 20k, split into `references/*.md` and reference them from SKILL.md.
+- Full SKILL.md: ≤ 100,000 chars (enforced as `MAX_SKILL_CONTENT_CHARS`, ~36k
+  tokens).
+- Peer skills in `software-development/` sit at **8-14k chars**. Aim for that
+  range. If you're pushing past 20k, split into `references/*.md` and reference
+  them from SKILL.md.
 
 ## Peer-Matched Structure
 
 Every in-repo skill follows roughly:
 
-```
+```text
 # <Title>
 
 ## Overview
@@ -90,28 +102,37 @@ Numbered list of mistakes and their fixes.
 Named scenarios → concrete command sequences.
 ```
 
-Not every section is mandatory, but `Overview` + `When to Use` + actionable body + pitfalls are the minimum for the skill to feel like a peer.
+Not every section is mandatory, but `Overview` + `When to Use` + actionable
+body + pitfalls are the minimum for the skill to feel like a peer.
 
 ## Directory Placement
 
-```
+```text
 skills/<category>/<skill-name>/SKILL.md
 ```
 
-Categories currently in repo (confirm with `ls skills/`): `autonomous-ai-agents`, `creative`, `data-science`, `devops`, `dogfood`, `email`, `gaming`, `github`, `leisure`, `mcp`, `media`, `mlops/*`, `note-taking`, `productivity`, `red-teaming`, `research`, `smart-home`, `social-media`, `software-development`.
+Categories currently in repo (confirm with `ls skills/`):
+`autonomous-ai-agents`, `creative`, `data-science`, `devops`, `dogfood`,
+`email`, `gaming`, `github`, `leisure`, `mcp`, `media`, `mlops/*`,
+`note-taking`, `productivity`, `red-teaming`, `research`, `smart-home`,
+`social-media`, `software-development`.
 
-Pick the closest existing category. Don't invent new top-level categories casually.
+Pick the closest existing category. Don't invent new top-level categories
+casually.
 
 ## Workflow
 
 1. **Survey peers** in the target category:
-   ```
+
+   ```text
    ls skills/<category>/
    ```
+
    Read 2-3 peer SKILL.md files to match tone and structure.
-2. **Check validator constraints** in `tools/skill_manager_tool.py` if unsure.
-3. **Draft** with `write_file` to `skills/<category>/<name>/SKILL.md`.
-4. **Validate locally**:
+
+2. **Draft** with `write_file` to `skills/<category>/<name>/SKILL.md`.
+3. **Validate locally**:
+
    ```python
    import yaml, re, pathlib
    content = pathlib.Path("skills/<category>/<name>/SKILL.md").read_text()
@@ -122,44 +143,76 @@ Pick the closest existing category. Don't invent new top-level categories casual
    assert len(fm["description"]) <= 1024
    assert len(content) <= 100_000
    ```
-5. **Git add + commit** on the active branch.
-6. **Note:** the CURRENT session's skill loader is cached — `skill_view` / `skills_list` will not see the new skill until a new session. This is expected, not a bug.
+
+4. **Git add + commit** on the active branch.
+5. **Note:** the CURRENT session's skill loader is cached — `skill_view` /
+   `skills_list` will not see the new skill until a new session. This is
+   expected, not a bug.
 
 ## Cross-Referencing Other Skills
 
-`metadata.hermes.related_skills` unions both trees (`skills/` in-repo and `~/.hermes/skills/`) at load time. You CAN reference a user-local skill from an in-repo skill, but it won't resolve for other users who clone the repo fresh. Prefer referencing only in-repo skills from in-repo skills. If a frequently-referenced skill lives only in `~/.hermes/skills/`, consider promoting it to the repo.
+`metadata.hermes.related_skills` unions both trees (`skills/` in-repo and
+`~/.hermes/skills/`) at load time. You CAN reference a user-local skill from an
+in-repo skill, but it won't resolve for other users who clone the repo fresh.
+Prefer referencing only in-repo skills from in-repo skills. If a
+frequently-referenced skill lives only in `~/.hermes/skills/`, consider
+promoting it to the repo.
 
 ## Editing Existing In-Repo Skills
 
-- **Small fix (typo, added pitfall, tightened trigger):** `skill_manage(action='patch', name=..., old_string=..., new_string=...)` works fine on in-repo skills.
-- **Major rewrite:** `write_file` the whole SKILL.md. `skill_manage(action='edit')` also works but requires supplying the full new content.
-- **Adding supporting files:** `write_file` to `skills/<category>/<name>/references/<file>.md`, `templates/<file>`, or `scripts/<file>`. `skill_manage(action='write_file')` also works and enforces the references/templates/scripts/assets subdir allowlist.
+- **Small fix (typo, added pitfall, tightened trigger):**
+  `skill_manage(action='patch', name=..., old_string=..., new_string=...)` works
+  fine on in-repo skills.
+- **Major rewrite:** `write_file` the whole SKILL.md.
+  `skill_manage(action='edit')` also works but requires supplying the full new
+  content.
+- **Adding supporting files:** `write_file` to
+  `skills/<category>/<name>/references/<file>.md`, `templates/<file>`, or
+  `scripts/<file>`. `skill_manage(action='write_file')` also works and enforces
+  the references/templates/scripts/assets subdir allowlist.
 - **Always commit** the edit — in-repo skills are source, not runtime state.
 
 ## Common Pitfalls
 
-1. **Using `skill_manage(action='create')` for an in-repo skill.** It writes to `~/.hermes/skills/`, not the repo tree. Use `write_file` for in-repo creation.
+1. **Using `skill_manage(action='create')` for an in-repo skill.** It writes to
+   `~/.hermes/skills/`, not the repo tree. Use `write_file` for in-repo
+   creation.
 
-2. **Leading whitespace before `---`.** The validator checks `content.startswith("---")`; any leading blank line or BOM fails validation.
+2. **Leading whitespace before `---`.** The validator checks
+   `content.startswith("---")`; any leading blank line or BOM fails validation.
 
-3. **Description too generic.** Peer descriptions start with "Use when ..." and describe the *trigger class*, not the one task. "Use when debugging X" > "Debug X".
+3. **Description too generic.** Peer descriptions start with "Use when ..." and
+   describe the _trigger class_, not the one task. "Use when debugging X" >
+   "Debug X".
 
-4. **Forgetting the author/license/metadata block.** Not validator-enforced, but every peer has it; omitting makes the skill look half-finished.
+4. **Forgetting the author/license/metadata block.** Not validator-enforced, but
+   every peer has it; omitting makes the skill look half-finished.
 
-5. **Writing a skill that duplicates a peer.** Before creating, `ls skills/<category>/` and open 2-3 peers. Prefer extending an existing skill to creating a narrow sibling.
+5. **Writing a skill that duplicates a peer.** Before creating,
+   `ls skills/<category>/` and open 2-3 peers. Prefer extending an existing
+   skill to creating a narrow sibling.
 
-6. **Expecting the current session to see the new skill.** It won't. The skill loader is initialized at session start. Verify in a fresh session or via `skill_view` using the exact path.
+6. **Expecting the current session to see the new skill.** It won't. The skill
+   loader is initialized at session start. Verify in a fresh session or via
+   `skill_view` using the exact path.
 
-7. **Linking to skills that don't exist in-repo.** `related_skills: [some-user-local-skill]` works for you but breaks for other clones. Prefer only in-repo links.
+7. **Linking to skills that don't exist in-repo.**
+   `related_skills: [some-user-local-skill]` works for you but breaks for other
+   clones. Prefer only in-repo links.
 
 ## Verification Checklist
 
-- [ ] File is at `skills/<category>/<name>/SKILL.md` (not in `~/.hermes/skills/`)
+- [ ] File is at `skills/<category>/<name>/SKILL.md` (not in
+      `~/.hermes/skills/`)
 - [ ] Frontmatter starts at byte 0 with `---`, closes with `\n---\n`
-- [ ] `name`, `description`, `version`, `author`, `license`, `metadata.hermes.{tags, related_skills}` all present
+- [ ] `name`, `description`, `version`, `author`, `license`,
+      `metadata.hermes.{tags, related_skills}` all present
 - [ ] Name ≤ 64 chars, lowercase + hyphens
 - [ ] Description ≤ 1024 chars and starts with "Use when ..."
 - [ ] Total file ≤ 100,000 chars (aim for 8-15k)
-- [ ] Structure: `# Title` → `## Overview` → `## When to Use` → body → `## Common Pitfalls` → `## Verification Checklist`
-- [ ] `related_skills` references resolve in-repo (or are explicitly OK to be user-local)
-- [ ] `git add skills/<category>/<name>/ && git commit` completed on the intended branch
+- [ ] Structure: `# Title` → `## Overview` → `## When to Use` → body →
+      `## Common Pitfalls` → `## Verification Checklist`
+- [ ] `related_skills` references resolve in-repo (or are explicitly OK to be
+      user-local)
+- [ ] `git add skills/<category>/<name>/ && git commit` completed on the
+      intended branch

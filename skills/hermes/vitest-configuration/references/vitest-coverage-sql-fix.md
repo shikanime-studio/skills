@@ -11,11 +11,12 @@
 
 CI job `unit-tests / Unit tests` failed with:
 
-```
+```text
 Error [RollupError]: Expected ';', '}' or <eof>
 ...
 Excluding it from coverage.
-Failed to parse file:///.../prisma/migrations/20250916134454_add_project_resources/migration.sql
+Failed to parse
+  file:///.../prisma/migrations/20250916134454_add_project_resources/migration.sql
 ...
 FAIL  src/prepare-app.spec.ts [ src/prepare-app.spec.ts ]
 ```
@@ -24,7 +25,8 @@ V8 coverage tried to parse `.sql` migration files as JavaScript.
 
 ## Resolution
 
-Added `'**/*.sql'` to the coverage `exclude` list in `apps/server/vitest.config.ts`.
+Added `'**/*.sql'` to the coverage `exclude` list in
+`apps/server/vitest.config.ts`.
 
 ```ts
 coverage: {
@@ -51,5 +53,8 @@ coverage: {
 
 ## Notes
 
-- The lockfile regenerated with workspace-specific tags (`file:plugins/argocd(...)`). Do not commit lockfile changes unless intentionally updating dependencies.
-- `prepare-app.spec.ts` imports the app and DB connections; coverage of migration SQL is never needed.
+- The lockfile regenerated with workspace-specific tags
+  (`file:plugins/argocd(...)`). Do not commit lockfile changes unless
+  intentionally updating dependencies.
+- `prepare-app.spec.ts` imports the app and DB connections; coverage of
+  migration SQL is never needed.

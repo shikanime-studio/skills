@@ -1,6 +1,9 @@
 ---
 name: jj-workflow
-description: "Jujutsu (jj) daily workflow — init, commit, push, rebase, resolve conflicts, and interop with git hosting (GitHub/GitLab). Use when the user asks about jj operations, or when any repo workflow is needed (jj is the preferred VCS)."
+description:
+  "Jujutsu (jj) daily workflow — init, commit, push, rebase, resolve conflicts,
+  and interop with git hosting (GitHub/GitLab). Use when the user asks about jj
+  operations, or when any repo workflow is needed (jj is the preferred VCS)."
 version: 1.0.0
 author: Operator 21O
 license: Apache-2.0
@@ -19,13 +22,14 @@ jj is the preferred VCS. Git is acceptable when needed for interop.
 
 Commit messages are **full short sentences**, not conventional commits:
 
-```
+```text
 jj commit -m "Fix some stuff about that"
 jj commit -m "Update the firewall rules for the new subnet"
 jj commit -m "Add missing netpol for vaultwarden"
 ```
 
-Not `fix: add foo` — just plain sentences. One commit per logical fix. No body, no trailers.
+Not `fix: add foo` — just plain sentences. One commit per logical fix. No body,
+no trailers.
 
 ## Init
 
@@ -197,7 +201,8 @@ jj squash --from main
 
 ```bash
 # Compact log with bookmarks
-jj log -T 'commit_id.short() ++ " " ++ description.first_line() ++ " " ++ bookmarks'
+jj log -T 'commit_id.short() ++ " " ++ description.first_line() ++ " " ++
+  bookmarks'
 
 # Full diff of a commit
 jj show <rev>
@@ -220,16 +225,36 @@ jj config list repo
 
 ## Common Pitfalls
 
-1. **`jj git push` fails with "No matching bookmarks"**: Create the bookmark first with `jj bookmark create <name> -r @-`, then push with `jj git push --bookmark <name>`.
+1. **`jj git push` fails with "No matching bookmarks"**: Create the bookmark
+   first with `jj bookmark create <name> -r @-`, then push with
+   `jj git push --bookmark <name>`.
 
-2. **Conflicts on rebase**: Expected when stacking changes. Resolve with `jj resolve` or manually edit then `jj squash`.
+2. **Conflicts on rebase**: Expected when stacking changes. Resolve with
+   `jj resolve` or manually edit then `jj squash`.
 
-3. **Detached HEAD**: If `jj show @` has no commit_id, use `jj new` to create a new commit before working.
+3. **Detached HEAD**: If `jj show @` has no commit_id, use `jj new` to create a
+   new commit before working.
 
-4. **Accidental abandon**: Use `jj undo` immediately. jj keeps everything until the `git gc` equivalent runs.
+4. **Accidental abandon**: Use `jj undo` immediately. jj keeps everything until
+   the `git gc` equivalent runs.
 
-5. **Commit scope**: `jj commit` commits everything in the working copy. To commit selectively, use `jj commit -- <paths>` or split first.
+5. **Commit scope**: `jj commit` commits everything in the working copy. To
+   commit selectively, use `jj commit -- <paths>` or split first.
+
+6. **GitHub rejects push with `GH013` (verified signatures required)**: If
+   `jj git push` fails because commits lack verified signatures, either upload
+   the GPG key to GitHub or switch to SSH commit signing:
+   `jj config set --repo signing.backend ssh` and
+   `jj config set --repo signing.key ~/.ssh/id_ed25519.pub`. Then rebase to
+   re-sign existing commits. See `github-auth` skill for full SSH signing setup.
+
+7. **User says "jj squash" but repo uses git**: The user uses "jj squash" as a
+   verb meaning "squash into the target commit" regardless of VCS. If the repo
+   is git-based (check with `jj status` -- "no jj repo" means git), use
+   `git reset --soft HEAD~N && git commit` or interactive rebase. Do NOT try to
+   init jj in a git repo unless explicitly asked.
 
 ## See Also
 
-- `references/ghstack-integration.md` — how jj interacts with ghstack for stacked PRs
+- `references/ghstack-integration.md` — how jj interacts with ghstack for
+  stacked PRs

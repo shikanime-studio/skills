@@ -1,6 +1,7 @@
 # Auth / JWT review notes
 
-Use this when reviewing auth changes that introduce JWT verification or JWKS lookup.
+Use this when reviewing auth changes that introduce JWT verification or JWKS
+lookup.
 
 ## Blocking checks
 
@@ -22,6 +23,8 @@ Use this when reviewing auth changes that introduce JWT verification or JWKS loo
 
 ## Useful implementation details
 
-- In Node 18+, `fetch(url, { signal: AbortSignal })` can be aborted with `AbortController`.
+- In Node 18+, `fetch(url, { signal: AbortSignal })` can be aborted with
+  `AbortController`.
 - Keep JWKS TTL and JWKS fetch timeout as separate configuration values.
-- If a JWT path needs Keycloak group claims, confirm the realm exports `groups` in the token.
+- If a JWT path needs Keycloak group claims, confirm the realm exports `groups`
+  in the token.
