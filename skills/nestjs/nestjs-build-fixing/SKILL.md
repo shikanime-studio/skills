@@ -8,6 +8,8 @@ description:
   when TS compilation errors appear in server-nestjs."
 ---
 
+<!-- markdownlint-disable MD013 MD076 -->
+
 # NestJS Build Fixing & Auth Migration
 
 Fix TypeScript compilation errors and migrate auth modules in NestJS projects
@@ -105,8 +107,7 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
   provides `KeycloakJwtService`. `AuthModule` imports `KeycloakJwtModule`.
 - **`CacheModule.register()` defaults**: Default in-memory store uses TTL in
   milliseconds. Make cache TTLs configurable via `ConfigurationService` (e.g.,
-  `keycloakJwksCacheTtlMs = Number(process.env.KEYCLOAK_JWKS_CACHE_TTL_MS ??
-  300_000)`)
+  `keycloakJwksCacheTtlMs = Number(process.env.KEYCLOAK_JWKS_CACHE_TTL_MS ?? 300_000)`)
   rather than hardcoding them. Use a named constant `JWKS_CACHE_TTL_MS` in the
   service to reference the config value.
 - **Don't register `CacheModule` inside small shared modules**: Registering
@@ -123,8 +124,7 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
 - **Keycloak subfolder**: Keycloak JWT service, module, schema, and testing
   utils live in `auth/keycloak/` subfolder, not directly in `auth/`.
 - **`secretOrKeyProvider` returns PEM string**:
-  `createPublicKey({ key: { kty: 'RSA', n, e }, format: 'jwk' }).export({
-  format: 'pem', type: 'pkcs1' })`
+  `createPublicKey({ key: { kty: 'RSA', n, e }, format: 'jwk' }).export({ format: 'pem', type: 'pkcs1' })`
   produces the right format.
 - **Prisma mockDeep strict types**: `mockDeep<PrismaService>()` generates strict
   return types that reject partial objects. Never use `as any` on mock return
@@ -309,8 +309,6 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
   The same issue applies when using `mockDeep<any>()` for `httpArgs` in a helper
   function. Use the plain-object pattern instead. This reliably preserves all
   properties on the request object including BigInt values, nested objects, and
-  arrays.
-- **`mockDeep` proxies break the `in` operator**: vitest-mock-extended creates
   ES Proxies for all nested properties. The `in` operator (e.g.
   `'adminRoleIds' in pat.owner`) returns `false` for properties that exist on
   the underlying object because the proxy's `has` trap doesn't forward to the
@@ -325,18 +323,16 @@ Fix TypeScript compilation errors and migrate auth modules in NestJS projects
   Applies to any property-access check on objects returned by
   `mockResolvedValue`. The same mock value works fine for direct property access
   (`pat.owner.adminRoleIds` reads the correct value) — only the `in` operator is
-  broken.
-- **`resolveProjectPermissions` lives with the loader, not the validation
-  service**: When `ProjectLoaderService` builds `ProjectConfig` from DB, it also
-  owns `resolveProjectPermissions()`.
+  broken. service\*\*: When `ProjectLoaderService` builds `ProjectConfig` from
+  DB, it also owns `resolveProjectPermissions()`.
   `ProjectService.validateProjectPermissions()` delegates to
   `this.loader.resolveProjectPermissions()` — never duplicate the logic. Mirrors
   how `AuthService` owns both `validateToken()` and private
   `resolveAdminPermissions()`. The service that fetches data is the natural
   owner of resolution logic.
+
 - **Requirements-based DB selects**: Pass a requirements object (derived from
   policy) to loader methods to conditionally include fields in Prisma `select`.
-  Avoids over-fetching:\n
 
   ````ts
   interface ProjectRequirements {
@@ -464,8 +460,7 @@ When migrating Keycloak JWT validation from a legacy Fastify app to NestJS:
      tracking)
 
 2. **Register `JwtModule.registerAsync`** with:
-   - `secretOrKeyProvider: async (_type, token) => { const { kid } =
-     decodeJweHeader(token); return getPublicKey(kid) }`
+   - `secretOrKeyProvider: async (_type, token) => { const { kid } = decodeJweHeader(token); return getPublicKey(kid) }`
    - `verifyOptions: { algorithms: ['RS256'], issuer }`
 
 3. **Guard uses `jwtService.verifyAsync(token)`** directly (not a separate

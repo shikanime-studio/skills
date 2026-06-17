@@ -119,6 +119,29 @@ ghstack checkout <PR_NUMBER>
 # OR: gh stack checkout <PR_NUMBER>
 ```
 
+**Important:** `ghstack checkout` fetches the remote branch
+`origin/gh/shikanime/N/orig` and detaches HEAD. The branch it checks out is NOT
+a local branch — it's a remote tracking branch. To work on it, create a local
+branch:
+
+```bash
+ghstack checkout <PR_NUMBER>
+git checkout -b pr-<N>-fix
+```
+
+**Rebasing a ghstack PR:** After `ghstack checkout`, the commit is immutable
+(remote bookmark). To rebase on latest main:
+
+```bash
+git checkout -b pr-<N>-fix origin/gh/shikanime/N/orig
+git rebase origin/main
+# Resolve conflicts, then squash/fixup as needed
+```
+
+**Warning:** If you squash the PR commit and rebase, `ghstack push` will create
+a NEW PR number (new stack) rather than updating the existing one. This is
+expected — the old PR will still exist. Close it manually if needed.
+
 ## Workflow: Sync PR Descriptions
 
 ```bash
@@ -160,10 +183,20 @@ For each commit N in a stack, ghstack creates three branches:
    `~/.ghstackrc`. `gh stack` (GitHub official) is a Go-based `gh` extension
    with `.git/gh-stack` metadata. They are NOT compatible — pick one per repo.
 
-8. **Splitting a stack into separate PRs.** When asked to split changes into
-   individual PRs (1 commit == 1 PR), use `ghstack submit` for each commit. If
-   `ghstack submit` fails mid-stack (e.g., timeout, duplicate commit error),
-   push remaining commits as separate branches and create PRs manually:
+8. **`ghstack push` creates new PRs when history changes.** If you squash,
+   rebase, or otherwise rewrite commits that were previously pushed with
+   ghstack, running `ghstack push` will create a NEW stack with new PR numbers.
+   The old PRs remain open. Close them manually with `gh pr close <old_number>`.
+   To avoid this, use `jj squash` to amend the existing commit in-place rather
+   than creating new commits.
+
+9. **Working directory must be the repo root.** `ghstack` and `nix develop` both
+   need to be run from the repository root. If you get "devenv was not able to
+   determine the current directory" or ghstack pushes to the wrong repo, `cd` to
+   the repo root first. When asked to split changes into individual PRs (1
+   commit == 1 PR), use `ghstack submit` for each commit. If `ghstack submit`
+   fails mid-stack (e.g., timeout, duplicate commit error), push remaining
+   commits as separate branches and create PRs manually:
 
    ```bash
    # Push each commit to its own branch
@@ -174,6 +207,57 @@ For each commit N in a stack, ghstack creates three branches:
 
    This preserves the stack relationship without relying on ghstack's internal
    tracking.
+
+## Commit Message = PR Title/Body
+
+When using `ghstack submit` or `ghstack`, the commit message **is** the PR title
+and body.
+
+- The commit title becomes the PR title
+- The commit body becomes the PR description
+- To update a PR after creation: amend the commit message (`jj squash` or
+  `git commit --amend`), then resubmit with `ghstack`
+- **Do NOT use `gh pr edit`** — agents should use ghstack to update PRs, not the
+  gh PR CLI
+- Use plain English commit titles — no conventional commit prefixes (`docs:`,
+  `feat:`, etc.)
+  - ✓ `Add PR body editing instructions to AGENTS.md`
+  - ✗ `docs: add PR body editing instructions to AGENTS.md`
+
+When using `ghstack submit` or `ghstack`, the commit message **is** the PR title
+and body.
+
+- The commit title becomes the PR title
+- The commit body becomes the PR description
+- To update a PR after creation: amend the commit message (`jj squash` or
+  `git commit --amend`), then resubmit with `ghstack`
+- **Do NOT use `gh pr edit`** — agents should use ghstack to update PRs, not the
+  gh PR CLI
+- Use plain English commit titles — no conventional commit prefixes (`docs:`,
+  `feat:`, etc.)
+  - ✓ `Add PR body editing instructions to AGENTS.md`
+  - ✗ `docs: add PR body editing instructions to AGENTS.md`
+
+## nix fmt / direnv Before Commit
+
+In Nix-based repos, always run formatting before committing:
+
+```bash
+# Option 1: direnv (if configured)
+direnv allow   # first time only
+# nix fmt runs automatically on enter, or:
+nix fmt
+
+# Option 2: nix develop
+nix develop
+nix fmt
+
+# Option 3: direct
+nix fmt
+```
+
+Large repos (100+ files) can take 60-300s. Use `timeout=300` when running
+programmatically.
 
 ## Quick Reference
 
@@ -186,3 +270,24 @@ For each commit N in a stack, ghstack creates three branches:
 | Checkout PR       | `ghstack checkout <N>`                  |
 | Sync descriptions | `ghstack sync`                          |
 | View stack        | `jj log -r main..@`                     |
+
+## nix fmt / Markdown Formatting
+
+When working on repos that use `nix fmt` (treefmt + rumdl), common markdown
+issues:
+
+| Rule  | Cause                                                 | Fix                                                                    |
+| ----- | ----------------------------------------------------- | ---------------------------------------------------------------------- |
+| MD013 | Line > 80 chars in code blocks                        | Add `<!-- markdownlint-disable MD013 -->` after frontmatter or heading |
+| MD056 | Unescaped `\|` in table cells                         | Escape as `\\\|`                                                       |
+| MD076 | Blank line between list item code block and next item | Remove the blank line                                                  |
+| MD075 | Link refs misidentified as table rows                 | Add MD075 to disable directive                                         |
+| MD034 | Bare URLs                                             | Auto-fixed by rumdl                                                    |
+
+**Disable directive placement:**
+
+- With frontmatter: insert after closing `---` line
+- Without frontmatter: insert after the `# Heading` line
+
+**nix fmt timeout:** Large repos (100+ md files) can take 60-300s. Use
+`timeout=300`.

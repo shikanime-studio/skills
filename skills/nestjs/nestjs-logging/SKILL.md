@@ -35,8 +35,9 @@ class SomeService {
       this.logger.log("someService.doWork completed");
     } catch (error) {
       this.logger.error(
-        `someService.doWork failed: ${error instanceof Error ? error.message :
-          String(error)}`,
+        `someService.doWork failed: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
         error instanceof Error ? error.stack : undefined,
       );
       throw error;

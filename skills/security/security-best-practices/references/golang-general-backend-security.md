@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # Go (Golang) Security Spec (Go 1.25.x, Standard Library, net/http)
 
 This document is designed as a **security spec** that supports:
@@ -313,8 +315,7 @@ Detection hints:
 Fix:
 
 - Use
-  `http.Server{ReadHeaderTimeout: ..., ReadTimeout: ..., WriteTimeout: ...,
-  IdleTimeout: ..., MaxHeaderBytes: ...}`.
+  `http.Server{ReadHeaderTimeout: ..., ReadTimeout: ..., WriteTimeout: ..., IdleTimeout: ..., MaxHeaderBytes: ...}`.
 - Calibrate timeouts per endpoint type (streaming vs JSON APIs).
 
 Notes:

@@ -20,6 +20,8 @@ metadata:
     related_skills: [codex, hermes-agent, opencode]
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 # Claude Code — Hermes Orchestration Guide
 
 Delegate coding tasks to

@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # Vue.js Web Security Spec (Vue 3.x, TypeScript/JavaScript, common tooling: Vite)
 
 This document is designed as a **security spec** that supports:

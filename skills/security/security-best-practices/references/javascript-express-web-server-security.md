@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # Express (Node.js) Web Security Spec (Express 5.x / 4.19.2+, Node.js LTS)
 
 This document is designed as a **security spec** that supports:
@@ -836,8 +838,7 @@ Fix:
   set safe `Content-Type` and `Content-Disposition: attachment` when
   appropriate.
 - Configure
-  `express.static(root, { dotfiles: 'deny'|'ignore', index: false (if desired)
-  })`.
+  `express.static(root, { dotfiles: 'deny'|'ignore', index: false (if desired) })`.
 
 Notes:
 

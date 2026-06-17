@@ -11,6 +11,8 @@ metadata:
     related_skills: [github-auth, github-pr-workflow]
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 # GitHub Issues Management
 
 Create, search, triage, and manage GitHub issues. Each section shows `gh` first,
@@ -76,8 +78,8 @@ for i in json.load(sys.stdin):
 # Filter by label
 curl -s \
   -H "Authorization: token $GITHUB_TOKEN" \
- 
-   
+
+
       "https://api.github.com/repos/$OWNER/$REPO/issues?state=open&labels=bug&per_page=20" \
   | python3 -c "
 import sys, json
@@ -102,8 +104,8 @@ print(f\"\n{i['body']}\")"
 # Search issues
 curl -s \
   -H "Authorization: token $GITHUB_TOKEN" \
- 
-   
+
+
       "https://api.github.com/search/issues?q=authentication+error+repo:$OWNER/$REPO" \
   | python3 -c "
 import sys, json
@@ -350,7 +352,7 @@ and report the actual resulting labels, milestone, and assignees:
 ```bash
 gh issue view 42 --json number,title,body,labels,milestone,assignees,state,url \
   --jq
-   
+
       '{number,title,state,url,labels:[.labels[].name],milestone:(.milestone.title//null),assignees:[.assignees[].login]}'
 ```
 
@@ -365,8 +367,8 @@ gh issue list --label "needs-triage" --state open
 # With curl
 curl -s \
   -H "Authorization: token $GITHUB_TOKEN" \
- 
-   
+
+
       "https://api.github.com/repos/$OWNER/$REPO/issues?labels=needs-triage&state=open" \
   | python3 -c "
 import sys, json

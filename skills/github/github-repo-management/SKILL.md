@@ -11,6 +11,8 @@ metadata:
     related_skills: [github-auth, github-pr-workflow, github-issues]
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 # GitHub Repository Management
 
 Create, clone, fork, configure, and manage GitHub repositories. Each section
@@ -236,18 +238,18 @@ curl -s \
 import sys, json
 for r in json.load(sys.stdin):
     vis = 'private' if r['private'] else 'public'
-    print(f\"  {r['full_name']:40}  {vis:8}  {r.get('language', ''):10} 
+    print(f\"  {r['full_name']:40}  {vis:8}  {r.get('language', ''):10}
       ★{r['stargazers_count']}\")"
 
 # Search repos
 curl -s \
- 
-   
+
+
       "https://api.github.com/search/repositories?q=machine+learning+language:python&sort=stars&per_page=10" \
   | python3 -c "
 import sys, json
 for r in json.load(sys.stdin)['items']:
-    print(f\"  {r['full_name']:40}  ★{r['stargazers_count']:6} 
+    print(f\"  {r['full_name']:40}  ★{r['stargazers_count']:6}
       {r['description'][:60] if r['description'] else ''}\")"
 ```
 
@@ -413,8 +415,8 @@ RELEASE_ID=<id_from_create_response>
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
   -H "Content-Type: application/octet-stream" \
- 
-   
+
+
       "https://uploads.github.com/repos/$OWNER/$REPO/releases/$RELEASE_ID/assets?name=binary-amd64" \
   --data-binary @./dist/binary-amd64
 ```
@@ -472,16 +474,16 @@ curl -s -X POST \
 # Re-run only failed jobs
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
- 
-   
+
+
       https://api.github.com/repos/$OWNER/$REPO/actions/runs/$RUN_ID/rerun-failed-jobs
 
 # Trigger a workflow manually (workflow_dispatch)
 WORKFLOW_ID=<workflow_id_or_filename>
 curl -s -X POST \
   -H "Authorization: token $GITHUB_TOKEN" \
- 
-   
+
+
       https://api.github.com/repos/$OWNER/$REPO/actions/workflows/$WORKFLOW_ID/dispatches \
   -d '{"ref": "main", "inputs": {"environment": "staging"}}'
 ```

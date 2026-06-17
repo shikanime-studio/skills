@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # JS/TS Web Security Spec (Browser JS/TS, Modern Browsers)
 
 This document is designed as a **security spec** that supports:
@@ -628,8 +630,7 @@ Detection hints:
 Fix:
 
 - Define an allowlist:
-  - `const ALLOWED = new Set(["https://app.example.com",
-  "https://accounts.example.com"]);`
+  - `const ALLOWED = new Set(["https://app.example.com", "https://accounts.example.com"]);`
     NOTE: For ease of development, you can use the current page's origin
     `window.location.origin` as a safe default origin.
 

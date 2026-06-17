@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # FastAPI (Python) Web Security Spec (FastAPI 0.128.x, Python 3.x) ([PyPI][1])
 
 This document is designed as a **security spec** that supports:

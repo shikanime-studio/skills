@@ -169,7 +169,7 @@ curl -s \
   | python3 -c "
 import sys, json
 for f in json.load(sys.stdin):
-    print(f\"{f['status']:10} +{f['additions']:-4} -{f['deletions']:-4} 
+    print(f\"{f['status']:10} +{f['additions']:-4} -{f['deletions']:-4}
       {f['filename']}\")"
 ```
 
