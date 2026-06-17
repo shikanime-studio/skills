@@ -4,7 +4,7 @@
 
 Jujutsu conflict markers differ from git:
 
-```
+```text
 <<<<<<< conflict 1 of 2
 +++++++ revision "commit message" (destination)
 import { Foo } from './bar'
@@ -26,14 +26,17 @@ import { Foo } from './new-path'
 
 ## Key Commands
 
-| Command | Purpose |
-|---------|---------|
-| `jj status` | Check working copy state |
-| `jj log` | View commit history |
+| Command                         | Purpose                        |
+| ------------------------------- | ------------------------------ |
+| `jj status`                     | Check working copy state       |
+| `jj log`                        | View commit history            |
 | `jj log -r 'heads(trunk()..@)'` | Show commits on current branch |
 
 ## Common Pitfalls
 
-- **Stale LSP diagnostics**: After writing resolved files, LSP may still show old errors. The file on disk is correct; the LSP just needs time to re-index.
-- **write_file silently failing**: Always verify the file content after writing. If conflict markers remain, retry.
-- **Test failures after resolution**: Conflict resolution often leaves type mismatches or renamed fields. Always run tests after resolving.
+- **Stale LSP diagnostics**: After writing resolved files, LSP may still show
+  old errors. The file on disk is correct; the LSP just needs time to re-index.
+- **write_file silently failing**: Always verify the file content after writing.
+  If conflict markers remain, retry.
+- **Test failures after resolution**: Conflict resolution often leaves type
+  mismatches or renamed fields. Always run tests after resolving.
