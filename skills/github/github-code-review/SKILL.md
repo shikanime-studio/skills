@@ -13,7 +13,9 @@ metadata:
 
 # GitHub Code Review
 
-Perform code reviews on local changes before pushing, or review open PRs on GitHub. Most of this skill uses plain `git` — the `gh`/`curl` split only matters for PR-level interactions.
+Perform code reviews on local changes before pushing, or review open PRs on
+GitHub. Most of this skill uses plain `git` — the `gh`/`curl` split only matters
+for PR-level interactions.
 
 ## Prerequisites
 
@@ -29,9 +31,11 @@ else
   AUTH="git"
   if [ -z "$GITHUB_TOKEN" ]; then
     if [ -f ~/.hermes/.env ] && grep -q "^GITHUB_TOKEN=" ~/.hermes/.env; then
-      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d= -f2 | tr -d '\n\r')
+      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d=
+        -f2 | tr -d '\n\r')
     elif grep -q "github.com" ~/.git-credentials 2>/dev/null; then
-      GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials 2>/dev/null | head -1 | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
+      GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials 2>/dev/null | head -1
+        | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
     fi
   fi
 fi
@@ -73,7 +77,8 @@ git diff main...HEAD --stat
 git log main..HEAD --oneline
 ```
 
-2. **Review file by file** — use `read_file` on changed files for full context, and the diff to see what changed:
+2. **Review file by file** — use `read_file` on changed files for full context,
+   and the diff to see what changed:
 
 ```bash
 git diff main...HEAD -- src/auth/login.py
@@ -83,13 +88,15 @@ git diff main...HEAD -- src/auth/login.py
 
 ```bash
 # Debug statements, TODOs, console.logs left behind
-git diff main...HEAD | grep -n "print(\|console\.log\|TODO\|FIXME\|HACK\|XXX\|debugger"
+git diff main...HEAD | grep -n
+  "print(\|console\.log\|TODO\|FIXME\|HACK\|XXX\|debugger"
 
 # Large files accidentally staged
 git diff main...HEAD --stat | sort -t'|' -k2 -rn | head -10
 
 # Secrets or credential patterns
-git diff main...HEAD | grep -in "password\|secret\|api_key\|token.*=\|private_key"
+git diff main...HEAD | grep -in
+  "password\|secret\|api_key\|token.*=\|private_key"
 
 # Merge conflict markers
 git diff main...HEAD | grep -n "<<<<<<\|>>>>>>\|======="
@@ -101,7 +108,7 @@ git diff main...HEAD | grep -n "<<<<<<\|>>>>>>\|======="
 
 When reviewing local changes, present findings in this structure:
 
-```
+```text
 ## Code Review Summary
 
 ### Critical
@@ -109,11 +116,13 @@ When reviewing local changes, present findings in this structure:
   Suggestion: Use parameterized queries.
 
 ### Warnings
-- **src/models/user.py:23** — Password stored in plaintext. Use bcrypt or argon2.
+- **src/models/user.py:23** — Password stored in plaintext. Use bcrypt or
+  argon2.
 - **src/api/routes.py:112** — No rate limiting on login endpoint.
 
 ### Suggestions
-- **src/utils/helpers.py:8** — Duplicates logic in `src/core/utils.py:34`. Consolidate.
+- **src/utils/helpers.py:8** — Duplicates logic in `src/core/utils.py:34`.
+  Consolidate.
 - **tests/test_auth.py** — Missing edge case: expired token test.
 
 ### Looks Good
@@ -160,7 +169,8 @@ curl -s \
   | python3 -c "
 import sys, json
 for f in json.load(sys.stdin):
-    print(f\"{f['status']:10} +{f['additions']:-4} -{f['deletions']:-4}  {f['filename']}\")"
+    print(f\"{f['status']:10} +{f['additions']:-4} -{f['deletions']:-4} 
+      {f['filename']}\")"
 ```
 
 ### Check Out PR Locally for Full Review
@@ -264,16 +274,20 @@ curl -s -X POST \
     \"event\": \"COMMENT\",
     \"body\": \"Code review from Hermes Agent\",
     \"comments\": [
-      {\"path\": \"src/auth.py\", \"line\": 45, \"body\": \"Use parameterized queries to prevent SQL injection.\"},
-      {\"path\": \"src/models/user.py\", \"line\": 23, \"body\": \"Hash passwords with bcrypt before storing.\"},
-      {\"path\": \"tests/test_auth.py\", \"line\": 1, \"body\": \"Add test for expired token edge case.\"}
+      {\"path\": \"src/auth.py\", \"line\": 45, \"body\": \"Use parameterized
+        queries to prevent SQL injection.\"},
+      {\"path\": \"src/models/user.py\", \"line\": 23, \"body\": \"Hash
+        passwords with bcrypt before storing.\"},
+      {\"path\": \"tests/test_auth.py\", \"line\": 1, \"body\": \"Add test for
+        expired token edge case.\"}
     ]
   }"
 ```
 
 Event values: `"APPROVE"`, `"REQUEST_CHANGES"`, `"COMMENT"`
 
-The `line` field refers to the line number in the *new* version of the file. For deleted lines, use `"side": "LEFT"`.
+The `line` field refers to the line number in the _new_ version of the file. For
+deleted lines, use `"side": "LEFT"`.
 
 ---
 
@@ -282,33 +296,39 @@ The `line` field refers to the line number in the *new* version of the file. For
 When performing a code review (local or PR), systematically check:
 
 ### Correctness
+
 - Does the code do what it claims?
 - Edge cases handled (empty inputs, nulls, large data, concurrent access)?
 - Error paths handled gracefully?
 
 ### Security
+
 - No hardcoded secrets, credentials, or API keys
 - Input validation on user-facing inputs
 - No SQL injection, XSS, or path traversal
 - Auth/authz checks where needed
 
 ### Code Quality
+
 - Clear naming (variables, functions, classes)
 - No unnecessary complexity or premature abstraction
 - DRY — no duplicated logic that should be extracted
 - Functions are focused (single responsibility)
 
 ### Testing
+
 - New code paths tested?
 - Happy path and error cases covered?
 - Tests readable and maintainable?
 
 ### Performance
+
 - No N+1 queries or unnecessary loops
 - Appropriate caching where beneficial
 - No blocking operations in async code paths
 
 ### Documentation
+
 - Public APIs documented
 - Non-obvious logic has comments explaining "why"
 - README updated if behavior changed
@@ -323,27 +343,32 @@ When the user asks you to "review the code" or "check before pushing":
 2. `git diff main...HEAD` — read the full diff
 3. For each changed file, use `read_file` if you need more context
 4. Apply the checklist above
-5. Present findings in the structured format (Critical / Warnings / Suggestions / Looks Good)
+5. Present findings in the structured format (Critical / Warnings / Suggestions
+   / Looks Good)
 6. If critical issues found, offer to fix them before the user pushes
 
 ---
 
 ## 5. PR Review Workflow (End-to-End)
 
-When the user asks you to "review PR #N", "look at this PR", or gives you a PR URL, follow this recipe:
+When the user asks you to "review PR #N", "look at this PR", or gives you a PR
+URL, follow this recipe:
 
 ### Step 1: Set up environment
 
 ```bash
-source "${HERMES_HOME:-$HOME/.hermes}/skills/github/github-auth/scripts/gh-env.sh"
+source
+  "${HERMES_HOME:-$HOME/.hermes}/skills/github/github-auth/scripts/gh-env.sh"
 # Or run the inline setup block from the top of this skill
 ```
 
 ### Step 2: Gather PR context
 
-Get the PR metadata, description, and list of changed files to understand scope before diving into code.
+Get the PR metadata, description, and list of changed files to understand scope
+before diving into code.
 
 **With gh:**
+
 ```bash
 gh pr view 123
 gh pr diff 123 --name-only
@@ -351,6 +376,7 @@ gh pr checks 123
 ```
 
 **With curl:**
+
 ```bash
 PR_NUMBER=123
 
@@ -365,7 +391,8 @@ curl -s -H "Authorization: token $GITHUB_TOKEN" \
 
 ### Step 3: Check out the PR locally
 
-This gives you full access to `read_file`, `search_files`, and the ability to run tests.
+This gives you full access to `read_file`, `search_files`, and the ability to
+run tests.
 
 ```bash
 git fetch origin pull/$PR_NUMBER/head:pr-$PR_NUMBER
@@ -384,7 +411,8 @@ git diff main...HEAD --name-only
 git diff main...HEAD -- path/to/file.py
 ```
 
-For each changed file, use `read_file` to see full context around the changes — diffs alone can miss issues visible only with surrounding code.
+For each changed file, use `read_file` to see full context around the changes —
+diffs alone can miss issues visible only with surrounding code.
 
 ### Step 5: Run automated checks locally (if applicable)
 
@@ -400,22 +428,27 @@ ruff check . 2>&1 | head -30
 
 ### Step 6: Apply the review checklist (Section 3)
 
-Go through each category: Correctness, Security, Code Quality, Testing, Performance, Documentation.
+Go through each category: Correctness, Security, Code Quality, Testing,
+Performance, Documentation.
 
 ### Step 7: Post the review to GitHub
 
 Collect your findings and submit them as a formal review with inline comments.
 
 **With gh:**
+
 ```bash
 # If no issues — approve
-gh pr review $PR_NUMBER --approve --body "Reviewed by Hermes Agent. Code looks clean — good test coverage, no security concerns."
+gh pr review $PR_NUMBER --approve --body "Reviewed by Hermes Agent. Code looks
+  clean — good test coverage, no security concerns."
 
 # If issues found — request changes with inline comments
-gh pr review $PR_NUMBER --request-changes --body "Found a few issues — see inline comments."
+gh pr review $PR_NUMBER --request-changes --body "Found a few issues — see
+  inline comments."
 ```
 
 **With curl — atomic review with multiple inline comments:**
+
 ```bash
 HEAD_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
   https://api.github.com/repos/$GH_OWNER/$GH_REPO/pulls/$PR_NUMBER \
@@ -428,20 +461,27 @@ curl -s -X POST \
   -d "{
     \"commit_id\": \"$HEAD_SHA\",
     \"event\": \"REQUEST_CHANGES\",
-    \"body\": \"## Hermes Agent Review\n\nFound 2 issues, 1 suggestion. See inline comments.\",
+    \"body\": \"## Hermes Agent Review\n\nFound 2 issues, 1 suggestion. See
+      inline comments.\",
     \"comments\": [
-      {\"path\": \"src/auth.py\", \"line\": 45, \"body\": \"🔴 **Critical:** User input passed directly to SQL query — use parameterized queries.\"},
-      {\"path\": \"src/models.py\", \"line\": 23, \"body\": \"⚠️ **Warning:** Password stored without hashing.\"},
-      {\"path\": \"src/utils.py\", \"line\": 8, \"body\": \"💡 **Suggestion:** This duplicates logic in core/utils.py:34.\"}
+      {\"path\": \"src/auth.py\", \"line\": 45, \"body\": \"🔴 **Critical:** User
+        input passed directly to SQL query — use parameterized queries.\"},
+      {\"path\": \"src/models.py\", \"line\": 23, \"body\": \"⚠️ **Warning:**
+        Password stored without hashing.\"},
+      {\"path\": \"src/utils.py\", \"line\": 8, \"body\": \"💡 **Suggestion:**
+        This duplicates logic in core/utils.py:34.\"}
     ]
   }"
 ```
 
 ### Step 8: Also post a summary comment
 
-In addition to inline comments, leave a top-level summary so the PR author gets the full picture at a glance. Use the review output format from `references/review-output-template.md`.
+In addition to inline comments, leave a top-level summary so the PR author gets
+the full picture at a glance. Use the review output format from
+`references/review-output-template.md`.
 
 **With gh:**
+
 ```bash
 gh pr comment $PR_NUMBER --body "$(cat <<'EOF'
 ## Code Review Summary
@@ -476,6 +516,9 @@ git branch -D pr-$PR_NUMBER
 
 ### Decision: Approve vs Request Changes vs Comment
 
-- **Approve** — no critical or warning-level issues, only minor suggestions or all clear
-- **Request Changes** — any critical or warning-level issue that should be fixed before merge
-- **Comment** — observations and suggestions, but nothing blocking (use when you're unsure or the PR is a draft)
+- **Approve** — no critical or warning-level issues, only minor suggestions or
+  all clear
+- **Request Changes** — any critical or warning-level issue that should be fixed
+  before merge
+- **Comment** — observations and suggestions, but nothing blocking (use when
+  you're unsure or the PR is a draft)

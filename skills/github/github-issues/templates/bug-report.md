@@ -1,3 +1,5 @@
+# Bug Report
+
 ## Bug Description
 
 <!-- Clear, concise description of the bug -->
@@ -27,7 +29,8 @@
 
 <!-- Paste relevant error messages, stack traces, or logs -->
 
-```
+```text
+
 ```
 
 ## Additional Context

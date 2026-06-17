@@ -14,7 +14,8 @@ prerequisites:
 
 # Apple Reminders
 
-Use `remindctl` to manage Apple Reminders directly from the terminal. Tasks sync across all Apple devices via iCloud.
+Use `remindctl` to manage Apple Reminders directly from the terminal. Tasks sync
+across all Apple devices via iCloud.
 
 ## Prerequisites
 
@@ -73,12 +74,15 @@ remindctl add --title "Meeting prep" --due "2026-02-15 09:00"
 `--due` and `--alarm` are different fields:
 
 - `--due` sets the reminder's due date/time.
-- `--alarm` sets the EventKit alarm/notification trigger. Timed due reminders may default to an alarm at the due time, but pass `--alarm` explicitly when the user asks for an earlier nudge.
+- `--alarm` sets the EventKit alarm/notification trigger. Timed due reminders
+  may default to an alarm at the due time, but pass `--alarm` explicitly when
+  the user asks for an earlier nudge.
 
 For a reminder due at 2:00 PM with a notification 30 minutes earlier:
 
 ```bash
-remindctl add --title "Hairdresser" --due "2026-05-15 14:00" --alarm "2026-05-15 13:30"
+remindctl add --title "Hairdresser" --due "2026-05-15 14:00" --alarm "2026-05-15
+  13:30"
 ```
 
 To edit an existing reminder:
@@ -87,7 +91,9 @@ To edit an existing reminder:
 remindctl edit 87354 --due "2026-05-15 14:00" --alarm "2026-05-15 13:30"
 ```
 
-The Reminders UI may show or group the item by the alarm time because that is when the notification fires. Verify with JSON instead of assuming the due time moved:
+The Reminders UI may show or group the item by the alarm time because that is
+when the notification fires. Verify with JSON instead of assuming the due time
+moved:
 
 ```bash
 remindctl today --json
@@ -98,7 +104,9 @@ Expected shape:
 - `dueDate`: actual due time
 - `alarmDate`: notification / early nudge time
 
-Apple's public `EKReminder` docs list only reminder-specific properties. Alarm support comes from inherited `EKCalendarItem` behavior exposed by remindctl's `--alarm` flag.
+Apple's public `EKReminder` docs list only reminder-specific properties. Alarm
+support comes from inherited `EKCalendarItem` behavior exposed by remindctl's
+`--alarm` flag.
 
 ### Complete / Delete
 
@@ -118,6 +126,7 @@ remindctl today --quiet      # Counts only
 ## Date Formats
 
 Accepted by `--due` and date filters:
+
 - `today`, `tomorrow`, `yesterday`
 - `YYYY-MM-DD`
 - `YYYY-MM-DD HH:mm`
@@ -125,6 +134,7 @@ Accepted by `--due` and date filters:
 
 ## Rules
 
-1. When user says "remind me", clarify: Apple Reminders (syncs to phone) vs agent cronjob alert
+1. When user says "remind me", clarify: Apple Reminders (syncs to phone) vs
+   agent cronjob alert
 2. Always confirm reminder content and due date before creating
 3. Use `--json` for programmatic parsing
